@@ -61,7 +61,7 @@ function MyGlobe() {
     // simple component usage
     return (
       <ReactGlobe
-        height="30vh"
+        height="50vh"
         globeBackgroundTexture="null"
         initialCoordinates={[1.3521, 103.8198]}
         markers={markers}
