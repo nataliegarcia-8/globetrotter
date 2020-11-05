@@ -16,10 +16,7 @@ import { makeStyles } from "@material-ui/core/styles";
 function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
-      {"Copyright © "}
-      <Link color='inherit' href='https://material-ui.com/'>
-        Your Website
-      </Link>{" "}
+      {"Copyright © Globetrotter "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -32,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     backgroundImage:
-      "url(https://images.unsplash.com/photo-1436891620584-47fd0e565afb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80)",
+      "url(https://images.unsplash.com/photo-1508781378177-4a8e7e4ef6c1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
@@ -40,6 +37,21 @@ const useStyles = makeStyles((theme) => ({
         : theme.palette.grey[900],
     backgroundSize: "cover",
     backgroundPosition: "center",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  headline: {
+    color: "white",
+    fontSize: 70,
+    fontWeight: 700,
+    textShadow: "0px 3px 3px rgba(0, 0, 0, 0.6)",
+  },
+  icon: {
+    color: "white",
+    fontSize: 60,
+    textShadow: "0px 3px 3px rgba(0, 0, 0, 0.6)",
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -49,10 +61,12 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    color: "#3f51b5",
+    border: "2px solid #3f51b5",
+    backgroundColor: "transparent",
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%",
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -66,14 +80,19 @@ export default function SignInSide() {
   return (
     <Grid container component='main' className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={12} sm={4} md={7} className={classes.image}>
+        <Typography className={classes.icon}>
+          <i className='fas fa-wave-square'></i>
+        </Typography>
+        <Typography className={classes.headline}>GLOBETROTTER</Typography>
+      </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
-            Sign in
+            Sign In
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
