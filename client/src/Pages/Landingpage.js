@@ -1,14 +1,10 @@
 import React from "react";
-
-import Globe from '../Globe'
+import LoginPage from "../Components/LoginPage";
 
 function LandingPage() {
   return (
     <>
-      
-        <h1>Hello</h1>
-        <Globe/>;
-     
+      <LoginPage />;
     </>
   );
 }
