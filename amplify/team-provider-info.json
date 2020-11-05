@@ -1,0 +1,25 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-globetrotter-dev-131848-authRole",
+      "UnauthRoleArn": "arn:aws:iam::052570518377:role/amplify-globetrotter-dev-131848-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::052570518377:role/amplify-globetrotter-dev-131848-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-globetrotter-dev-131848-deployment",
+      "UnauthRoleName": "amplify-globetrotter-dev-131848-unauthRole",
+      "StackName": "amplify-globetrotter-dev-131848",
+      "StackId": "arn:aws:cloudformation:us-east-1:052570518377:stack/amplify-globetrotter-dev-131848/5c4c9b30-1f93-11eb-9588-0ae04cd9df81",
+      "AmplifyAppId": "d1stdl4unqw9i7"
+    },
+    "categories": {
+      "auth": {
+        "globetrotterdaa03b03": {
+          "userPoolId": "us-east-1_tMWcqKcfM",
+          "userPoolName": "globetrotter7b8c9251_userpool_7b8c9251-dev",
+          "webClientId": "8rkt1paa8hbm89v6bfabvrc1e",
+          "nativeClientId": "6tsm0hcc4csrmm2irj8t468600"
+        }
+      }
+    }
+  }
+}
