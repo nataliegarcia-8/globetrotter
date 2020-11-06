@@ -3,6 +3,13 @@ import LandingPage from "./Pages/Landingpage";
 // import SignUp from "./Pages/SignUp";
 // import Dashboard from "./Pages/Dashboard";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Amplify from "aws-amplify";
+import { withAuthenticator } from "aws-amplify-react";
+
+
+import config from "./aws-exports";
+Amplify.configure(config);
+
 
 function App() {
   return (
@@ -19,4 +26,9 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App, {
+  usernameAttributes: 'email',
+  signUpConfig: {     
+     hiddenDefaults: ["phone_number"]
+  }
+});
