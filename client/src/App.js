@@ -12,7 +12,7 @@ function App() {
   return (
     <Router>
       <div>
-      <h1>Globetrotter</h1>
+      
       
         <Switch>
           <Route exact path="/" component={LandingPage} />

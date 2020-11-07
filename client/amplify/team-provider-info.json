@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-globetrotter-dev-210449-authRole",
+      "UnauthRoleArn": "arn:aws:iam::320747305823:role/amplify-globetrotter-dev-210449-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::320747305823:role/amplify-globetrotter-dev-210449-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-globetrotter-dev-210449-deployment",
+      "UnauthRoleName": "amplify-globetrotter-dev-210449-unauthRole",
+      "StackName": "amplify-globetrotter-dev-210449",
+      "StackId": "arn:aws:cloudformation:us-east-1:320747305823:stack/amplify-globetrotter-dev-210449/7513ece0-1fd4-11eb-901b-0ac2c503da11",
+      "AmplifyAppId": "d3sv28dxfxy5kh"
+    }
+  }
+}
