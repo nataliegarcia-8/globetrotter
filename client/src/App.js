@@ -5,9 +5,6 @@ import LandingPage from "./Pages/Landingpage";
 import NoMatch from './Pages/NoMatch'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-
-
-
 function App() {
   return (
     <Router>

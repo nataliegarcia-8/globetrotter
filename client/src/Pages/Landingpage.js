@@ -4,13 +4,12 @@ import LoginPage from "../Components/LoginPage";
 
 
 function LandingPage() {
- ;
-  
+
 
   return (
     <>
-      
-      
+
+
 
       <LoginPage />
     </>
