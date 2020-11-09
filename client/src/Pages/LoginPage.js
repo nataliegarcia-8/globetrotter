@@ -1,15 +1,12 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
-
 import CssBaseline from "@material-ui/core/CssBaseline";
-
 import Paper from "@material-ui/core/Paper";
-
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import SignIn from '../Components/SignIn/index';
+import AuthForms from '../Components/AuthForms'
 
 
 
@@ -81,7 +78,9 @@ export default function SignInSide() {
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
-          <SignIn/>
+
+          <AuthForms/>
+
         </div>
       </Grid>
     </Grid>
