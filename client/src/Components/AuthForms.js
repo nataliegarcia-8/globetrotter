@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import Button from "@material-ui/core/Button";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Auth } from "aws-amplify";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import ConfirmSignUp from "./ConfirmSignUp";
-
+import { Redirect } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,6 +73,7 @@ function AuthForms() {
     await Auth.signIn(email, password);
     setFormState({ ...formState, formType: "signedIn" });
   };
+
   const backToSignIn = () => {
     setFormState({ ...formState, formType: "signIn" });
   };
@@ -107,18 +107,10 @@ function AuthForms() {
           toSignUp={backToSignUp}
         />
       )}
-      <Button
-        type="sign out"
-        fullWidth
-        variant="contained"
-        color="primary"
-        className={classes.submit}
-        onClick={() => {
-          Auth.signOut();
-        }}
-      >
-        Sign out
-      </Button>
+      {formType === "signedIn" && (
+        <Redirect to='/dashboard' />
+      )}
+      
     </div>
   );
 }
