@@ -9,10 +9,6 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { Auth, Hub } from "aws-amplify";
-import Amplify from "aws-amplify";
-
-import config from "../aws-exports";
-Amplify.configure(config);
 
 function Copyright() {
   return (
@@ -30,74 +26,72 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: "100%",
     marginTop: theme.spacing(1),
-},
-submit: {
+  },
+  submit: {
     margin: theme.spacing(3, 0, 2),
-},
+  },
 }));
 
 function SignIn() {
-    const initialFormState = {
-        email: "",
-        password: "",
-        code: "",
-        formType: "signIn",
-        name: "",
-    };
-    const [formState, setFormState] = useState(initialFormState);
-    const [user, setUser] = useState(null)
-    
-    useEffect(() => {
-        checkUser()
-        
-    }, [])
+  const initialFormState = {
+    email: "",
+    password: "",
+    code: "",
+    formType: "signIn",
+    name: "",
+  };
+  const [formState, setFormState] = useState(initialFormState);
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
     const checkUser = async () => {
-        try {
-            const user = await Auth.currentAuthenticatedUser()
-            setUser(user)
-            console.log("user: ", user);
-            setFormState(() => ({ ...formState, formType: "signedIn" }))
-        } catch (error) {
-            
-        }
+      try {
+        const user = await Auth.currentAuthenticatedUser()
+        setUser(user)
+        console.log("user: ", user.username);
+        setFormState({ ...formState, formType: "signedIn" })
+      } catch (error) {
+        console.log(error)
+      }
     }
-    
-    const handleInputChange = (e) => {
-        setFormState(() => ({ ...formState, [e.target.name]: e.target.value }));
-        console.log(e.target.value);
-    };
-    
-    
-    const { formType } = formState;
-    
-    //  --------------- Handle form button press functions ---------------
-    const signUp = async (e) => {
-        e.preventDefault();
-        const { email, password, name } = formState;
-        await Auth.signUp({ username: email, password, attributes: { name } });
-        setFormState(() => ({ ...formState, formType: "confirmSignUp" }));
-    };
-    const confirmSignUp = async (e) => {
-        e.preventDefault();
+    checkUser()
+  }, [])
 
-        const { email, code } = formState;
-        await Auth.confirmSignUp({ username: email, code });
-        setFormState(() => ({ ...formState, formType: "signIn" }));
-    };
-    const signIn = async (e) => {
-        e.preventDefault();
-
-        const { email, password } = formState;
-        await Auth.signIn({ username: email, password });
-        setFormState(() => ({ ...formState, formType: "signedIn" }));
-    };
+  const handleInputChange = ({ target: { name, value } }) =>
+    setFormState({ ...formState, [name]: value });
 
 
-    const classes = useStyles();
-    return (
-        <div>
+  const { formType } = formState;
+
+  //  --------------- Handle form button press functions ---------------
+  const signUp = async (e) => {
+    e.preventDefault();
+    const { email, password, name } = formState;
+    await Auth.signUp({ username: email, password, attributes: { name } });
+    setFormState({ ...formState, formType: "confirmSignUp" });
+  };
+
+  const confirmSignUp = async (e) => {
+    e.preventDefault();
+
+    const { email, code } = formState;
+    await Auth.confirmSignUp(email, code);
+    setFormState({ ...formState, formType: "signIn" });
+  };
+  const signIn = async (e) => {
+    e.preventDefault();
+
+    const { email, password } = formState;
+    await Auth.signIn(email, password);
+    setFormState({ ...formState, formType: "signedIn" });
+  };
+
+
+  const classes = useStyles();
+  return (
+    <div>
       {formType === "signUp" && (
-          <div>
+        <div>
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
@@ -113,7 +107,7 @@ function SignIn() {
               autoComplete="Full Name"
               autoFocus
               onChange={handleInputChange}
-              />
+            />
             <TextField
               variant="outlined"
               margin="normal"
@@ -125,7 +119,7 @@ function SignIn() {
               autoComplete="email"
               autoFocus
               onChange={handleInputChange}
-              />
+            />
             <TextField
               variant="outlined"
               margin="normal"
@@ -153,10 +147,10 @@ function SignIn() {
               Sign Up
             </Button>
             <Grid item>
-                <Link href="#" variant="body2" onClick={() => {setFormState(() => ({ ...formState, formType: "signIn" }))}}>
-                  {"Already have an account? Sign in"}
-                </Link>
-              </Grid>
+              <Link href="#" variant="body2" onClick={() => { setFormState(() => ({ ...formState, formType: "signIn" })) }}>
+                {"Already have an account? Sign in"}
+              </Link>
+            </Grid>
             <Box mt={5}>
               <Copyright />
             </Box>
@@ -263,7 +257,7 @@ function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2" onClick={() => {setFormState(() => ({ ...formState, formType: "signUp" }))}}>
+                <Link href="#" variant="body2" onClick={() => { setFormState(() => ({ ...formState, formType: "signUp" })) }}>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
@@ -275,16 +269,16 @@ function SignIn() {
         </div>
       )}
       <Button
-              type="sign out"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={()=> {
-                  Auth.signOut();
-              }}
-            >
-              Sign out
+        type="sign out"
+        fullWidth
+        variant="contained"
+        color="primary"
+        className={classes.submit}
+        onClick={() => {
+          Auth.signOut();
+        }}
+      >
+        Sign out
             </Button>
     </div>
   );
