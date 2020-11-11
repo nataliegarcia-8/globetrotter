@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-
 import { makeStyles } from "@material-ui/core/styles";
 import { Auth } from "aws-amplify";
+import { Hub } from "aws-amplify";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import ConfirmSignUp from "./ConfirmSignUp";
-import { Redirect } from 'react-router-dom'
+import { Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,18 +34,20 @@ function AuthForms() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const user = await Auth.currentAuthenticatedUser();
-        setUser(user);
-        console.log("user: ", user.username);
-        setFormState({ ...formState, formType: "signedIn" });
-      } catch (error) {
-        console.log(error);
-      }
-    };
     checkUser();
   }, []);
+
+
+  const checkUser = async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      setUser(user);
+      console.log("user: ", user.username);
+      setFormState({ ...formState, formType: "signedIn" });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleInputChange = ({ target: { name, value } }) =>
     setFormState({ ...formState, [name]: value });
@@ -107,10 +110,7 @@ function AuthForms() {
           toSignUp={backToSignUp}
         />
       )}
-      {formType === "signedIn" && (
-        <Redirect to='/dashboard' />
-      )}
-      
+      {formType === "signedIn" && <Redirect to="/" />}
     </div>
   );
 }
