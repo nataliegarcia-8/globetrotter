@@ -2,10 +2,11 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Auth } from "aws-amplify";
 import Globe from "../Components/Globe";
-import Button from "@material-ui/core/Button";
+import SignOut from "../Components/SignOutButton"
 import { Redirect } from 'react-router-dom'
+import SignOutButton from "../Components/SignOutButton";
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 
 
 
@@ -31,22 +32,7 @@ const useStyles = makeStyles((theme) => ({
     <div>
       <h1>Hello!</h1>
       <Globe />
-      <Button
-        type="sign out"
-        fullWidth
-        variant="contained"
-        color="primary"
-        className={classes.submit}
-        onClick={() => {
-          Auth.signOut();
-         
-
-          <Redirect to='/' />
-        
-        }}
-      >
-        Sign out
-      </Button>
+      <SignOut/>
     </div>
   );
 }
