@@ -3,6 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Auth } from "aws-amplify";
 import Globe from "../Components/Globe";
 import Button from "@material-ui/core/Button";
+import { Redirect } from 'react-router-dom'
+
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 
 
 
@@ -21,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
   
   function Dashboard() {
+    
     const classes = useStyles();
   return (
     <div>
@@ -34,6 +39,10 @@ const useStyles = makeStyles((theme) => ({
         className={classes.submit}
         onClick={() => {
           Auth.signOut();
+         
+
+          <Redirect to='/' />
+        
         }}
       >
         Sign out
