@@ -23,21 +23,38 @@ const useStyles = makeStyles((theme) => ({
   function Dashboard() {
     const classes = useStyles();
   return (
+    // <div>
+    //   <h1>Hello!</h1>
+    //   <Globe />
+    //   <Button
+    //     type="sign out"
+    //     fullWidth
+    //     variant="contained"
+    //     color="primary"
+    //     className={classes.submit}
+    //     onClick={() => {
+    //       Auth.signOut();
+    //     }}
+    //   >
+    //     Sign out
+    //   </Button>
+    // </div>
     <div>
-      <h1>Hello!</h1>
-      <Globe />
-      <Button
-        type="sign out"
-        fullWidth
-        variant="contained"
-        color="primary"
-        className={classes.submit}
-        onClick={() => {
-          Auth.signOut();
-        }}
-      >
-        Sign out
-      </Button>
+      <h2>Dashboard</h2>
+      <form>
+      <div className="form-input">
+        <input 
+        type="text"
+        name="title"
+        value=""
+        onChange={2}
+        />
+      </div>
+<div className="form-input">
+  <textarea name="body" cols="30" rows="10" value="" onChange={2}></textarea>
+</div>
+<button>Submit</button>
+      </form>
     </div>
   );
 }
