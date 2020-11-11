@@ -1,10 +1,11 @@
 const express = require("express");
-
+const cors = require('cors');
 const mongoose = require("mongoose");
 // const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+app.use(cors());
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -71,12 +72,11 @@ app.get('/api', (req, res) => {
             console.log('error:', error)
         })
 })
-app.get('/api/name', (req, res) => {
-    const data = {
-        username: 'natalie',
-        age: 44
-    };
-    res.json(data);
+app.post('/save', (req, res) => {
+    console.log('Body:', req.body)
+    res.json({
+        msg: 'We received your data!!!!'
+    });
 });
 
 // Start the API server
