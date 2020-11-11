@@ -1,9 +1,8 @@
 import React from "react";
-import LandingPage from "./Pages/Landingpage";
-// import SignUp from "./Pages/SignUp";
-// import Dashboard from "./Pages/Dashboard";
+import Login from "./Pages/LoginPage";
+import Dashboard from "./Pages/Dashboard";
 import NoMatch from "./Pages/NoMatch";
-import SignUpPage from "./Pages/SignUpPage";
+import PlanTrip from "./Pages/PlanTrip";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
@@ -11,9 +10,10 @@ function App() {
     <Router>
       <div>
         <Switch>
-          <Route exact path='/' component={LandingPage} />
-          {/* <Route exact path='/signup' component={SignUpPage} /> */}
-          {/* <Route exact path="/dashboard" component={Dashboard} /> */}
+          <Route exact path='/' component={Login} />
+
+          <Route exact path='/dashboard' component={Dashboard} />
+          <Route exact path='/plan-trip' component={PlanTrip} />
           <Route component={NoMatch} />
         </Switch>
       </div>

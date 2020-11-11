@@ -1,19 +1,18 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 import Copyright from "./Copyright";
 
-function SignIn(props) {
+function ConfirmSignUp(props) {
   return (
     <div>
-      <Typography component='h1' variant='h5' className='text-center'>
-        Sign In
+      <Typography component='h1' variant='h5' align='center'>
+        Confirm Sign Up
+      </Typography>
+      <Typography variant='body2' color='textSecondary' align='center'>
+        An email should have been sent over with a confirmation code
       </Typography>
       <form className={props.classes.form} noValidate>
         <TextField
@@ -33,16 +32,11 @@ function SignIn(props) {
           margin='normal'
           required
           fullWidth
-          name='password'
-          label='Password'
-          type='password'
-          id='password'
-          autoComplete='current-password'
+          name='code'
+          label='Verification Code'
+          id='code'
+          autoComplete='Verification Code'
           onChange={props.handleInputChange}
-        />
-        <FormControlLabel
-          control={<Checkbox value='remember' color='primary' />}
-          label='Remember me'
         />
         <Button
           type='submit'
@@ -50,21 +44,10 @@ function SignIn(props) {
           variant='contained'
           color='primary'
           className={props.classes.submit}
-          onClick={props.signIn}>
-          Sign In
+          onClick={props.confirmSignUp}>
+          Confirm
         </Button>
-        <Grid container>
-          <Grid item xs>
-            <Link href='#' variant='body2'>
-              Forgot password?
-            </Link>
-          </Grid>
-          <Grid item>
-            <Link href='#' variant='body2' onClick={props.toSignUp}>
-              {"Don't have an account? Sign Up"}
-            </Link>
-          </Grid>
-        </Grid>
+
         <Box mt={5}>
           <Copyright />
         </Box>
@@ -73,4 +56,4 @@ function SignIn(props) {
   );
 }
 
-export default SignIn;
+export default ConfirmSignUp;
