@@ -37,7 +37,6 @@ function AuthForms() {
     checkUser();
   }, []);
 
-
   const checkUser = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
@@ -110,7 +109,7 @@ function AuthForms() {
           toSignUp={backToSignUp}
         />
       )}
-      {formType === "signedIn" && <Redirect to="/" />}
+      {formType === "signedIn" && <Redirect to='/' />}
     </div>
   );
 }
