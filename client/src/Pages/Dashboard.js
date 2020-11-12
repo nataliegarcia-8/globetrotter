@@ -24,6 +24,8 @@ import Deposits from "../Components/Deposits";
 import Orders from "../Components/Orders";
 import SignOut from "../Components/SignOutButton";
 import Map from '../Components/Map';
+import TripCard from '../Components/TripCard';
+
 function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
@@ -160,7 +162,7 @@ export default function Dashboard() {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <SignOut/>
+          <SignOut />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -198,13 +200,26 @@ export default function Dashboard() {
             {/* Map */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Map  />
+                <Map />
               </Paper>
             </Grid>
             {/* Recent Orders */}
-            <Grid item xs={12}>
+            <Grid item xs={12} md={4}>
               <Paper className={classes.paper}>
-                <Orders />
+                <TripCard text={"Previous Trip"} href="/" />
+
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Paper className={classes.paper}>
+                <TripCard text={"Current Trip"} href="/" />
+
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Paper className={classes.paper}>
+                <TripCard text={"Plan a Trip"} image="./tripplanner.jpg" href="/plantrip" />
+
               </Paper>
             </Grid>
           </Grid>

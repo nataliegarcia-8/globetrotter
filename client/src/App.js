@@ -6,9 +6,10 @@ import PlanTrip from "./Pages/PlanTrip";
 import API from "./utils/API"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Auth, Hub } from "aws-amplify";
+import PlanATrip from './Components/PlanATrip'
 
 function App() {
-  
+
   const [loginState, setLoginState] = useState("signedOut");
 
   const [user, setUser] = useState(null);
@@ -32,7 +33,7 @@ function App() {
       email: user.attributes.email,
       id: user.username
     });
- }
+  }
   const setAuthListener = async () => {
     Hub.listen("auth", (data) => {
       switch (data.payload.event) {
@@ -54,13 +55,15 @@ function App() {
 
   switch (loginState) {
     case "signedIn":
-      
+
       saveNewUser(user)
       return (
         <Router>
           <div>
             <Switch>
               <Route exact path='/' component={Dashboard} />
+              <Route exact path="/plantrip"
+                component={PlanTrip} />
               <Route component={NoMatch} />
             </Switch>
           </div>
@@ -68,7 +71,7 @@ function App() {
       );
 
     case "signedOut":
-      
+
       return (
         <Router>
           <div>

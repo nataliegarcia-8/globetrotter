@@ -16,5 +16,12 @@ export default {
   // Saves a user to the database
   saveUser: function(userData) {
     return axios.post("/api/users", userData);
+  },
+  getBookmarks: function(id) {
+    return axios.get("/api/bookmarks/" + id);
   }
 };
+
+// get bookmarks in here
+
+// 
