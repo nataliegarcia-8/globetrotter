@@ -23,7 +23,7 @@ import Chart from "../Components/Chart";
 import Deposits from "../Components/Deposits";
 import Orders from "../Components/Orders";
 import SignOut from "../Components/SignOutButton";
-
+import Map from '../Components/Map';
 function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
@@ -184,15 +184,21 @@ export default function Dashboard() {
         <Container maxWidth='lg' className={classes.container}>
           <Grid container spacing={3}>
             {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
+            {/* <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
                 <Chart />
               </Paper>
-            </Grid>
+            </Grid> */}
             {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
+            {/* <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <Deposits />
+              </Paper>
+            </Grid> */}
+            {/* Map */}
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <Map  />
               </Paper>
             </Grid>
             {/* Recent Orders */}
