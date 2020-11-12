@@ -160,6 +160,7 @@ export default function Dashboard() {
               <NotificationsIcon />
             </Badge>
           </IconButton>
+          <SignOut/>
         </Toolbar>
       </AppBar>
       <Drawer

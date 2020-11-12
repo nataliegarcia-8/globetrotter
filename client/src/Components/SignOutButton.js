@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
     
       <Button
         type="sign out"
-        fullWidth
+        
         variant="contained"
-        color="primary"
-        className={classes.submit}
+        
+        
         onClick={() => {
           Auth.signOut();
           <Redirect to='/' />
