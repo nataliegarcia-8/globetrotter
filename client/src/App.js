@@ -3,23 +3,12 @@ import Login from "./Pages/LoginPage";
 import Dashboard from "./Pages/Dashboard";
 import NoMatch from "./Pages/NoMatch";
 import PlanTrip from "./Pages/PlanTrip";
+import API from "./utils/API"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Auth, Hub } from "aws-amplify";
 
 function App() {
-  // return (
-  //   // <Router>
-  //   //   <div>
-  //   //     <Switch>
-  //   //       <Route exact path='/' component={Login} />
-
-  //   //       <Route exact path='/dashboard' component={Dashboard} />
-  //   //       <Route exact path='/plan-trip' component={PlanTrip} />
-  //   //       <Route component={NoMatch} />
-  //   //     </Switch>
-  //   //   </div>
-  //   // </Router>
-  // );
+  
   const [loginState, setLoginState] = useState("signedOut");
 
   const [user, setUser] = useState(null);
@@ -32,13 +21,18 @@ function App() {
     try {
       const user = await Auth.currentAuthenticatedUser();
       setUser(user);
-      console.log("user: ", user.username);
+      console.log("user: ", user);
       setLoginState("signedIn");
     } catch (error) {
       console.log(error);
     }
   };
-
+  const saveNewUser = (user) => {
+    API.saveUser({
+      email: user.attributes.email,
+      id: user.username
+    });
+ }
   const setAuthListener = async () => {
     Hub.listen("auth", (data) => {
       switch (data.payload.event) {
@@ -60,7 +54,8 @@ function App() {
 
   switch (loginState) {
     case "signedIn":
-      console.log("user signed in");
+      
+      saveNewUser(user)
       return (
         <Router>
           <div>
@@ -73,7 +68,7 @@ function App() {
       );
 
     case "signedOut":
-      console.log("user signed out");
+      
       return (
         <Router>
           <div>
