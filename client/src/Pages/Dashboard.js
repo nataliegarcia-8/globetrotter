@@ -23,6 +23,8 @@ import Chart from "../Components/Chart";
 import Deposits from "../Components/Deposits";
 import Orders from "../Components/Orders";
 import SignOut from "../Components/SignOutButton";
+import Map from '../Components/Map';
+import TripCard from '../Components/TripCard';
 
 function Copyright() {
   return (
@@ -160,7 +162,7 @@ export default function Dashboard() {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <SignOut/>
+          <SignOut />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -184,21 +186,40 @@ export default function Dashboard() {
         <Container maxWidth='lg' className={classes.container}>
           <Grid container spacing={3}>
             {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
+            {/* <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
                 <Chart />
               </Paper>
-            </Grid>
+            </Grid> */}
             {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
+            {/* <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <Deposits />
               </Paper>
-            </Grid>
-            {/* Recent Orders */}
+            </Grid> */}
+            {/* Map */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Orders />
+                <Map />
+              </Paper>
+            </Grid>
+            {/* Recent Orders */}
+            <Grid item xs={12} md={4}>
+              <Paper className={classes.paper}>
+                <TripCard text={"Previous Trip"} href="/" />
+
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Paper className={classes.paper}>
+                <TripCard text={"Current Trip"} href="/" />
+
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Paper className={classes.paper}>
+                <TripCard text={"Plan a Trip"} image="./tripplanner.jpg" href="/plantrip" />
+
               </Paper>
             </Grid>
           </Grid>
