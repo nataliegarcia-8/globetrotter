@@ -8,65 +8,108 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Copyright from "./Copyright";
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  fontcolor: {
+    color: "#BB86FC",
+    "&:hover": {
+      color: "#BB90FF",
+    },
+  },
+}));
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#BB86FC",
+    },
+    type: "dark",
+  },
+});
 
 function SignUp(props) {
+  const classes = useStyles();
+
   return (
     <>
       <Typography component='h1' variant='h5' className='text-center'>
         Sign Up
       </Typography>
       <form className={props.classes.form} noValidate>
-        <TextField
-          variant='outlined'
-          margin='normal'
-          required
-          fullWidth
-          id='name'
-          label='Full Name'
-          name='name'
-          autoComplete='Full Name'
-          autoFocus
-          onChange={props.handleInputChange}
-        />
-        <TextField
-          variant='outlined'
-          margin='normal'
-          required
-          fullWidth
-          id='email'
-          label='Email Address'
-          name='email'
-          autoComplete='email'
-          autoFocus
-          onChange={props.handleInputChange}
-        />
-        <TextField
-          variant='outlined'
-          margin='normal'
-          required
-          fullWidth
-          name='password'
-          label='Password'
-          type='password'
-          id='password'
-          autoComplete='current-password'
-          onChange={props.handleInputChange}
-        />
+        <ThemeProvider theme={theme}>
+          <TextField
+            variant='outlined'
+            margin='normal'
+            required
+            fullWidth
+            id='firstName'
+            label='First Name'
+            name='firstName'
+            autoComplete='First Name'
+            autoFocus
+            onChange={props.handleInputChange}
+          />
+          <TextField
+            variant='outlined'
+            margin='normal'
+            required
+            fullWidth
+            id='lastName'
+            label='Last Name'
+            name='lastName'
+            autoComplete='Last Name'
+            autoFocus
+            onChange={props.handleInputChange}
+          />
+          <TextField
+            variant='outlined'
+            margin='normal'
+            required
+            fullWidth
+            id='email'
+            label='Email Address'
+            name='email'
+            autoComplete='email'
+            autoFocus
+            onChange={props.handleInputChange}
+          />
+          <TextField
+            variant='outlined'
+            margin='normal'
+            required
+            fullWidth
+            name='password'
+            label='Password'
+            type='password'
+            id='password'
+            autoComplete='current-password'
+            onChange={props.handleInputChange}
+          />
+        </ThemeProvider>
         <FormControlLabel
-          control={<Checkbox value='remember' color='primary' />}
+          control={<Checkbox value='remember' color='white' />}
           label='Remember me'
         />
         <Button
+          color='primary'
           type='submit'
           fullWidth
           variant='contained'
-          color='primary'
           className={props.classes.submit}
           onClick={props.signUp}>
           Sign Up
         </Button>
         <Grid item>
-          <Link href='#' variant='body2' onClick={props.backToSignIn}>
+          <Link
+            href='#'
+            variant='body2'
+            onClick={props.backToSignIn}
+            className={classes.fontcolor}>
             {"Already have an account? Sign in"}
           </Link>
         </Grid>

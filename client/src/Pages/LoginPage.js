@@ -5,7 +5,11 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles";
 import AuthForms from "../Components/AuthForms";
 
 const useStyles = makeStyles((theme) => ({
@@ -14,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     backgroundImage:
-      "url(https://images.unsplash.com/photo-1508781378177-4a8e7e4ef6c1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80)",
+      "url(https://images.unsplash.com/photo-1436891620584-47fd0e565afb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
@@ -46,8 +50,8 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    color: "#3f51b5",
-    border: "2px solid #3f51b5",
+    color: "#BB86FC",
+    border: "2px solid #BB86FC",
     backgroundColor: "transparent",
   },
   form: {
@@ -61,25 +65,41 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide() {
   const classes = useStyles();
+  const theme = createMuiTheme({
+    palette: {
+      type: "dark",
+    },
+  });
 
   return (
-    <Grid container component='main' className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={12} sm={4} md={7} className={classes.image}>
-        <Typography className={classes.icon}>
-          <i className='fas fa-wave-square'></i>
-        </Typography>
-        <Typography className={classes.headline}>GLOBETROTTER</Typography>
-      </Grid>
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
+    <ThemeProvider theme={theme}>
+      <Paper>
+        <Grid container component='main' className={classes.root}>
+          <CssBaseline />
+          <Grid item xs={12} sm={4} md={7} className={classes.image}>
+            <Typography className={classes.icon}>
+              <i className='fas fa-wave-square'></i>
+            </Typography>
+            <Typography className={classes.headline}>STATETREK</Typography>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={8}
+            md={5}
+            component={Paper}
+            elevation={6}
+            square>
+            <div className={classes.paper}>
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
 
-          <AuthForms />
-        </div>
-      </Grid>
-    </Grid>
+              <AuthForms />
+            </div>
+          </Grid>
+        </Grid>
+      </Paper>
+    </ThemeProvider>
   );
 }
