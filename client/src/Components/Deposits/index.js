@@ -12,6 +12,9 @@ const useStyles = makeStyles({
   depositContext: {
     flex: 1,
   },
+  balance: {
+    color: "#BB86FC",
+  },
 });
 
 export default function Deposits() {
@@ -26,7 +29,11 @@ export default function Deposits() {
         on 15 March, 2019
       </Typography>
       <div>
-        <Link color='primary' href='#' onClick={preventDefault}>
+        <Link
+          color='primary'
+          href='#'
+          className={classes.balance}
+          onClick={preventDefault}>
           View balance
         </Link>
       </div>
