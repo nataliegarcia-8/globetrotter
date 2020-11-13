@@ -5,35 +5,41 @@ import {
   GoogleMap,
   Marker,
 } from "react-google-maps";
-
 import API from "../../utils/API";
-
 const CustomSkinMap = withScriptjs(
   withGoogleMap((props) => {
     const [position, setPosition] = useState({ lat: 37.0902, lng: -95.7129 });
     const [markerState, setMarkerState] = useState([]);
-    useEffect(() => {
-      loadTrips();
-    }, []);
-
-    //let markers = [];
-
-    const loadTrips = () => {
-      API.getTrips().then(({ data }) => {
-        console.log(data);
-        // markers.push({
-        //   lat: data[0].lat,
-        //   long: data[0].long,
-        // });
-        // console.log("markers: ", markers);
-        setMarkerState([...markerState, {lat:data[0].lat, long:data[0].long}]);
-        console.log("markerState: ", markerState);
-      });
+    const [zoom, setZoom] = useState(4.5);
+    const zoomIntoMarkerHandler = (coordinates) => {
+      console.log("clicked");
+      setZoom(zoom + 1);
+      setPosition({ lat: coordinates.lat, lng: coordinates.long });
     };
+    // useEffect(() => {
+    //   setZoom(zoom+1);
+    //   setZooming(false);
+    // }, [zooming]);
+    let count = 0;
+    useEffect(() => {
+      async function getTrips() {
+        try {
+          const results = await API.getTrips();
+          console.log(results.data);
+          setMarkerState((state) => [...state, ...results.data]);
+        } catch (error) {}
+      }
+      getTrips();
+    }, []);
+    useEffect(() => {
+      console.log(markerState);
+    }, [markerState]);
     return (
       <GoogleMap
-        defaultZoom={4.5}
+        defaultZoom={zoom}
+        zoom={zoom}
         defaultCenter={position}
+        center={position}
         defaultOptions={{
           scrollwheel: false,
           zoomControl: true,
@@ -99,13 +105,20 @@ const CustomSkinMap = withScriptjs(
           ],
         }}
       >
-        <Marker position={{ lat: 40.748817, lng: -73.985428 }} />
-        <Marker position={{ lat: 37.0902, lng: -95.7129 }} />
+        {markerState.map((marker, i) => (
+          <Marker
+            onClick={() => zoomIntoMarkerHandler(marker)}
+            key={i}
+            position={{ lat: marker.lat, lng: marker.long }}
+            zoomOnClick={true}
+          />
+        ))}
+        {/* <Marker position={{ lat: 40.748817, lng: -73.985428 }} />
+        <Marker position={{ lat: 37.0902, lng: -95.7129 }} /> */}
       </GoogleMap>
     );
   })
 );
-
 export default function Maps() {
   return (
     <CustomSkinMap
