@@ -5,12 +5,14 @@
   "main": "server.js",
   "proxy": "http://localhost:3001",
   "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build",
-    "dev": "concurrently -n 'server,client' -c 'red,green' \"nodemon server.js\" \"npm run client\""
+    "heroku-postbuild": "npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -25,9 +27,7 @@
     "aws-amplify": "^3.3.7",
     "aws-amplify-react": "^4.2.11",
     "axios": "^0.18.0",
-    "cors": "^2.8.5",
     "express": "^4.16.3",
-    "graphql": "^15.4.0",
     "if-env": "^1.0.4",
     "mongoose": "^5.3.16",
     "morgan": "^1.10.0",
