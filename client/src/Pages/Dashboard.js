@@ -18,18 +18,14 @@ import Badge from "@material-ui/core/Badge";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems, secondaryListItems } from "../Components/ListItems";
-import Chart from "../Components/Chart";
-import Deposits from "../Components/Deposits";
 import Cards from "../Components/Cards";
 import SignOut from "../Components/SignOutButton";
 import Copyright from "../Components/Copyright";
 import Map from "../Components/Map";
-import TripCard from "../Components/TripCard";
 
 const drawerWidth = 240;
 
