@@ -1,30 +1,7 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Auth } from "aws-amplify";
-import Globe from "../Components/Globe";
-import SignOut from "../Components/SignOutButton"
-import { Redirect } from 'react-router-dom'
-import SignOutButton from "../Components/SignOutButton";
 import axios from "axios";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      height: "100vh",
-    },
-    form: {
-      width: "100%",
-      marginTop: theme.spacing(1),
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    },
-  }));
-
-  
-  class Dashboard extends React.Component {
-  //   const [titleState, setTitleState] = useState("")
-  
-  // const [bodyState, setBodyState] = useState("");
+class Dashboard extends React.Component {
   state = {
     title: '',
     body: '',
@@ -36,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   }
 
   getPost = () => {
-    axios.get('http://localhost/api')
+    axios.get('http://localhost:8080/api')
     .then((response) => {
       const data = response.data;
       this.setState({ posts: data })
@@ -71,33 +48,36 @@ const useStyles = makeStyles((theme) => ({
     })
     .then(() => {
       console.log('data has been sent to the server')
+      this.resetUserInputs();
+      this.getPost();
     })
     .catch(() => {
       console.log('server error')
     });
 
   };
-  // const classes = useStyles();
-  
+
+  resetUserInputs = () => {
+    this.setState({
+      title: '',
+      body: ''
+    })
+  }
+
+  displayPost = (posts) => {
+    if(!posts.length) return null;
+
+    return posts.map((post, index) => {
+      <div key={index}>
+        <h3>{posts.title}</h3>
+    <p>{posts.body}</p>
+
+      </div>
+    })
+  }
   render() {
-    console.log("state", this.state)
+
   return (
-    // <div>
-    //   <h1>Hello!</h1>
-    //   <Globe />
-    //   <Button
-    //     type="sign out"
-    //     fullWidth
-    //     variant="contained"
-    //     color="primary"
-    //     className={classes.submit}
-    //     onClick={() => {
-    //       Auth.signOut();
-    //     }}
-    //   >
-    //     Sign out
-    //   </Button>
-    // </div>
     <div>
       <h2>Dashboard</h2>
       <form onSubmit={this.submit}>
@@ -121,13 +101,10 @@ const useStyles = makeStyles((theme) => ({
 </div>
 <button>Submit</button>
       </form>
-
-      {/* <h1>Hello!</h1>
-      <Globe />
-      <SignOut/> */}
-    </div>
+      <div className="blog-post">
+        {this.displayPost(this.state.posts)}
+      </div>
+      </div>
   );
-    }
-}
-
-export default Dashboard;
+   }}
+   export default Dashboard;

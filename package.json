@@ -29,6 +29,7 @@
     "graphql": "^15.4.0",
     "if-env": "^1.0.4",
     "mongoose": "^5.10.13",
-    "react-globe": "^5.0.2"
+    "react-globe": "^5.0.2",
+    "recharts": "^1.8.5"
   }
 }
