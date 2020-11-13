@@ -79,8 +79,6 @@ function App() {
       );
 
     case "signedOut":
-
-      
       return (
         <Router>
           <div>
