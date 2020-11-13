@@ -1,5 +1,5 @@
 import React from "react";
-import { useTheme } from "@material-ui/core/styles";
+import { useTheme, makeStyles } from "@material-ui/core/styles";
 import {
   LineChart,
   Line,
@@ -27,8 +27,15 @@ const data = [
   createData("24:00", undefined),
 ];
 
+const useStyles = makeStyles((theme) => ({
+  stroke: {
+    color: "#BB86FC",
+  },
+}));
+
 export default function Chart() {
   const theme = useTheme();
+  const classes = useStyles();
 
   return (
     <React.Fragment>
@@ -57,7 +64,7 @@ export default function Chart() {
           <Line
             type='monotone'
             dataKey='amount'
-            stroke={theme.palette.primary.main}
+            stroke={classes.stroke}
             dot={false}
           />
         </LineChart>

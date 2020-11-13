@@ -63,6 +63,7 @@ function preventDefault(event) {
 const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
+    color: "#BB86FC",
   },
 }));
 
@@ -94,7 +95,7 @@ export default function Orders() {
         </TableBody>
       </Table>
       <div className={classes.seeMore}>
-        <Link color='primary' href='#' onClick={preventDefault}>
+        <Link className={classes.seeMore} href='#' onClick={preventDefault}>
           See more orders
         </Link>
       </div>

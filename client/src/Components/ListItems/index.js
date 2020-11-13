@@ -4,11 +4,14 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import PeopleIcon from "@material-ui/icons/People";
-import BarChartIcon from "@material-ui/icons/BarChart";
+import EventIcon from "@material-ui/icons/Event";
+import CardTravelIcon from "@material-ui/icons/CardTravel";
+import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
+import PersonIcon from "@material-ui/icons/Person";
 import LayersIcon from "@material-ui/icons/Layers";
-import AssignmentIcon from "@material-ui/icons/Assignment";
+import { Auth } from "aws-amplify";
+import { Redirect } from "react-router-dom";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 export const mainListItems = (
   <div>
@@ -20,51 +23,44 @@ export const mainListItems = (
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <EventIcon />
       </ListItemIcon>
-      <ListItemText primary='Orders' />
+      <ListItemText primary='Previous Trips' />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <PeopleIcon />
+        <CardTravelIcon />
       </ListItemIcon>
-      <ListItemText primary='Customers' />
+      <ListItemText primary='Current Trip' />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <BarChartIcon />
+        <SpeakerNotesIcon />
       </ListItemIcon>
-      <ListItemText primary='Reports' />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary='Integrations' />
+      <ListItemText primary='Plan Trip' />
     </ListItem>
   </div>
 );
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Saved reports</ListSubheader>
+    <ListSubheader inset>User Settings</ListSubheader>
     <ListItem button>
       <ListItemIcon>
-        <AssignmentIcon />
+        <PersonIcon />
       </ListItemIcon>
-      <ListItemText primary='Current month' />
+      <ListItemText primary='Account Info' />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <AssignmentIcon />
+        <ExitToAppIcon />
       </ListItemIcon>
-      <ListItemText primary='Last quarter' />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary='Year-end sale' />
+      <ListItemText
+        primary='Logout'
+        onClick={() => {
+          Auth.signOut();
+          <Redirect to='/' />;
+        }}></ListItemText>
     </ListItem>
   </div>
 );
