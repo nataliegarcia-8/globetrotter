@@ -47,7 +47,6 @@ export default function PlanTrip() {
     <React.Fragment>
       <CssBaseline />
       <Container className={classes.cardGrid} maxWidth='md'>
-        {/* End hero unit */}
         <Grid container spacing={5}>
           {cards.map((card) => (
             <Grid item key={card} xs={12} sm={6} md={4}>

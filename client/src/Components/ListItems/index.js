@@ -9,6 +9,8 @@ import CardTravelIcon from "@material-ui/icons/CardTravel";
 import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
 import PersonIcon from "@material-ui/icons/Person";
 import LayersIcon from "@material-ui/icons/Layers";
+import { Auth } from "aws-amplify";
+import { Redirect } from "react-router-dom";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 export const mainListItems = (
@@ -23,13 +25,13 @@ export const mainListItems = (
       <ListItemIcon>
         <EventIcon />
       </ListItemIcon>
-      <ListItemText primary='Current Trip' />
+      <ListItemText primary='Previous Trips' />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <CardTravelIcon />
       </ListItemIcon>
-      <ListItemText primary='Previous Trips' />
+      <ListItemText primary='Current Trip' />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
@@ -53,7 +55,12 @@ export const secondaryListItems = (
       <ListItemIcon>
         <ExitToAppIcon />
       </ListItemIcon>
-      <ListItemText primary='Logout' />
+      <ListItemText
+        primary='Logout'
+        onClick={() => {
+          Auth.signOut();
+          <Redirect to='/' />;
+        }}></ListItemText>
     </ListItem>
   </div>
 );

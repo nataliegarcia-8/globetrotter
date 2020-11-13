@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-
+import API from "../utils/API";
 import { makeStyles } from "@material-ui/core/styles";
 import { Auth } from "aws-amplify";
-import { Hub } from "aws-amplify";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import ConfirmSignUp from "./ConfirmSignUp";
 import { Redirect } from "react-router-dom";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,12 +45,13 @@ function AuthForms() {
       const user = await Auth.currentAuthenticatedUser();
       setUser(user);
       console.log("user: ", user.username);
+      
       setFormState({ ...formState, formType: "signedIn" });
     } catch (error) {
       console.log(error);
     }
   };
-
+ 
   const handleInputChange = ({ target: { name, value } }) =>
     setFormState({ ...formState, [name]: value });
 
@@ -62,6 +62,7 @@ function AuthForms() {
     e.preventDefault();
     const { email, password, name } = formState;
     await Auth.signUp({ username: email, password, attributes: { name } });
+    
     setFormState({ ...formState, formType: "confirmSignUp" });
   };
 
@@ -70,6 +71,7 @@ function AuthForms() {
 
     const { email, code } = formState;
     await Auth.confirmSignUp(email, code);
+    
     setFormState({ ...formState, formType: "signIn" });
   };
   const signIn = async (e) => {

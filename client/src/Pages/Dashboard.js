@@ -28,6 +28,8 @@ import Deposits from "../Components/Deposits";
 import Cards from "../Components/Cards";
 import SignOut from "../Components/SignOutButton";
 import Copyright from "../Components/Copyright";
+import Map from "../Components/Map";
+import TripCard from "../Components/TripCard";
 
 const drawerWidth = 240;
 
@@ -183,19 +185,19 @@ export default function Dashboard() {
             <div className={classes.appBarSpacer} />
             <Container maxWidth='lg' className={classes.container}>
               <Grid container spacing={3}>
-                {/* Chart */}
-                <Grid item xs={12} md={8} lg={9}>
-                  <Paper className={fixedHeightPaper}>
-                    <Chart />
+                {/* Map */}
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}>
+                    <Map />
                   </Paper>
                 </Grid>
                 {/* Recent Deposits */}
-                <Grid item xs={12} md={4} lg={3}>
+                {/* <Grid item xs={12} md={4} lg={3}>
                   <Paper className={fixedHeightPaper}>
                     <Deposits />
                   </Paper>
-                </Grid>
-                {/* Recent Orders */}
+                </Grid> */}
+                {/* Cards */}
                 <Grid item xs={12}>
                   <Paper className={classes.paper}>
                     <Cards />

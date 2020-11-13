@@ -20,9 +20,8 @@ function SignOutButton() {
   return (
     <Button
       type='sign out'
-      fullWidth
-      variant='contained'
       className={classes.submit}
+      variant='contained'
       onClick={() => {
         Auth.signOut();
         <Redirect to='/' />;
