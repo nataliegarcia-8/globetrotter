@@ -18,22 +18,30 @@ function App() {
     checkUser();
     setAuthListener();
   }, []);
+
   const checkUser = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
       setUser(user);
       console.log("user: ", user);
+      console.log("signedIn");
+
       setLoginState("signedIn");
     } catch (error) {
       console.log(error);
+      console.log("signedOut");
+
+      setLoginState("signedOut");
     }
   };
+
   const saveNewUser = (user) => {
     API.saveUser({
       email: user.attributes.email,
       id: user.username
     });
   }
+
   const setAuthListener = async () => {
     Hub.listen("auth", (data) => {
       switch (data.payload.event) {
@@ -72,11 +80,13 @@ function App() {
 
     case "signedOut":
 
+      
       return (
         <Router>
           <div>
             <Switch>
-              <Route exact path='*' component={Login} />
+              <Route exact path='/' component={Login} />
+              <Route component={NoMatch} />
             </Switch>
           </div>
         </Router>
