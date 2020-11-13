@@ -52,35 +52,34 @@ function App() {
     });
   };
 
-  // switch (loginState) {
-  //   case "signedIn":
-  //     saveNewUser(user);
-  return (
-    <Router>
-      <div>
-        <Switch>
-          <Route exact path='/dashboard' component={Dashboard} />
-          <Route exact path='/' component={Login} />
-          <Route exact path='/plantrip' component={PlanTrip} />
-          <Route component={NoMatch} />
-        </Switch>
-      </div>
-    </Router>
-  );
+  switch (loginState) {
+    case "signedIn":
+      saveNewUser(user);
+      return (
+        <Router>
+          <div>
+            <Switch>
+              <Route exact path='/' component={Dashboard} />
+              <Route exact path='/plantrip' component={PlanTrip} />
+              <Route component={NoMatch} />
+            </Switch>
+          </div>
+        </Router>
+      );
 
-  //     case "signedOut":
-  //       return (
-  //         <Router>
-  //           <div>
-  //             <Switch>
-  //               <Route exact path='*' component={Login} />
-  //             </Switch>
-  //           </div>
-  //         </Router>
-  //       );
-  //     default:
-  //       break;
-  //   }
+    case "signedOut":
+      return (
+        <Router>
+          <div>
+            <Switch>
+              <Route exact path='/' component={Login} />
+            </Switch>
+          </div>
+        </Router>
+      );
+    default:
+      break;
+  }
 }
 
 export default App;
