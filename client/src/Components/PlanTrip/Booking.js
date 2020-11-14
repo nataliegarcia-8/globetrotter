@@ -37,34 +37,40 @@ export default function MaterialUIPickers() {
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid container justify='space-around'></Grid>
       <Grid container justify='space-around'>
-        <KeyboardDatePicker
-          variant='inline'
-          format='MM/dd/yyyy'
-          margin='normal'
-          id='departing'
-          label='Departing'
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            "aria-label": "change date",
-          }}
-        />
-        <KeyboardDatePicker
-          margin='normal'
-          id='returning'
-          label='Returning'
-          format='MM/dd/yyyy'
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            "aria-label": "change date",
-          }}
-        />
-      </Grid>
-      <Grid container justify='space-around' className={classes.margin}>
-        <Location />
-        <FormControl variant='outlined'>
+        <FormControl>
+          <KeyboardDatePicker
+            variant='inline'
+            format='MM/dd/yyyy'
+            margin='normal'
+            id='departing'
+            label='Departing'
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change date",
+            }}
+          />
+        </FormControl>
+
+        <FormControl>
+          <KeyboardDatePicker
+            margin='normal'
+            id='returning'
+            label='Returning'
+            format='MM/dd/yyyy'
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change date",
+            }}
+          />
+        </FormControl>
+        <FormControl className={classes.margin}>
+          <Location />
+        </FormControl>
+        <FormControl variant='outlined' className={classes.margin}>
           <InputLabel htmlFor='standard-start-adornment'>Budget</InputLabel>
           <OutlinedInput
             id='standard-start-adornment'
