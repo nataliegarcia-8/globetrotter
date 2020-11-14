@@ -19,6 +19,9 @@ module.exports = {
     db.Trips
       .create(req.body)
       .then(dbModel => res.json(dbModel))
+      .then(dbModel => {
+        return db.Users.findOneAndUpdate({ _id: req.params.id }, { trips: dbReview._id }, { new: true });
+      })
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
