@@ -20,10 +20,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MaterialUIPickers() {
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [departureDate, setDepartureDate] = React.useState(new Date());
+  const [returnDate, setReturnDate] = React.useState(new Date());
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
+  const handleDepartDateChange = (date) => {
+    setDepartureDate(date);
+  };
+
+  const handleReturnDateChange = (date) => {
+    setReturnDate(date);
   };
 
   const [values, setValues] = React.useState({
@@ -46,8 +51,8 @@ export default function MaterialUIPickers() {
             margin='normal'
             id='departing'
             label='Departing'
-            value={selectedDate}
-            onChange={handleDateChange}
+            value={departureDate}
+            onChange={handleDepartDateChange}
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
@@ -60,8 +65,8 @@ export default function MaterialUIPickers() {
             id='returning'
             label='Returning'
             format='MM/dd/yyyy'
-            value={selectedDate}
-            onChange={handleDateChange}
+            value={returnDate}
+            onChange={handleReturnDateChange}
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
