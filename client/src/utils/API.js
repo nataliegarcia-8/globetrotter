@@ -19,7 +19,10 @@ export default {
   },
   getBookmarks: function(id) {
     return axios.get("/api/bookmarks/" + id);
-  }
+  },
+  getTrips: function() {
+    return axios.get("/api/trips");
+  },
 };
 
 // get bookmarks in here
