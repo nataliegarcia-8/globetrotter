@@ -6,7 +6,7 @@ import PlanTrip from "./Pages/PlanTrip";
 import API from "./utils/API";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Auth, Hub } from "aws-amplify";
-import PlanATrip from "./Components/PlanATrip";
+import PlanATrip from "./Components/PlanTrip/PlanATrip";
 
 function App() {
   const [loginState, setLoginState] = useState("signedOut");

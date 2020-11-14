@@ -1,0 +1,81 @@
+import "date-fns";
+import React from "react";
+import Grid from "@material-ui/core/Grid";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
+import Location from "./Location";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  margin: {
+    marginTop: theme.spacing(5),
+  },
+}));
+
+export default function MaterialUIPickers() {
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
+  const [values, setValues] = React.useState({
+    amount: "",
+  });
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+  const classes = useStyles();
+
+  return (
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid container justify='space-around'>
+        <KeyboardDatePicker
+          variant='inline'
+          format='MM/dd/yyyy'
+          margin='normal'
+          id='departing'
+          label='Departing'
+          value={selectedDate}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            "aria-label": "change date",
+          }}
+        />
+        <KeyboardDatePicker
+          margin='normal'
+          id='returning'
+          label='Returning'
+          format='MM/dd/yyyy'
+          value={selectedDate}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            "aria-label": "change date",
+          }}
+        />
+      </Grid>
+      <Grid container justify='space-around' className={classes.margin}>
+        <Location />
+        <FormControl variant='outlined'>
+          <InputLabel htmlFor='standard-start-adornment'>Budget</InputLabel>
+          <OutlinedInput
+            id='standard-start-adornment'
+            value={values.amount}
+            style={{ width: 225 }}
+            onChange={handleChange("amount")}
+            startAdornment={<InputAdornment position='start'>$</InputAdornment>}
+            labelWidth={60}
+          />
+        </FormControl>
+      </Grid>
+    </MuiPickersUtilsProvider>
+  );
+}
