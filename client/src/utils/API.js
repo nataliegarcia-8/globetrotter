@@ -17,14 +17,12 @@ export default {
   saveUser: function(userData) {
     return axios.post("/api/users", userData);
   },
-  getBookmarks: function(id) {
-    return axios.get("/api/bookmarks/" + id);
+  saveTrip: function(id, tripData) {
+    return axios.post("/api/users" + id, tripData);
   },
   getTrips: function() {
     return axios.get("/api/trips");
   },
 };
 
-// get bookmarks in here
 
-// 

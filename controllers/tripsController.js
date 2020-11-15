@@ -19,6 +19,10 @@ module.exports = {
     db.Trips
       .create(req.body)
       .then(dbModel => res.json(dbModel))
+      .then(dbModel => {
+        // console.log("HERE: ", dbModel[0]._id);
+        return db.Users.findOneAndUpdate({ _id: req.params.id }, { trips: dbModel._id }, { new: true });
+      })
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
