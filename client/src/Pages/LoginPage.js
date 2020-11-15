@@ -80,7 +80,7 @@ export default function SignInSide() {
             <Typography className={classes.icon}>
               <i className='fas fa-wave-square'></i>
             </Typography>
-            <Typography className={classes.headline}>Trotter</Typography>
+            <Typography className={classes.headline}>TROTTER</Typography>
           </Grid>
           <Grid
             item
