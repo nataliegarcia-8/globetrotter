@@ -6,8 +6,8 @@ const usersSchema = new Schema({
   email: { type: String, required: true, unique: true},
   id: { type: String, required: true },
   date: { type: Date, default: Date.now },
-  firstName: { type: String, required: true},
-  lastName: { type: String, required: true},
+  firstName: { type: String},
+  lastName: { type: String},
   trips:[{ type: Schema.Types.ObjectId, ref: "Trips"}]
 
 });

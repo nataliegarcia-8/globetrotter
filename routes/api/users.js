@@ -11,6 +11,7 @@ router.route("/")
 // Matches with "/api/users/:id"
 router
   .route("/:id")
+  .post(tripsController.create)
   .get(usersController.findById)
   .put(usersController.update)
   .delete(usersController.remove);

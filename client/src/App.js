@@ -16,20 +16,20 @@ function App() {
   useEffect(() => {
     checkUser();
     setAuthListener();
-  }, []);
+  }, [loginState]);
 
   const checkUser = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
       setUser(user);
       console.log("user: ", user);
+      
       console.log("signedIn");
 
       setLoginState("signedIn");
     } catch (error) {
       console.log(error);
       console.log("signedOut");
-
       setLoginState("signedOut");
     }
   };
@@ -47,6 +47,7 @@ function App() {
         case "signIn":
           console.log("user signed in");
           setLoginState("signedIn");
+          saveNewUser(user);
           break;
 
         case "signOut":
@@ -62,7 +63,7 @@ function App() {
 
   switch (loginState) {
     case "signedIn":
-      saveNewUser(user);
+      
       return (
         <Router>
           <div>

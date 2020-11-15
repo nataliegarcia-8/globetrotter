@@ -7,9 +7,13 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/globetrotter");
 
 const usersSeed = [
   {
-    name: "ya boi",
+    
+    email: "santu@gmain.com",
     id: "asd3asd442as",
     date: new Date(Date.now()),
+    firstName: "santu",
+    lastName: "solang",
+   
   },
 ];
 const tripsSeed = [
