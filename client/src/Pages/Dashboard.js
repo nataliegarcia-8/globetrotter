@@ -26,6 +26,7 @@ import Cards from "../Components/Cards";
 import SignOut from "../Components/SignOutButton";
 import Copyright from "../Components/Copyright";
 import Map from "../Components/Map";
+import Dropdown from "../Components/PlanTrip/Dropdown";
 
 const drawerWidth = 240;
 
@@ -185,6 +186,7 @@ export default function Dashboard() {
                 <Grid item xs={12}>
                   <Paper className={classes.paper}>
                     <Map />
+                    <Dropdown />
                   </Paper>
                 </Grid>
                 {/* Recent Deposits */}
