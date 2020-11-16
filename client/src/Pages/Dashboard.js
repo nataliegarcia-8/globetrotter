@@ -186,7 +186,7 @@ export default function Dashboard() {
                 <Grid item xs={12}>
                   <Paper className={classes.paper}>
                     <Map />
-                    <Dropdown />
+                    
                   </Paper>
                 </Grid>
                 {/* Recent Deposits */}
