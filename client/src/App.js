@@ -23,7 +23,7 @@ function App() {
       const user = await Auth.currentAuthenticatedUser();
       setUser(user);
       console.log("user: ", user);
-      
+
       console.log("signedIn");
 
       setLoginState("signedIn");
@@ -47,7 +47,6 @@ function App() {
         case "signIn":
           console.log("user signed in");
           setLoginState("signedIn");
-          saveNewUser(user);
           break;
 
         case "signOut":
@@ -63,13 +62,13 @@ function App() {
 
   switch (loginState) {
     case "signedIn":
-      
+      saveNewUser(user);
       return (
         <Router>
           <div>
             <Switch>
-              <Route exact path='/' component={Dashboard} />
-              <Route exact path='/plantrip' component={PlanTrip} />
+              <Route exact path="/" component={Dashboard} />
+              <Route exact path="/plantrip" component={PlanTrip} />
               <Route component={NoMatch} />
             </Switch>
           </div>
@@ -81,7 +80,7 @@ function App() {
         <Router>
           <div>
             <Switch>
-              <Route exact path='/' component={Login} />
+              <Route exact path="/" component={Login} />
               <Route component={NoMatch} />
             </Switch>
           </div>
