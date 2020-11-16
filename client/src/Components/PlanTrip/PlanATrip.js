@@ -18,7 +18,7 @@ import Link from "@material-ui/core/Link";
 import Copyright from "../Copyright";
 import Booking from "./Booking";
 import SubmitButton from "./SubmitButton";
-import Location from "./Location";
+import Dropdown from "./Dropdown";
 
 import { Auth } from "aws-amplify";
 
@@ -130,7 +130,7 @@ export default function PlanTrip() {
             budget = {tripState.budget}
             return = {returnDate}
             departure = {departureDate} >
-              <Location />
+              <Dropdown />
             </Booking>
             <SubmitButton />
           </Container>
