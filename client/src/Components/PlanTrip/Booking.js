@@ -19,25 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MaterialUIPickers() {
-  const [departureDate, setDepartureDate] = React.useState(new Date());
-  const [returnDate, setReturnDate] = React.useState(new Date());
-
-  const handleDepartDateChange = (date) => {
-    setDepartureDate(date);
-  };
-
-  const handleReturnDateChange = (date) => {
-    setReturnDate(date);
-  };
-
-  const [values, setValues] = React.useState({
-    amount: "",
-  });
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
+export default function MaterialUIPickers(props) {
   const classes = useStyles();
 
   return (
@@ -51,8 +33,9 @@ export default function MaterialUIPickers() {
             margin='normal'
             id='departing'
             label='Departing'
-            value={departureDate}
-            onChange={handleDepartDateChange}
+            name='departure'
+            value={props.departure}
+            onChange={props.handleDepartDateChange}
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
@@ -64,25 +47,29 @@ export default function MaterialUIPickers() {
             margin='normal'
             id='returning'
             label='Returning'
+            name='return'
             format='MM/dd/yyyy'
-            value={returnDate}
-            onChange={handleReturnDateChange}
+            value={props.return}
+            onChange={props.handleReturnDateChange}
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
           />
         </FormControl>
         <FormControl className={classes.margin}>
+          {props.children}
+          
          {/* <Location /> */}
-        <Dropdown />
+        
         </FormControl>
         <FormControl variant='outlined' className={classes.margin}>
           <InputLabel htmlFor='standard-start-adornment'>Budget</InputLabel>
           <OutlinedInput
             id='standard-start-adornment'
-            value={values.amount}
+            name="budget"
+            value={props.budget}
             style={{ width: 225 }}
-            onChange={handleChange("amount")}
+            onChange={props.handleInputChange}
             startAdornment={<InputAdornment position='start'>$</InputAdornment>}
             labelWidth={60}
           />
