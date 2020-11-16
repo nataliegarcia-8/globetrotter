@@ -41,7 +41,7 @@ const tutorialSteps = [
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 400,
+    maxWidth: 600,
     flexGrow: 1,
   },
   header: {
@@ -52,15 +52,15 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
   },
   img: {
-    height: 255,
-    display: 'block',
-    maxWidth: 400,
+    height: 455,
+    maxWidth: 600,
     overflow: 'hidden',
+    display: 'block',
     width: '100%',
   },
 }));
 
-function SwipeableTextMobileStepper() {
+export default function Carousel() {
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -73,7 +73,6 @@ function SwipeableTextMobileStepper() {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
@@ -97,6 +96,7 @@ function SwipeableTextMobileStepper() {
           </div>
         ))}
       </AutoPlaySwipeableViews>
+
       <MobileStepper
         steps={maxSteps}
         position="static"
@@ -115,8 +115,7 @@ function SwipeableTextMobileStepper() {
           </Button>
         }
       />
+  
     </div>
   );
 }
-
-export default SwipeableTextMobileStepper;

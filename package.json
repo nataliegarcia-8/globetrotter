@@ -33,6 +33,7 @@
     "morgan": "^1.10.0",
     "react-globe": "^5.0.2",
     "react-google-maps": "^9.4.5",
+    "react-swipeable-views": "^0.13.9",
     "recompose": "^0.30.0"
   }
 }
