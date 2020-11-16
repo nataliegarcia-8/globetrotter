@@ -18,12 +18,15 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "column",
     },
     cardMedia: {
-      paddingTop: "56.25%",
+      display: "flex",
+      paddingTop: "35%",
       backgroundColor: "#BB86FC",
+      justifyContent: "center",
     },
     cardContent: {
       flexGrow: 1,
     },
+
     // footer: {
     //   backgroundColor: theme.palette.background.paper,
     //   padding: theme.spacing(6),
@@ -35,7 +38,9 @@ function TripCard(props) {
     return (
                 <Grid item xs={12} sm={6} md={4}>
                   <Card className={classes.card}>
-                    <CardMedia className={classes.cardMedia}></CardMedia>
+                    <CardMedia className={classes.cardMedia}>
+                      {props.icon}
+                    </CardMedia>
                     <CardContent className={classes.cardContent}>
                       <Typography gutterBottom variant='h5' component='h2'>
                         {props.title}

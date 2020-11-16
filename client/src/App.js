@@ -6,7 +6,7 @@ import PlanTrip from "./Pages/PlanTrip";
 import API from "./utils/API";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Auth, Hub } from "aws-amplify";
-import PlanATrip from "./Components/PlanTrip/PlanATrip";
+import PastTrip from "./Pages/PreviousTrip";
 
 function App() {
   const [loginState, setLoginState] = useState("signedOut");
@@ -70,6 +70,7 @@ function App() {
             <Switch>
               <Route exact path='/' component={Dashboard} />
               <Route exact path='/plantrip' component={PlanTrip} />
+              <Route exact path='/pasttrip' component={PastTrip} />
               <Route component={NoMatch} />
             </Switch>
           </div>
