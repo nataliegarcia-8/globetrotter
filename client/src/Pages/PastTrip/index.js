@@ -6,17 +6,17 @@ import {
 } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Carousel from "../Components/Carousel";
+import Carousel from "../../Components/Carousel";
 import Container from "@material-ui/core/Container";
-import Drawer from "../Components/Drawer";
-import Copyright from "../Components/Copyright";
+import Drawer from "../../Components/Drawer";
+import Copyright from "../../Components/Copyright";
 import Grid from '@material-ui/core/Grid';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
-import FeaturedPost from '../Components/FeaturePost';
-import Sidebar from '../Components/Sidebar';
-import Main from '../Components/PastTrips/main';
+import FeaturedPost from '../../Components/FeaturePost';
+import Sidebar from '../../Components/Sidebar';
+import Main from './Components/main';
 
 const useStyles = makeStyles((theme) => ({
     jumbotron: {

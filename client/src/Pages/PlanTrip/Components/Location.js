@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
-import locations from '../../locations.json';
+import locations from '../../../locations.json';
 
 function loadScript(src, position, id) {
   if (!position) {

@@ -23,7 +23,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems, secondaryListItems } from "../../Components/ListItems";
 import Cards from "./Components/Cards";
 import Copyright from "../../Components/Copyright";
-import Map from "../../Components/Map";
+import Map from "./Components/Map";
 
 const drawerWidth = 240;
 

@@ -6,7 +6,7 @@ import PlanTrip from "./Pages/PlanTrip";
 import API from "./utils/API";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Auth, Hub } from "aws-amplify";
-import PastTrip from "./Pages/PreviousTrip";
+import PastTrip from "./Pages/PastTrip";
 import CurrentTrip from "./Pages/CurrentTrip";
 
 function App() {
