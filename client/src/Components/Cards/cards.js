@@ -15,7 +15,7 @@ const CardInfo = [
     new Card(<EventIcon />,
     "Past Trips",
     "#",
-    "Keep out the past trips now!", 
+    "View your past trips now!", 
     "REMINISCE"),
     new Card(<CardTravelIcon />,
     "Current Trip",
@@ -24,7 +24,7 @@ const CardInfo = [
     "EXPLORE"),
     new Card(<SpeakerNotesIcon />,
     "Plan A Trip",
-    "#",
+    "/plantrip",
     "Plan a trip now!",
     "DISCOVER"),
 ]
