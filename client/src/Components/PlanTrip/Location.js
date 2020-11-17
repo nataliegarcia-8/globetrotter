@@ -107,7 +107,7 @@ export default function GoogleMaps() {
         typeof option === "string" ? option : option.description
       }
       filterOptions={(x) => x}
-      options={locations}
+      options={options}
       autoComplete
       includeInputInList
       filterSelectedOptions

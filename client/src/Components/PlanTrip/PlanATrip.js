@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -20,10 +20,9 @@ import Booking from "./Booking";
 import SubmitButton from "./SubmitButton";
 import Location from "./Location";
 import Dropdown from "./Dropdown";
-
-
+import API from "../../utils/API"
 import { Auth } from "aws-amplify";
-
+import Geocode from "react-geocode";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -77,6 +76,8 @@ export default function PlanTrip() {
   };
   const [tripState, setTripState] = useState(initialTripState);
   const [userId, setUserId] = useState("");
+  const [dbId, setDbId] = useState("");
+
   const [departureDate, setDepartureDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(new Date());
 
@@ -84,25 +85,70 @@ export default function PlanTrip() {
     checkUser();
   }, []);
 
-  const handleDepartDateChange = (date) => {
+  Geocode.setApiKey("AIzaSyAayUREzm6gydcCBnHzTXcnN4PsneoLays");
+
+  const getLatLong = (tripState) => {
+
+    Geocode.fromAddress(`${tripState.city}, ${tripState.state}`).then(
+      response => {
+        const { lat, lng } = response.results[0].geometry.location;
+        console.log(lat, lng);
+        setTripState({ ...tripState, lat: lat, long: lng });
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
+  const handleDepartDateChange = (date, value) => {
     setDepartureDate(date);
+    setTripState({ ...tripState, departure: value });
+    
   };
 
-  const handleReturnDateChange = (date) => {
+  const handleReturnDateChange = (date, value) => {
     setReturnDate(date);
+    setTripState({ ...tripState, return: value });
   };
 
   const checkUser = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
       setUserId(user.username);
+      dbUserSelect();
+      
     } catch (error) {
       console.log(error);
     }
   };
+  const dbUserSelect = () => {
+    API.getUsers().then((data) =>
+    data.data.forEach(user => {
+      if(user.id === userId)
+        setDbId(user._id)
+      
+    }))
+  }
 
+  const valueSelected = (val) => {
+    if (!val) {
+      return;
+    } else {
+      setTripState({ ...tripState, city: val.city, state: val.state });
+      console.log(tripState);
+      getLatLong(tripState);
+    }
+  };
+  const handleSubmit = () =>{
+    API.saveTrip(dbId, tripState)
+    console.log("submit");
+    console.log(dbId);
+
+    
+  }
   const handleInputChange = ({ target: { name, value } }) =>
     setTripState({ ...tripState, [name]: value });
+  console.log(tripState);
 
   return (
     <ThemeProvider theme={theme}>
@@ -125,16 +171,20 @@ export default function PlanTrip() {
           <Container maxWidth="sm"></Container>
           <Container className={classes.booking} maxWidth="md">
             {/* End hero unit */}
-            <Booking 
-            handleDepartDateChange= {handleDepartDateChange}
-            handleReturnDateChange= {handleReturnDateChange}
-            handleInputChange={handleInputChange}
-            budget = {tripState.budget}
-            return = {returnDate}
-            departure = {departureDate} >
-              <Dropdown />
+            <Booking
+              handleDepartDateChange={handleDepartDateChange}
+              handleReturnDateChange={handleReturnDateChange}
+              handleInputChange={handleInputChange}
+              budget={tripState.budget}
+              return={returnDate}
+              departure={departureDate}
+            >
+              <Dropdown
+                valueChange={valueSelected}
+                handleInputChange={handleInputChange}
+              />
             </Booking>
-            <SubmitButton />
+            <SubmitButton handleSubmit={handleSubmit} />
           </Container>
         </main>
         {/* Footer */}
