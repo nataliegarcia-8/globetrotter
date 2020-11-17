@@ -148,7 +148,7 @@ export default function PlanTrip() {
   }
   const handleInputChange = ({ target: { name, value } }) =>
     setTripState({ ...tripState, [name]: value });
-  console.log(tripState);
+  
 
   return (
     <ThemeProvider theme={theme}>
