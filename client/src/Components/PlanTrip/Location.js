@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState, useRef, useMemo} from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
+import locations from '../../locations.json';
 
 function loadScript(src, position, id) {
   if (!position) {
@@ -22,6 +23,7 @@ function loadScript(src, position, id) {
 
 const autocompleteService = { current: null };
 
+
 const useStyles = makeStyles((theme) => ({
   icon: {
     color: theme.palette.text.secondary,
@@ -31,15 +33,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GoogleMaps() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState("");
-  const [options, setOptions] = React.useState([]);
-  const loaded = React.useRef(false);
+  const [value, setValue] = useState(null);
+  const [inputValue, setInputValue] = useState("");
+  const [options, setOptions] = useState([]);
+  const loaded = useRef(false);
 
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {
       loadScript(
-        "https://maps.googleapis.com/maps/api/js?key=AIzaSyAayUREzm6gydcCBnHzTXcnN4PsneoLays&libraries=places&components=country:us",
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyAayUREzm6gydcCBnHzTXcnN4PsneoLays&libraries=places&components=country:us&region=US",
         document.querySelector("head"),
         "google-maps"
       );
@@ -48,19 +50,24 @@ export default function GoogleMaps() {
     loaded.current = true;
   }
 
-  const fetch = React.useMemo(
+  const fetch = useMemo(
     () =>
       throttle((request, callback) => {
         autocompleteService.current.getPlacePredictions(request, callback);
+        
       }, 200),
     []
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     let active = true;
+    console.log(value);
 
     if (!autocompleteService.current && window.google) {
       autocompleteService.current = new window.google.maps.places.AutocompleteService();
+     
+      
+      
     }
     if (!autocompleteService.current) {
       return undefined;
@@ -100,7 +107,7 @@ export default function GoogleMaps() {
         typeof option === "string" ? option : option.description
       }
       filterOptions={(x) => x}
-      options={options}
+      options={locations}
       autoComplete
       includeInputInList
       filterSelectedOptions

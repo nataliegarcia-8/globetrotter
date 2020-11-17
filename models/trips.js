@@ -8,7 +8,8 @@ const tripsSchema = new Schema({
   lat: { type: Number, required: true},
   long: { type: Number, required: true},
   departure: { type: Date, required: true  },
-  return: { type: Date, required: true  }
+  return: { type: Date, required: true  },
+ 
 
 });
 
