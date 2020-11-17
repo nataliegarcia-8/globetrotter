@@ -1,3 +1,8 @@
+import EventIcon from "@material-ui/icons/Event";
+import CardTravelIcon from "@material-ui/icons/CardTravel";
+import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
+
+
 function Card(i, t, l, p, b) {
     this.icon = i;
     this.title = t;
@@ -7,17 +12,17 @@ function Card(i, t, l, p, b) {
 }
 
 const CardInfo = [
-    new Card("i",
+    new Card(<EventIcon />,
     "Past Trips",
     "#",
     "View your past trips now!", 
     "REMINISCE"),
-    new Card("i",
+    new Card(<CardTravelIcon />,
     "Current Trip",
     "#",
     "We are on a trip!",
     "EXPLORE"),
-    new Card("i",
+    new Card(<SpeakerNotesIcon />,
     "Plan A Trip",
     "/plantrip",
     "Plan a trip now!",
