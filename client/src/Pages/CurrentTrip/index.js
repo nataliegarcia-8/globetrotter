@@ -90,8 +90,6 @@ const useStyles = makeStyles((theme) => ({
       },
     budget: {
         marginTop: theme.spacing(10),
-        display: 'flex',
-        justifyContent: 'center',
     },
 }));
 
