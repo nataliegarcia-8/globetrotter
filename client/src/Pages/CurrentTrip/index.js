@@ -17,6 +17,9 @@ import Button from '@material-ui/core/Button';
 import AddressForm from './Components/AddressForm';
 import PaymentForm from './Components/PaymentForm';
 import Review from './Components/Review';
+import Grid from '@material-ui/core/Grid';
+import Budget from '../../Components/Deposits';
+import Steps from './Components/Steps';
 
 const useStyles = makeStyles((theme) => ({
     jumbotron: {
@@ -44,17 +47,19 @@ const useStyles = makeStyles((theme) => ({
     },
     appBar: {
         position: 'relative',
+        marginBottom: theme.spacing(3),
+
     },
-    layout: {
-        width: 'auto',
-        marginLeft: theme.spacing(2),
-        marginRight: theme.spacing(2),
-        [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-            width: 600,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-        },
-    },
+    // layout: {
+    //     width: 'auto',
+    //     marginLeft: theme.spacing(2),
+    //     marginRight: theme.spacing(2),
+    //     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+    //         width: 600,
+    //         marginLeft: 'auto',
+    //         marginRight: 'auto',
+    //     },
+    // },
     paper: {
         marginTop: theme.spacing(3),
         marginBottom: theme.spacing(3),
@@ -76,6 +81,18 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(3),
         marginLeft: theme.spacing(1),
     },
+    dates: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+    root: {
+        flexGrow: 1,
+      },
+    budget: {
+        marginTop: theme.spacing(10),
+        display: 'flex',
+        justifyContent: 'center',
+    },
 }));
 
 export default function CurrentTrip() {
@@ -96,7 +113,8 @@ export default function CurrentTrip() {
 
     const handleBack = () => {
         setActiveStep(activeStep - 1);
-        const steps = ['Shipping address', 'Payment details', 'Review your order'];
+    }
+        const steps = ['Notes', 'Payment details', 'Review your order'];
 
         function getStepContent(step) {
             switch (step) {
@@ -123,29 +141,33 @@ export default function CurrentTrip() {
                             align='center'
                             color='textPrimary'
                             gutterBottom>
-                            Current Trip
+                            City, State
             </Typography>
                     </div>
                     <Container maxWidth="lg">
                         <AppBar position="absolute" color="default" className={classes.appBar}>
-                            <Toolbar>
+                            <Toolbar className={classes.dates}>
                                 <Typography variant="h6" color="inherit" noWrap>
-                                    Company name
+                                    MM/DD/YY - MM/DD/YY
     </Typography>
                             </Toolbar>
                         </AppBar>
-                        <main className={classes.layout}>
-                            <Paper className={classes.paper}>
-                                <Typography component="h1" variant="h4" align="center">
-                                    Checkout
-    </Typography>
-                                <Stepper activeStep={activeStep} className={classes.stepper}>
+                        <Steps />
+                                {/* <Stepper activeStep={activeStep} className={classes.stepper}>
                                     {steps.map((label) => (
                                         <Step key={label}>
                                             <StepLabel>{label}</StepLabel>
                                         </Step>
                                     ))}
-                                </Stepper>
+                                </Stepper> */}
+                        <main className={classes.layout}>
+                        <div className={classes.root}>
+      <Grid container spacing={3}>
+      <Grid item xs={7}>
+                            <Paper className={classes.paper}>
+                                <Typography component="h1" variant="h4" align="center">
+                                    Trip Details
+    </Typography>
                                 <React.Fragment>
                                     {activeStep === steps.length ? (
                                         <React.Fragment>
@@ -166,23 +188,28 @@ export default function CurrentTrip() {
                                                             Back
                                                         </Button>
                                                     )}
-                                                    <Button
+                                                    {/* <Button
                                                         variant="contained"
                                                         color="primary"
                                                         onClick={handleNext}
                                                         className={classes.button}
                                                     >
                                                         {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
-                                                    </Button>
+                                                    </Button> */}
                                                 </div>
                                             </React.Fragment>
                                         )}
                                 </React.Fragment>
                             </Paper>
+                            </Grid>
+                           <Grid item xs={5} className={classes.budget} > 
+                           <Budget /> 
+                           </Grid>
+                           </Grid>
+                           </div>
                         </main>
                     </Container>
                 </React.Fragment>
             </ThemeProvider>
         )
     }
-}
