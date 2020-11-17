@@ -18,7 +18,9 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "column",
     },
     cardMedia: {
-      paddingTop: "56.25%",
+      display: "flex",
+      paddingTop: "35%",
+      justifyContent: "center",
       backgroundColor: "#BB86FC",
     },
     cardContent: {

@@ -10,7 +10,7 @@ const CardInfo = [
     new Card("i",
     "Past Trips",
     "#",
-    "Keep out the past trips now!", 
+    "View your past trips now!", 
     "REMINISCE"),
     new Card("i",
     "Current Trip",
@@ -19,7 +19,7 @@ const CardInfo = [
     "EXPLORE"),
     new Card("i",
     "Plan A Trip",
-    "#",
+    "/plantrip",
     "Plan a trip now!",
     "DISCOVER"),
 ]
