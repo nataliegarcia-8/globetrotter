@@ -108,6 +108,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -182,6 +183,7 @@ export default function Dashboard() {
                 <Grid item xs={12}>
                   <Paper className={classes.paper}>
                     <Cards />
+                    
                   </Paper>
                 </Grid>
                 <Grid container spacing={3}>
