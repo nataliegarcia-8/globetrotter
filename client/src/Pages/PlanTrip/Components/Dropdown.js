@@ -31,15 +31,15 @@ const Dropdown = (props) => {
   return (
     <div>
       <Autocomplete
-        id="City, State"
+        id='City, State'
         style={{ width: 225 }}
         options={locations}
-        name="location"
+        name='location'
         onChange={(event, value) => props.valueChange(value)}
         getOptionLabel={(option) => option.city + ", " + option.state}
         renderOption={(option) => {
           return (
-            <span >
+            <span>
               {option.city}, {option.state}
             </span>
             // <Grid container alignItems='center'>
@@ -61,14 +61,9 @@ const Dropdown = (props) => {
             // </Grid>
           );
         }}
-        style={{ width: 300 }}
+        style={{ width: 225 }}
         renderInput={(params) => (
-          <TextField
-            {...params}
-            label="City, State"
-            variant="outlined"
-            
-          />
+          <TextField {...params} label='Destination' variant='outlined' />
         )}
       />
       {/* <input

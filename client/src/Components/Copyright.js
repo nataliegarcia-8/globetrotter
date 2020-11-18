@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
-      {"Copyright © Trotter "}
+      {"Copyright © Stateside "}
       {new Date().getFullYear()}
       {"."}
     </Typography>

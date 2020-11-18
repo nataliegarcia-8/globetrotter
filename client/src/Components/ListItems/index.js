@@ -28,7 +28,7 @@ export const mainListItems = (
       <Route
         render={({ history }) => (
           <ListItemText
-            primary="Past Trips"
+            primary="Previous Trips"
             onClick={() => {
               history.push("/pasttrip");
             }}
