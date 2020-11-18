@@ -24,23 +24,14 @@ function App() {
       const user = await Auth.currentAuthenticatedUser();
       setUser(user);
       console.log("user: ", user);
-
-      console.log("signedIn");
-
       setLoginState("signedIn");
     } catch (error) {
       console.log(error);
-      console.log("signedOut");
       setLoginState("signedOut");
     }
   };
 
-  const saveNewUser = (user) => {
-    API.saveUser({
-      email: user.attributes.email,
-      id: user.username,
-    });
-  };
+  
 
   const setAuthListener = async () => {
     Hub.listen("auth", (data) => {
@@ -63,7 +54,7 @@ function App() {
 
   switch (loginState) {
     case "signedIn":
-      saveNewUser(user);
+      
       return (
         <Router>
           <div>

@@ -31,7 +31,9 @@ function AuthForms() {
     password: "",
     code: "",
     formType: "signIn",
-    name: "",
+    firstName: "",
+    lastName: ""
+
   };
   const [formState, setFormState] = useState(initialFormState);
   const [user, setUser] = useState(null);
@@ -39,19 +41,31 @@ function AuthForms() {
   useEffect(() => {
     checkUser();
   }, []);
-
+  
+  // ------- check for current user ----------
   const checkUser = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
       setUser(user);
       console.log("user: ", user.username);
-      
       setFormState({ ...formState, formType: "signedIn" });
     } catch (error) {
       console.log(error);
     }
   };
- 
+  // ---------- Save New User To db ----------------
+  // const saveNewUser = (user, firstName, lastName ) => {
+    
+
+  //     API.saveUser({
+  //       email: user.attributes.email,
+  //       cognitoId: user.username,
+  //       firstName: firstName,
+  //       lastName: lastName
+  //     });
+    
+  // };
+  //  ---------- Handle Input Change -------------
   const handleInputChange = ({ target: { name, value } }) =>
     setFormState({ ...formState, [name]: value });
 
@@ -60,28 +74,28 @@ function AuthForms() {
   //  --------------- Handle form button press functions ---------------
   const signUp = async (e) => {
     e.preventDefault();
-    const { email, password, name } = formState;
-    await Auth.signUp({ username: email, password, attributes: { name } });
-    
+    const { email, password} = formState;
+    await Auth.signUp({ username: email, password });
     setFormState({ ...formState, formType: "confirmSignUp" });
   };
 
   const confirmSignUp = async (e) => {
     e.preventDefault();
-
     const { email, code } = formState;
     await Auth.confirmSignUp(email, code);
-    
     setFormState({ ...formState, formType: "signIn" });
   };
+
   const signIn = async (e) => {
     e.preventDefault();
-
     const { email, password } = formState;
     await Auth.signIn(email, password);
+    // saveNewUser(user, formState.firstName, formState.lastName )
     setFormState({ ...formState, formType: "signedIn" });
+
   };
 
+  //  ------------ Switch between sugn up and sign in page ------------
   const backToSignIn = () => {
     setFormState({ ...formState, formType: "signIn" });
   };

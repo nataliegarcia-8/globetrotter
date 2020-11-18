@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const usersSchema = new Schema({
 
   email: { type: String, required: true, unique: true},
-  id: { type: String, required: true },
+  cognitoId: { type: String, required: true },
   date: { type: Date, default: Date.now },
   firstName: { type: String},
   lastName: { type: String},
