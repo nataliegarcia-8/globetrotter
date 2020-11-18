@@ -1,8 +1,8 @@
 import React from "react";
 import {
-    makeStyles,
-    createMuiTheme,
-    ThemeProvider,
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
 } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -26,34 +26,75 @@ import clsx from 'clsx';
 import ImgGrid from './Components/ImgGrid';
 
 const useStyles = makeStyles((theme) => ({
-    jumbotron: {
-        background: 'linear-gradient(45deg, #BB86FC 10%, #29025a 90%)',
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        height: "400px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+  jumbotron: {
+    background: "linear-gradient(45deg, #BB86FC 10%, #29025a 90%)",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    height: "400px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: theme.spacing(6),
+  },
+  headline: {
+    color: "white",
+    fontSize: 100,
+    fontWeight: 300,
+    letterSpacing: "4px",
+    padding: theme.spacing(4, 0, 1),
+  },
+  carousel: {
+    padding: theme.spacing(6, 20),
+  },
+  mainGrid: {
+    marginTop: theme.spacing(3),
+  },
+  appBar: {
+    position: "relative",
+    marginBottom: theme.spacing(3),
+  },
+  // layout: {
+  //     width: 'auto',
+  //     marginLeft: theme.spacing(2),
+  //     marginRight: theme.spacing(2),
+  //     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+  //         width: 600,
+  //         marginLeft: 'auto',
+  //         marginRight: 'auto',
+  //     },
+  // },
+  paper: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    padding: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      padding: theme.spacing(3),
     },
-    headline: {
-        color: "white",
-        fontSize: 100,
-        fontWeight: 300,
-        letterSpacing: "4px",
-        padding: theme.spacing(4, 0, 1),
-    },
-    carousel: {
-        padding: theme.spacing(6, 20),
-    },
-    mainGrid: {
-        marginTop: theme.spacing(3),
-    },
-    appBar: {
-        position: 'relative',
-        marginBottom: theme.spacing(3),
-
-    },
+  },
+  stepper: {
+    padding: theme.spacing(3, 0, 5),
+  },
+  buttons: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+  button: {
+    marginTop: theme.spacing(3),
+    marginLeft: theme.spacing(1),
+  },
+  dates: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  root: {
+    flexGrow: 1,
+  },
+  budget: {
+    marginTop: theme.spacing(10),
+  },
     // layout: {
     //     width: 'auto',
     //     marginLeft: theme.spacing(2),
@@ -140,17 +181,19 @@ export default function CurrentTrip() {
                             gutterBottom>
                             City, State
             </Typography>
-                    </div>
-                    <Container maxWidth="lg">
-                        <AppBar position="absolute" color="default" className={classes.appBar}>
-                            <Toolbar className={classes.dates}>
-                                <Typography variant="h6" color="inherit" noWrap>
-                                    MM/DD/YY - MM/DD/YY
-    </Typography>
-                            </Toolbar>
-                        </AppBar>
-                        <Steps />
-                                {/* <Stepper activeStep={activeStep} className={classes.stepper}>
+            <Typography
+              className={classes.dates}
+              variant='h4'
+              color='inherit'
+              noWrap>
+              December 01, 2020
+            </Typography>
+         
+        </div>
+
+        <Container maxWidth='lg'>
+          <Steps />
+          {/* <Stepper activeStep={activeStep} className={classes.stepper}>
                                     {steps.map((label) => (
                                         <Step key={label}>
                                             <StepLabel>{label}</StepLabel>
