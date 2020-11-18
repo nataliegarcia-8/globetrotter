@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#BB86FC",
   },
   root: {
-    maxHeight: 225,
+    maxHeight: 285,
     overflow: "auto",
     position: "relative",
   },

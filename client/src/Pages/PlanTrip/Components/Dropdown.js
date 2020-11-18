@@ -63,7 +63,7 @@ const Dropdown = (props) => {
         }}
         style={{ width: 225 }}
         renderInput={(params) => (
-          <TextField {...params} label='City, State' variant='outlined' />
+          <TextField {...params} label='Destination' variant='outlined' />
         )}
       />
       {/* <input
