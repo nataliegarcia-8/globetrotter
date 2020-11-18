@@ -12,7 +12,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { makeStyles } from "@material-ui/core/styles";
-import Dropdown from './Dropdown';
+import Dropdown from "./Dropdown";
 const useStyles = makeStyles((theme) => ({
   margin: {
     marginTop: theme.spacing(5),
@@ -58,15 +58,14 @@ export default function MaterialUIPickers(props) {
         </FormControl>
         <FormControl className={classes.margin}>
           {props.children}
-          
-         {/* <Location /> */}
-        
+
+          {/* <Location /> */}
         </FormControl>
         <FormControl variant='outlined' className={classes.margin}>
           <InputLabel htmlFor='standard-start-adornment'>Budget</InputLabel>
           <OutlinedInput
             id='standard-start-adornment'
-            name="budget"
+            name='budget'
             value={props.budget}
             style={{ width: 225 }}
             onChange={props.handleInputChange}
