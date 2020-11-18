@@ -20,6 +20,10 @@ import Review from './Components/Review';
 import Grid from '@material-ui/core/Grid';
 import Budget from './Components/Budget';
 import Steps from './Components/Steps';
+import BudgetTable from './Components/BudgetTable';
+import CategorySelector from './Components/CategorySelector';
+import clsx from 'clsx';
+import ImgGrid from './Components/ImgGrid';
 
 const useStyles = makeStyles((theme) => ({
     jumbotron: {
@@ -60,16 +64,25 @@ const useStyles = makeStyles((theme) => ({
     //         marginRight: 'auto',
     //     },
     // },
+    // paper: {
+    //     marginTop: theme.spacing(3),
+    //     marginBottom: theme.spacing(3),
+    //     padding: theme.spacing(2),
+    //     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+    //         marginTop: theme.spacing(6),
+    //         marginBottom: theme.spacing(6),
+    //         padding: theme.spacing(3),
+    //     },
+    // },
     paper: {
-        marginTop: theme.spacing(3),
-        marginBottom: theme.spacing(3),
         padding: theme.spacing(2),
-        [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-            marginTop: theme.spacing(6),
-            marginBottom: theme.spacing(6),
-            padding: theme.spacing(3),
-        },
-    },
+        display: 'flex',
+        overflow: 'auto',
+        flexDirection: 'column',
+      },
+      fixedHeight: {
+        height: 500,
+          },
     stepper: {
         padding: theme.spacing(3, 0, 5),
     },
@@ -89,8 +102,15 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
       },
     budget: {
-        marginTop: theme.spacing(10),
+        marginTop: theme.spacing(5),
+        display: 'flex',
+        justifyContent: 'center',
+
     },
+    center: {
+        display: 'flex',
+        justifyContent: 'center',
+    }
 }));
 
 export default function CurrentTrip() {
@@ -103,29 +123,8 @@ export default function CurrentTrip() {
             type: "dark",
         },
     });
-    const [activeStep, setActiveStep] = React.useState(0);
+    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-    const handleNext = () => {
-        setActiveStep(activeStep + 1);
-    };
-
-    const handleBack = () => {
-        setActiveStep(activeStep - 1);
-    }
-        const steps = ['Notes', 'Payment details', 'Review your order'];
-
-        function getStepContent(step) {
-            switch (step) {
-                case 0:
-                    return <AddressForm />;
-                case 1:
-                    return <PaymentForm />;
-                case 2:
-                    return <Review />;
-                default:
-                    throw new Error('Unknown step');
-            }
-        }
         return (
             <ThemeProvider theme={theme}>
                 <React.Fragment>
@@ -161,49 +160,30 @@ export default function CurrentTrip() {
                         <main className={classes.layout}>
                         <div className={classes.root}>
       <Grid container spacing={3}>
-      <Grid item xs={7}>
+      <Grid item xs={12} md={8} lg={9}>
                             <Paper className={classes.paper}>
                                 <Typography component="h1" variant="h4" align="center">
                                     Trip Details
     </Typography>
-                                <React.Fragment>
-                                    {activeStep === steps.length ? (
-                                        <React.Fragment>
-                                            <Typography variant="h5" gutterBottom>
-                                                Thank you for your order.
-          </Typography>
-                                            <Typography variant="subtitle1">
-                                                Your order number is #2001539. We have emailed your order confirmation, and will
-                                                send you an update when your order has shipped.
-          </Typography>
-                                        </React.Fragment>
-                                    ) : (
-                                            <React.Fragment>
-                                                {getStepContent(activeStep)}
-                                                <div className={classes.buttons}>
-                                                    {activeStep !== 0 && (
-                                                        <Button onClick={handleBack} className={classes.button}>
-                                                            Back
-                                                        </Button>
-                                                    )}
-                                                    {/* <Button
-                                                        variant="contained"
-                                                        color="primary"
-                                                        onClick={handleNext}
-                                                        className={classes.button}
-                                                    >
-                                                        {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
-                                                    </Button> */}
-                                                </div>
-                                            </React.Fragment>
-                                        )}
-                                </React.Fragment>
                             </Paper>
                             </Grid>
-                           <Grid item xs={5} className={classes.budget} > 
-                           <Budget /> 
+                            <Grid item xs={12} md={4} lg={3}>
+              <Paper  className={fixedHeightPaper}>
+    
+               <div> <Budget/> </div>
+            <CategorySelector/>
+                           <BudgetTable />
+            
+              </Paper>
+        
                            </Grid>
-                           </Grid>
+                           <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                  <ImgGrid />
+                  </Paper>
+                  </Grid>
+                           
+            </Grid>
                            </div>
                         </main>
                     </Container>
