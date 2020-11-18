@@ -184,11 +184,14 @@ export default function Dashboard() {
                     <Cards />
                   </Paper>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid container spacing={3}>
+                <Grid item xs={10}>
                   <Paper className={classes.paper}>
                     <Map />
                   </Paper>
                 </Grid>
+                <Grid item xs={2}></Grid>
+              </Grid>
               </Grid>
               <Box pt={4}>
                 <Copyright />

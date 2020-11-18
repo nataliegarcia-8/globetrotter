@@ -18,7 +18,7 @@ import AddressForm from './Components/AddressForm';
 import PaymentForm from './Components/PaymentForm';
 import Review from './Components/Review';
 import Grid from '@material-ui/core/Grid';
-import Budget from '../../Components/Deposits';
+import Budget from './Components/Deposits';
 import Steps from './Components/Steps';
 
 const useStyles = makeStyles((theme) => ({
