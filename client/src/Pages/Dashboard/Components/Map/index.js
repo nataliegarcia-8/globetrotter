@@ -5,7 +5,7 @@ import {
   GoogleMap,
   Marker,
 } from "react-google-maps";
-import API from "../../utils/API";
+import API from "../../../../utils/API";
 const CustomSkinMap = withScriptjs(
   withGoogleMap((props) => {
     const [position, setPosition] = useState({ lat: 38.0902, lng: -95.7129 });

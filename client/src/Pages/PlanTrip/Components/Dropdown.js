@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import locations from "../../locations.json";
+import locations from "../../../locations.json";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
