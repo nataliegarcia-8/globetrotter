@@ -10,13 +10,13 @@ import PastTrip from "./Pages/PastTrip";
 import CurrentTrip from "./Pages/CurrentTrip";
 
 function App() {
-  const [loginState, setLoginState] = useState("signedOut");
+  const [loginState, setLoginState] = useState(false);
 
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     checkUser();
-    setAuthListener();
+    // setAuthListener();
   }, [loginState]);
 
   const checkUser = async () => {
@@ -25,13 +25,11 @@ function App() {
       setUser(user);
       console.log("user: ", user);
 
-      console.log("signedIn");
-
-      setLoginState("signedIn");
+      setLoginState(true);
     } catch (error) {
       console.log(error);
       console.log("signedOut");
-      setLoginState("signedOut");
+      setLoginState(false);
     }
   };
 
@@ -47,12 +45,12 @@ function App() {
       switch (data.payload.event) {
         case "signIn":
           console.log("user signed in");
-          setLoginState("signedIn");
+          setLoginState(true);
           break;
 
         case "signOut":
           console.log("user signed out");
-          setLoginState("signedOut");
+          setLoginState(false);
 
           break;
         default:
@@ -61,37 +59,21 @@ function App() {
     });
   };
 
-  switch (loginState) {
-    case "signedIn":
-      saveNewUser(user);
-      return (
-        <Router>
-          <div>
-            <Switch>
-              <Route exact path='/' component={Dashboard} />
-              <Route exact path='/plantrip' component={PlanTrip} />
-              <Route exact path='/pasttrip' component={PastTrip} />
-              <Route exact path='/currenttrip' component={CurrentTrip} />
-              <Route component={NoMatch} />
-            </Switch>
-          </div>
-        </Router>
-      );
-
-    case "signedOut":
-      return (
-        <Router>
-          <div>
-            <Switch>
-              <Route exact path="/" component={Login} />
-              <Route component={NoMatch} />
-            </Switch>
-          </div>
-        </Router>
-      );
-    default:
-      break;
-  }
+  return <Router>
+    <div>
+      <Switch>
+        <ProtectedRoute loginState={loginState} exact path="/" component={Dashboard} />
+        <ProtectedRoute loginState={loginState}  exact path='/plantrip' component={PlanTrip} />
+        <ProtectedRoute loginState={loginState}  exact path='/pasttrip' component={PastTrip} />
+        <ProtectedRoute loginState={loginState}  exact path='/currenttrip' component={CurrentTrip} />
+        <Route component={NoMatch} />
+      </Switch>
+    </div>
+  </Router>
 }
+
+function ProtectedRoute({ loginState, component:Component, ...rest }) {
+  return <Route {...rest} component={loginState ? Component: Login}/>
+};
 
 export default App;

@@ -7,6 +7,7 @@ const tripsRoutes = require("./trips");
 // Book routes
 router.use("/users", usersRoutes);
 router.use("/trips", tripsRoutes);
+router.use("/img", require("./photos"))
 
 
 router.use(function(req, res) {

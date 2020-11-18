@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+// import IconButton from '@material-ui/core/IconButton';
+// import StarBorderIcon from '@material-ui/icons/StarBorder';
 // import tileData from './tileData';
-import image from './test.jpeg';
+import image from './test2.jpg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,31 +37,23 @@ const useStyles = makeStyles((theme) => ({
   const tileData = [
     {
       img: image,
-      title: 'Image',
+      
     },
     {
         img: image,
-        title: 'Image',
+       
     },
     {
         img: image,
-        title: 'Image',
-        author: 'author',
     },
     {
         img: image,
-        title: 'Image',
-        author: 'author',
     },
     {
         img: image,
-        title: 'Image',
-        author: 'author',
     },
     {
         img: image,
-        title: 'Image',
-        author: 'author',
     },
   ];
  
@@ -78,13 +70,13 @@ export default function ImgGrid() {
               title={tile.title}
               classes={{
                 root: classes.titleBar,
-                title: classes.title,
+                // title: classes.title,
               }}
-              actionIcon={
-                <IconButton aria-label={`star ${tile.title}`}>
-                  <StarBorderIcon className={classes.title} />
-                </IconButton>
-              }
+            //   actionIcon={
+            //     <IconButton aria-label={`star ${tile.title}`}>
+            //       <StarBorderIcon className={classes.title} />
+            //     </IconButton>
+            //   }
             />
           </GridListTile>
         ))}
