@@ -10,7 +10,7 @@ import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
 import PersonIcon from "@material-ui/icons/Person";
 import LayersIcon from "@material-ui/icons/Layers";
 import { Auth } from "aws-amplify";
-import { Redirect, Link } from "react-router-dom";
+import { Route, Redirect, Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
@@ -20,25 +20,52 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary='Dashboard' />
+      <ListItemText primary="Dashboard" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <EventIcon />
       </ListItemIcon>
-      <ListItemText primary='Previous Trips' />
+      <Route
+        render={({ history }) => (
+          <ListItemText
+            primary="Past Trips"
+            onClick={() => {
+              history.push("/pasttrip");
+            }}
+          />
+        )}
+      />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <CardTravelIcon />
       </ListItemIcon>
-      <ListItemText primary='Current Trip' />
+      <Route
+        render={({ history }) => (
+          <ListItemText
+            primary="Current Trip"
+            onClick={() => {
+              history.push("/currenttrip");
+            }}
+          />
+        )}
+      />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <SpeakerNotesIcon />
       </ListItemIcon>
-      <ListItemText primary='Plan Trip'></ListItemText>
+      <Route
+        render={({ history }) => (
+          <ListItemText
+            primary="Plan Trip"
+            onClick={() => {
+              history.push("/plantrip");
+            }}
+          />
+        )}
+      />
     </ListItem>
   </div>
 );
@@ -50,17 +77,18 @@ export const secondaryListItems = (
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
-      <ListItemText primary='Account Info' />
+      <ListItemText primary="Account Info" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <ExitToAppIcon />
       </ListItemIcon>
       <ListItemText
-        primary='Logout'
+        primary="Logout"
         onClick={() => {
           Auth.signOut();
-        }}></ListItemText>
+        }}
+      ></ListItemText>
     </ListItem>
   </div>
 );
