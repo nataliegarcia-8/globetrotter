@@ -15,11 +15,11 @@ import {
 } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
-import Copyright from "../Components/Copyright";
-import Booking from "../Components/PlanTrip/Booking";
-import SubmitButton from "../Components/PlanTrip/SubmitButton";
-import Location from "../Components/PlanTrip/Location";
-import Dropdown from "../Components/PlanTrip/Dropdown";
+import Copyright from "../../Components/Copyright";
+import Booking from "./Components/Booking";
+import SubmitButton from "./Components/SubmitButton";
+import Location from "./Components/Location";
+import Dropdown from "./Components/Dropdown";
 
 
 import { Auth } from "aws-amplify";

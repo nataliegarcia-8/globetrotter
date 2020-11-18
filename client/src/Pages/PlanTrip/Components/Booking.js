@@ -12,7 +12,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { makeStyles } from "@material-ui/core/styles";
-import Dropdown from '../PlanTrip/Dropdown'
+import Dropdown from './Dropdown';
 const useStyles = makeStyles((theme) => ({
   margin: {
     marginTop: theme.spacing(5),

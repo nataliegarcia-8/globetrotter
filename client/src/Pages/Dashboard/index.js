@@ -14,19 +14,16 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import { mainListItems, secondaryListItems } from "../Components/ListItems";
-import Cards from "../Components/Cards";
-import SignOut from "../Components/SignOutButton";
-import Copyright from "../Components/Copyright";
-import Map from "../Components/Map";
-import Dropdown from "../Components/PlanTrip/Dropdown";
+import { mainListItems, secondaryListItems } from "../../Components/ListItems";
+import Cards from "./Components/Cards";
+import Copyright from "../../Components/Copyright";
+import Map from "./Components/Map";
 
 const drawerWidth = 240;
 
@@ -182,24 +179,14 @@ export default function Dashboard() {
             <div className={classes.appBarSpacer} />
             <Container maxWidth='lg' className={classes.container}>
               <Grid container spacing={3}>
-               
-                {/* Recent Deposits */}
-                {/* <Grid item xs={12} md={4} lg={3}>
-                  <Paper className={fixedHeightPaper}>
-                    <Deposits />
-                  </Paper>
-                </Grid> */}
-                {/* Cards */}
                 <Grid item xs={12}>
                   <Paper className={classes.paper}>
                     <Cards />
                   </Paper>
                 </Grid>
-                 {/* Map */}
-                 <Grid item xs={12}>
+                <Grid item xs={12}>
                   <Paper className={classes.paper}>
                     <Map />
-                    
                   </Paper>
                 </Grid>
               </Grid>
