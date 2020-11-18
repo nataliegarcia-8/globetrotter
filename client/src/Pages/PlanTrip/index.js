@@ -15,6 +15,10 @@ import {
 } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
+
+import API from "../../utils/API";
+import { Auth } from "aws-amplify";
+import Geocode from "react-geocode";
 import Copyright from "../../Components/Copyright";
 import Booking from "./Components/Booking";
 import SubmitButton from "./Components/SubmitButton";
@@ -22,7 +26,6 @@ import Location from "./Components/Location";
 import Dropdown from "./Components/Dropdown";
 
 
-import { Auth } from "aws-amplify";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -77,32 +80,86 @@ export default function PlanTrip() {
   };
   const [tripState, setTripState] = useState(initialTripState);
   const [userId, setUserId] = useState("");
+  const [dbId, setDbId] = useState("");
+
   const [departureDate, setDepartureDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(new Date());
 
   useEffect(() => {
     checkUser();
+    
   }, []);
+  useEffect(() => {
+    dbUserSelect();
+    
+  }, [userId]);
 
-  const handleDepartDateChange = (date) => {
+  Geocode.setApiKey("AIzaSyAayUREzm6gydcCBnHzTXcnN4PsneoLays");
+
+  const getLatLong = (tripState) => {
+
+    Geocode.fromAddress(`${tripState.city}, ${tripState.state}`).then(
+      response => {
+        const { lat, lng } = response.results[0].geometry.location;
+        console.log(lat, lng);
+        setTripState({ ...tripState, lat: lat, long: lng });
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
+  const handleDepartDateChange = (date, value) => {
     setDepartureDate(date);
+    setTripState({ ...tripState, departure: value });
+    
   };
 
-  const handleReturnDateChange = (date) => {
+  const handleReturnDateChange = (date, value) => {
     setReturnDate(date);
+    setTripState({ ...tripState, return: value });
   };
 
   const checkUser = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
       setUserId(user.username);
+      
+      
     } catch (error) {
       console.log(error);
     }
   };
+  const dbUserSelect = () => {
+    API.getUsers().then((data) =>
+    data.data.forEach(user => {
+      if(user.id === userId)
+        setDbId(user._id)
+      
+    }))
+  }
 
+  const valueSelected = (val) => {
+    if (!val) {
+      return;
+    } else {
+      setTripState({ ...tripState, city: val.city, state: val.state });
+      console.log(tripState);
+      getLatLong(tripState);
+    }
+  };
+  const handleSubmit = () =>{
+    
+    API.saveTrip(dbId, tripState)
+    console.log("submit");
+    console.log(dbId);
+    console.log(tripState);
+    
+  }
   const handleInputChange = ({ target: { name, value } }) =>
     setTripState({ ...tripState, [name]: value });
+    console.log(tripState, dbId);
+  
 
   return (
     <ThemeProvider theme={theme}>
@@ -125,16 +182,20 @@ export default function PlanTrip() {
           <Container maxWidth="sm"></Container>
           <Container className={classes.booking} maxWidth="md">
             {/* End hero unit */}
-            <Booking 
-            handleDepartDateChange= {handleDepartDateChange}
-            handleReturnDateChange= {handleReturnDateChange}
-            handleInputChange={handleInputChange}
-            budget = {tripState.budget}
-            return = {returnDate}
-            departure = {departureDate} >
-              <Dropdown />
+            <Booking
+              handleDepartDateChange={handleDepartDateChange}
+              handleReturnDateChange={handleReturnDateChange}
+              handleInputChange={handleInputChange}
+              budget={tripState.budget}
+              return={returnDate}
+              departure={departureDate}
+            >
+              <Dropdown
+                valueChange={valueSelected}
+                handleInputChange={handleInputChange}
+              />
             </Booking>
-            <SubmitButton />
+            <SubmitButton handleSubmit={handleSubmit} />
           </Container>
         </main>
         {/* Footer */}
@@ -149,5 +210,4 @@ export default function PlanTrip() {
     </ThemeProvider>
   );
 }
-
 

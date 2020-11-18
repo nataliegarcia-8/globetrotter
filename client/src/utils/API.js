@@ -18,7 +18,9 @@ export default {
     return axios.post("/api/users", userData);
   },
   saveTrip: function(id, tripData) {
+    console.log(tripData, id);
     return axios.post("/api/users/" + id, tripData);
+    
   },
   getTrips: function() {
     return axios.get("/api/trips");
