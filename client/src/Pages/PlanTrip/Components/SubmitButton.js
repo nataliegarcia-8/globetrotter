@@ -19,12 +19,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FloatingActionButtonSize() {
+export default function FloatingActionButtonSize(props) {
   const classes = useStyles();
 
   return (
     <Grid container justify='center'>
-      <Fab variant='extended' aria-label='add' className={classes.styling}>
+      <Fab variant='extended' aria-label='add' className={classes.styling} onClick={props.handleSubmit}>
         <AddIcon className={classes.extendedIcon} />
         Add Trip
       </Fab>
