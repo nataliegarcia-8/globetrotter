@@ -24,6 +24,7 @@ import { mainListItems, secondaryListItems } from "../../Components/ListItems";
 import Cards from "./Components/Cards";
 import Copyright from "../../Components/Copyright";
 import Map from "./Components/Map";
+import Footer from "../../Components/Footer";
 
 const drawerWidth = 240;
 
@@ -184,14 +185,17 @@ export default function Dashboard() {
                     <Cards />
                   </Paper>
                 </Grid>
-                <Grid item xs={12}>
-                  <Paper className={classes.paper}>
-                    <Map />
-                  </Paper>
+                <Grid container spacing={3}>
+                  <Grid item xs={10}>
+                    <Paper className={classes.paper}>
+                      <Map />
+                    </Paper>
+                  </Grid>
+                  <Grid item xs={2}></Grid>
                 </Grid>
               </Grid>
               <Box pt={4}>
-                <Copyright />
+                <Footer />
               </Box>
             </Container>
           </main>

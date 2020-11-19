@@ -44,6 +44,7 @@ export default function MaterialUIPickers(props) {
 
         <FormControl>
           <KeyboardDatePicker
+            variant='inline'
             margin='normal'
             id='returning'
             label='Returning'

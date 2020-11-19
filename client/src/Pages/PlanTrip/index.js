@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -8,6 +8,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 import {
   makeStyles,
   createMuiTheme,
@@ -24,9 +25,8 @@ import Booking from "./Components/Booking";
 import SubmitButton from "./Components/SubmitButton";
 import Location from "./Components/Location";
 import Dropdown from "./Components/Dropdown";
-
-
-
+import Footer from "../../Components/Footer";
+import Navigation from "../../Components/Navigation";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -87,32 +87,28 @@ export default function PlanTrip() {
 
   useEffect(() => {
     checkUser();
-    
   }, []);
   useEffect(() => {
     dbUserSelect();
-    
   }, [userId]);
 
   Geocode.setApiKey("AIzaSyAayUREzm6gydcCBnHzTXcnN4PsneoLays");
 
   const getLatLong = (tripState) => {
-
     Geocode.fromAddress(`${tripState.city}, ${tripState.state}`).then(
-      response => {
+      (response) => {
         const { lat, lng } = response.results[0].geometry.location;
         console.log(lat, lng);
         setTripState({ ...tripState, lat: lat, long: lng });
       },
-      error => {
+      (error) => {
         console.error(error);
       }
     );
-  }
+  };
   const handleDepartDateChange = (date, value) => {
     setDepartureDate(date);
     setTripState({ ...tripState, departure: value });
-    
   };
 
   const handleReturnDateChange = (date, value) => {
@@ -124,20 +120,17 @@ export default function PlanTrip() {
     try {
       const user = await Auth.currentAuthenticatedUser();
       setUserId(user.username);
-      
-      
     } catch (error) {
       console.log(error);
     }
   };
   const dbUserSelect = () => {
     API.getUsers().then((data) =>
-    data.data.forEach(user => {
-      if(user.id === userId)
-        setDbId(user._id)
-      
-    }))
-  }
+      data.data.forEach((user) => {
+        if (user.id === userId) setDbId(user._id);
+      })
+    );
+  };
 
   const valueSelected = (val) => {
     if (!val) {
@@ -148,18 +141,15 @@ export default function PlanTrip() {
       getLatLong(tripState);
     }
   };
-  const handleSubmit = () =>{
-    
-    API.saveTrip(dbId, tripState)
+  const handleSubmit = () => {
+    API.saveTrip(dbId, tripState);
     console.log("submit");
     console.log(dbId);
     console.log(tripState);
-    
-  }
+  };
   const handleInputChange = ({ target: { name, value } }) =>
     setTripState({ ...tripState, [name]: value });
-    console.log(tripState, dbId);
-  
+  console.log(tripState, dbId);
 
   return (
     <ThemeProvider theme={theme}>
@@ -170,17 +160,16 @@ export default function PlanTrip() {
           <div className={classes.image}>
             <Typography
               className={classes.headline}
-              component="h1"
-              variant="h2"
-              align="center"
-              color="textPrimary"
-              gutterBottom
-            >
+              component='h1'
+              variant='h2'
+              align='center'
+              color='textPrimary'
+              gutterBottom>
               Where to Next?
             </Typography>
           </div>
-          <Container maxWidth="sm"></Container>
-          <Container className={classes.booking} maxWidth="md">
+          <Container maxWidth='sm'></Container>
+          <Container className={classes.booking} maxWidth='md'>
             {/* End hero unit */}
             <Booking
               handleDepartDateChange={handleDepartDateChange}
@@ -188,8 +177,7 @@ export default function PlanTrip() {
               handleInputChange={handleInputChange}
               budget={tripState.budget}
               return={returnDate}
-              departure={departureDate}
-            >
+              departure={departureDate}>
               <Dropdown
                 valueChange={valueSelected}
                 handleInputChange={handleInputChange}
@@ -198,16 +186,11 @@ export default function PlanTrip() {
             <SubmitButton handleSubmit={handleSubmit} />
           </Container>
         </main>
-        {/* Footer */}
-        <footer className={classes.footer}>
-          <Typography variant="h6" align="center" component="p">
-            Your Next Adventure Awaits
-          </Typography>
-          <Copyright />
-        </footer>
-        {/* End footer */}
+        <Box pt={4} pb={4}>
+          <Navigation />
+          <Footer />
+        </Box>
       </React.Fragment>
     </ThemeProvider>
   );
 }
-
