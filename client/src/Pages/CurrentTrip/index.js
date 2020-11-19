@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import {
   makeStyles,
   createMuiTheme,
@@ -28,6 +28,8 @@ import Title from "../../Components/Title";
 import ActivitiesForm from "./Components/AddressForm";
 import API from "../../utils/API";
 import { Auth } from "aws-amplify";
+import { GlobalUserState } from "../../Components/globalUserState";
+
 const useStyles = makeStyles((theme) => ({
   jumbotron: {
     background: "linear-gradient(45deg, #BB86FC 10%, #29025a 90%)",
