@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AddressForm() {
+export default function ActivitiesForm() {
   const classes = useStyles();
 
   return (

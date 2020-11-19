@@ -1,5 +1,9 @@
+const Activities = require("./activities");
+
 module.exports = {
   Users: require("./users"),
-  Trips: require("./trips")
+  Trips: require("./trips"),
+  Expenses: require("./expenses"),
+  Activities: require("./activities")
 
 };

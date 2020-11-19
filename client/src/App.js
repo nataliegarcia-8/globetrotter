@@ -24,9 +24,7 @@ function App() {
       const user = await Auth.currentAuthenticatedUser();
       setUser(user);
       console.log("user: ", user);
-
       console.log("signedIn");
-
       setLoginState("signedIn");
     } catch (error) {
       console.log(error);
@@ -38,7 +36,7 @@ function App() {
   const saveNewUser = (user) => {
     API.saveUser({
       email: user.attributes.email,
-      id: user.username,
+      cognitoId: user.username,
     });
   };
 

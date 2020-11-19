@@ -12,6 +12,7 @@ module.exports = {
   findById: function(req, res) {
     db.Trips
       .findById(req.params.id)
+      .populate("activities", "expenses")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -20,11 +21,12 @@ module.exports = {
       .create(req.body)
       .then(dbModel => {
         console.log(dbModel);
-        return db.Users.findOneAndUpdate({ _id: req.params.id }, { trips: dbModel._id }, { new: true });
+        return db.Users.findOneAndUpdate({ _id: req.params.id }, { $push : {trips: dbModel._id }}, { new: true });
       })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  
   update: function(req, res) {
     db.Trips
       .findOneAndUpdate({ _id: req.params.id }, req.body)
