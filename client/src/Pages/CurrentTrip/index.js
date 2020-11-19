@@ -10,12 +10,6 @@ import Container from "@material-ui/core/Container";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
-import PaymentForm from "./Components/PaymentForm";
-import Review from "./Components/Review";
 import Grid from "@material-ui/core/Grid";
 import Budget from "./Components/Budget";
 import Steps from "./Components/Steps";
@@ -25,9 +19,13 @@ import clsx from "clsx";
 import ImgGrid from "./Components/ImgGrid";
 import UploadBtn from "./Components/ImgGrid/UploadButton";
 import Title from "../../Components/Title";
-import ActivitiesForm from "./Components/AddressForm";
+import ItineraryForm from "./Components/ItineraryForm";
 import API from "../../utils/API";
 import { Auth } from "aws-amplify";
+// import moment from 'moment';
+// var displayDate = 
+// var currentDate = moment().format('MM-DD-YYYY');
+
 const useStyles = makeStyles((theme) => ({
   jumbotron: {
     background: "linear-gradient(45deg, #BB86FC 10%, #29025a 90%)",
@@ -57,15 +55,6 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     marginBottom: theme.spacing(3),
   },
-  //   paper: {
-  //     marginTop: theme.spacing(3),
-  //     marginBottom: theme.spacing(3),
-  //     padding: theme.spacing(2),
-  //     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-  //       marginTop: theme.spacing(6),
-  //       marginBottom: theme.spacing(6),
-  //       padding: theme.spacing(3),
-  //     },
   paper: {
     padding: theme.spacing(2),
     display: "flex",
@@ -119,7 +108,6 @@ export default function CurrentTrip() {
   const [userId, setUserId] = useState("");
   const [dbId, setDbId] = useState("");
 
-
 // ---------- Use Effect hooks -------------
    useEffect(() => {
     checkUser();
@@ -149,9 +137,6 @@ const checkUser = async () => {
     );
   };
 
-
-
-
   return (
     <ThemeProvider theme={theme}>
       <React.Fragment>
@@ -175,19 +160,12 @@ const checkUser = async () => {
               color="inherit"
               noWrap
             >
-              December 01, 2020
+ Date
             </Typography>
           </Container>
         </div>
         <Container maxWidth="lg">
           <Steps />
-          {/* <Stepper activeStep={activeStep} className={classes.stepper}>
-                                    {steps.map((label) => (
-                                        <Step key={label}>
-                                            <StepLabel>{label}</StepLabel>
-                                        </Step>
-                                    ))}
-                                </Stepper> */}
           <main className={classes.layout}>
             <div className={classes.root}>
               <Grid container spacing={3}>
@@ -196,7 +174,7 @@ const checkUser = async () => {
                     <Typography component="h1" variant="h4" align="left">
                       Trip Itinerary
                     </Typography>
-                    <ActivitiesForm />
+                    <ItineraryForm />
                   </Paper>
                 </Grid>
                 <Grid item xs={12} md={4} lg={3}>
