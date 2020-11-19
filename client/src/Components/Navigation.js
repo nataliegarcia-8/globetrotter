@@ -41,19 +41,11 @@ export default function IconBreadcrumbs() {
     <Breadcrumbs aria-label='breadcrumb' className={classes.center}>
       <Link
         color='textPrimary'
-        href='/'
+        href='localhost:3000/'
         onClick={handleClick}
         className={classes.link}>
         <HomeIcon className={classes.icon} />
         Home
-      </Link>
-      <Link
-        color='textPrimary'
-        href='/getting-started/installation/'
-        onClick={handleClick}
-        className={classes.link}>
-        <ExitToAppIcon className={classes.icon} />
-        Logout
       </Link>
     </Breadcrumbs>
   );

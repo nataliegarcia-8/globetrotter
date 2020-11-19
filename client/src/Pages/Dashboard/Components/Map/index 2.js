@@ -74,7 +74,9 @@ const CustomSkinMap = withScriptjs(
             {
               featureType: "poi.park",
               elementType: "geometry.fill",
-              stylers: [{ visibility: "off " }],
+              stylers: [
+                { visibility: "off "},
+              ],
             },
             {
               featureType: "road",
@@ -86,23 +88,18 @@ const CustomSkinMap = withScriptjs(
               elementType: "labels.text.stroke",
               stylers: [{ color: "#f5f1e6" }],
             },
-            {
-              featureType: "poi",
-              stylers: [
-                { saturation: -78 },
-                { lightness: -17 },
-                { hue: "#6600ff" },
-                { visibility: "off " },
-              ],
-            },
+            { featureType: "poi",  stylers: [
+              { saturation: -78 },
+              { lightness: -17 },
+              { hue: "#6600ff" },
+              { visibility: "off "}],
+           },
             {
               featureType: "landscape.natural",
               elementType: "geometry.fill",
-              stylers: [
-                { visibility: "on" },
-                { hue: "#6600ff" },
-                { saturation: -11 },
-              ],
+              stylers: [{ visibility: "on" },
+               { hue: "#6600ff" }, 
+               { saturation: -11 }],
             },
 
             { featureType: "poi.park", stylers: [{ visibility: "on" }] },
@@ -116,7 +113,8 @@ const CustomSkinMap = withScriptjs(
               stylers: [{ visibility: "simplified" }],
             },
           ],
-        }}>
+        }}
+      >
         {markerState.map((marker, i) => (
           <Marker
             onClick={() => zoomIntoMarkerHandler(marker)}
@@ -134,9 +132,9 @@ const CustomSkinMap = withScriptjs(
 export default function Maps() {
   return (
     <CustomSkinMap
-      googleMapURL='https://maps.googleapis.com/maps/api/js?key=AIzaSyAayUREzm6gydcCBnHzTXcnN4PsneoLays&libraries=places'
+      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAayUREzm6gydcCBnHzTXcnN4PsneoLays&libraries=places"
       loadingElement={<div style={{ height: `100%` }} />}
-      containerElement={<div style={{ height: `65vh` }} />}
+      containerElement={<div style={{ height: `86vh` }} />}
       mapElement={<div style={{ height: `100%` }} />}
     />
   );

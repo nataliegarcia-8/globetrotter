@@ -22,6 +22,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems, secondaryListItems } from "../../Components/ListItems";
 import Cards from "./Components/Cards";
+import Button from "./Components/Cards/buttons";
 import Copyright from "../../Components/Copyright";
 import Map from "./Components/Map";
 import Footer from "../../Components/Footer";
@@ -152,9 +153,6 @@ export default function Dashboard() {
                 className={classes.title}>
                 Welcome, User!
               </Typography>
-              <IconButton color='inherit'>
-                <NotificationsIcon />
-              </IconButton>
             </Toolbar>
           </AppBar>
           <Drawer
@@ -180,20 +178,32 @@ export default function Dashboard() {
             <div className={classes.appBarSpacer} />
             <Container maxWidth='lg' className={classes.container}>
               <Grid container spacing={3}>
+                <Grid item xs={8}>
+                  <Paper className={classes.paper}>
+                    <Map />
+                  </Paper>
+                </Grid>
+                <Grid item xs={4}>
+                  <Paper className={classes.paper}>
+                    <Map />
+                  </Paper>
+                </Grid>
+              </Grid>
+
+              <Grid container spacing={3}>
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}>
+                    <Button />
+                  </Paper>
+                </Grid>
+              </Grid>
+              {/* <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <Paper className={classes.paper}>
                     <Cards />
                   </Paper>
                 </Grid>
-                <Grid container spacing={3}>
-                  <Grid item xs={10}>
-                    <Paper className={classes.paper}>
-                      <Map />
-                    </Paper>
-                  </Grid>
-                  <Grid item xs={2}></Grid>
-                </Grid>
-              </Grid>
+              </Grid> */}
               <Box pt={4}>
                 <Footer />
               </Box>
