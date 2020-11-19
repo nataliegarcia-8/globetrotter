@@ -187,7 +187,7 @@ export default function Dashboard() {
                   </Paper>
                 </Grid>
                 <Grid container spacing={3}>
-                <Grid item xs={10}>
+                <Grid item xs={12}>
                   <Paper className={classes.paper}>
                     <Map />
                   </Paper>

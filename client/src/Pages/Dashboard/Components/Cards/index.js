@@ -99,11 +99,11 @@ const countStatesBeenTo = (placesArray) =>{
     return(
       <React.Fragment>
       <CssBaseline />
-      <Container className={classes.cardGrid} maxWidth='md'>
+      <Container className={classes.cardGrid} maxWidth='lg'>
          <Grid container spacing={5}>
       {CardInfo.map((p, i) => <TripCard key={i + '-trip'} {...p} />)}
          </Grid>
-    <Typography >{statesBeenTo / 50 * 100}%</Typography>
+    <Typography > You have visited {statesBeenTo / 50 * 100}% of the United States of America so far, keep up the good work!</Typography>
       </Container>
     </React.Fragment>
  )};
