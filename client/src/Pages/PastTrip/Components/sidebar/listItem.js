@@ -12,23 +12,18 @@ import { Auth } from "aws-amplify";
 import { Route, Redirect, Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import RoomIcon from '@material-ui/icons/Room';
 
 export const mainListItems = (
   <div>
     <ListItem button>
       <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <EventIcon />
+        <RoomIcon />
       </ListItemIcon>
       <Route
         render={({ history }) => (
           <ListItemText
-            primary="Previous Trips"
+            primary="City, State"
             onClick={() => {
               history.push("/pasttrip");
             }}
@@ -38,14 +33,14 @@ export const mainListItems = (
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <CardTravelIcon />
+        <RoomIcon />
       </ListItemIcon>
       <Route
         render={({ history }) => (
           <ListItemText
-            primary="Current Trip"
+            primary="City, State"
             onClick={() => {
-              history.push("/currenttrip");
+              history.push("/pasttrip");
             }}
           />
         )}
@@ -53,14 +48,29 @@ export const mainListItems = (
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <SpeakerNotesIcon />
+        <RoomIcon />
       </ListItemIcon>
       <Route
         render={({ history }) => (
           <ListItemText
-            primary="Plan Trip"
+            primary="City, State"
             onClick={() => {
-              history.push("/plantrip");
+              history.push("/pasttrip");
+            }}
+          />
+        )}
+      />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon>
+        <RoomIcon />
+      </ListItemIcon>
+      <Route
+        render={({ history }) => (
+          <ListItemText
+            primary="City, State"
+            onClick={() => {
+              history.push("/pasttrip");
             }}
           />
         )}
@@ -69,25 +79,25 @@ export const mainListItems = (
   </div>
 );
 
-export const secondaryListItems = (
-  <div>
-    <ListSubheader inset>User Settings</ListSubheader>
-    <ListItem button>
-      <ListItemIcon>
-        <PersonIcon />
-      </ListItemIcon>
-      <ListItemText primary="Account Info" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <ExitToAppIcon />
-      </ListItemIcon>
-      <ListItemText
-        primary="Logout"
-        onClick={() => {
-          Auth.signOut();
-        }}
-      ></ListItemText>
-    </ListItem>
-  </div>
-);
+// export const secondaryListItems = (
+//   <div>
+//     <ListSubheader inset>User Settings</ListSubheader>
+//     <ListItem button>
+//       <ListItemIcon>
+//         <PersonIcon />
+//       </ListItemIcon>
+//       <ListItemText primary="Account Info" />
+//     </ListItem>
+//     <ListItem button>
+//       <ListItemIcon>
+//         <ExitToAppIcon />
+//       </ListItemIcon>
+//       <ListItemText
+//         primary="Logout"
+//         onClick={() => {
+//           Auth.signOut();
+//         }}
+//       ></ListItemText>
+//     </ListItem>
+//   </div>
+// );

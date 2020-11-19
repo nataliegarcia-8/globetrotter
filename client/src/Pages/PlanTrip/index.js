@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -24,9 +24,6 @@ import Booking from "./Components/Booking";
 import SubmitButton from "./Components/SubmitButton";
 import Location from "./Components/Location";
 import Dropdown from "./Components/Dropdown";
-
-
-
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -77,42 +74,77 @@ export default function PlanTrip() {
     departure: "",
     lat: 0,
     long: 0,
+    current: "future",
   };
+  const coordinates = {
+    lat: 0,
+    long: 0,
+  };
+  // ---------- States -------------
+
   const [tripState, setTripState] = useState(initialTripState);
   const [userId, setUserId] = useState("");
   const [dbId, setDbId] = useState("");
-
+  const [coordinatesState, setCoordinates] = useState(coordinates);
   const [departureDate, setDepartureDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(new Date());
 
+  // ---------- Use Effect hooks -------------
   useEffect(() => {
     checkUser();
-    
   }, []);
+
   useEffect(() => {
     dbUserSelect();
-    
   }, [userId]);
 
+  useEffect(() => {
+    getLatLong(tripState);
+  }, [tripState]);
+
+
+  // ----------Goecoder function for getting lat and long -------------
   Geocode.setApiKey("AIzaSyAayUREzm6gydcCBnHzTXcnN4PsneoLays");
 
   const getLatLong = (tripState) => {
-
     Geocode.fromAddress(`${tripState.city}, ${tripState.state}`).then(
-      response => {
+      (response) => {
         const { lat, lng } = response.results[0].geometry.location;
         console.log(lat, lng);
-        setTripState({ ...tripState, lat: lat, long: lng });
+        setCoordinates({ lat: lat, long: lng });
       },
-      error => {
+      (error) => {
         console.error(error);
       }
     );
-  }
+  };
+
+
+  // ---------- Check cognito user and then get db user from cognito ID -------------
+  const checkUser = async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      setUserId(user.username);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const dbUserSelect = () => {
+    API.getUsers().then((data) =>
+      data.data.forEach((user) => {
+        if (user.cognitoId === userId) setDbId(user._id);
+
+        console.log();
+        API.getUser(dbId).then((data) => console.log(data));
+      })
+    );
+  };
+
+
+  // ---------- Departure and Return date Input handlers -------------
   const handleDepartDateChange = (date, value) => {
     setDepartureDate(date);
     setTripState({ ...tripState, departure: value });
-    
   };
 
   const handleReturnDateChange = (date, value) => {
@@ -120,46 +152,36 @@ export default function PlanTrip() {
     setTripState({ ...tripState, return: value });
   };
 
-  const checkUser = async () => {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      setUserId(user.username);
-      
-      
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const dbUserSelect = () => {
-    API.getUsers().then((data) =>
-    data.data.forEach(user => {
-      if(user.id === userId)
-        setDbId(user._id)
-      
-    }))
-  }
 
+  // ---------- City and State Input handler -------------
   const valueSelected = (val) => {
     if (!val) {
       return;
     } else {
       setTripState({ ...tripState, city: val.city, state: val.state });
+
       console.log(tripState);
-      getLatLong(tripState);
     }
   };
-  const handleSubmit = () =>{
-    
-    API.saveTrip(dbId, tripState)
+
+
+  // ---------- other input handler - mainly for budget  -------------
+  const handleInputChange = ({ target: { name, value } }) =>
+    setTripState({ ...tripState, [name]: value });
+
+
+  // ---------- Submit button handler -------------
+  const handleSubmit = () => {
+    API.saveTrip(dbId, { ...tripState, ...coordinatesState });
     console.log("submit");
     console.log(dbId);
     console.log(tripState);
+  };
+  
+  const reRoute = () => {
     
   }
-  const handleInputChange = ({ target: { name, value } }) =>
-    setTripState({ ...tripState, [name]: value });
-    console.log(tripState, dbId);
-  
+  console.log(tripState, dbId);
 
   return (
     <ThemeProvider theme={theme}>
@@ -210,4 +232,3 @@ export default function PlanTrip() {
     </ThemeProvider>
   );
 }
-

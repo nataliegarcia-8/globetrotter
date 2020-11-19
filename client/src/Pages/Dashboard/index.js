@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import clsx from "clsx";
 import {
   createMuiTheme,
@@ -24,6 +24,9 @@ import { mainListItems, secondaryListItems } from "../../Components/ListItems";
 import Cards from "./Components/Cards";
 import Copyright from "../../Components/Copyright";
 import Map from "./Components/Map";
+import { Auth } from "aws-amplify";
+
+import API from "../../utils/API";
 
 const drawerWidth = 240;
 
@@ -108,6 +111,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -123,6 +127,52 @@ export default function Dashboard() {
     },
   });
 
+
+
+  const [userId, setUserId] = useState("");
+  const [dbId, setDbId] = useState("");
+  const [userData,setUserData] = useState({})
+  const [tripsData,setTripsData] = useState([])
+
+
+  // ---------- Use Effect hooks -------------
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  useEffect(() => {
+    dbUserSelect();
+  }, [userId]);
+
+  useEffect(() => {
+    API.getUser(dbId).then((data) => {
+      setUserData(data.data)
+      setTripsData(data.data.trips)
+      console.log("user: ", data.data.trips)
+    } );
+  }, [dbId]);
+
+ 
+  // ---------- Check cognito user and then get db user from cognito ID -------------
+const checkUser = async () => {
+  try {
+    const user = await Auth.currentAuthenticatedUser();
+    setUserId(user.username);
+    console.log("Cognito User Info: ", user);
+  } catch (error) {
+    console.log(error);
+  }
+};
+const dbUserSelect = () => {
+  API.getUsers().then((data) =>
+    data.data.forEach((user) => {
+      if (user.cognitoId === userId) setDbId(user._id);
+      console.log(dbId);
+      
+    })
+  );
+};
+  //  API.getUser()
   return (
     <ThemeProvider theme={theme}>
       <Paper>
@@ -149,7 +199,7 @@ export default function Dashboard() {
                 color='inherit'
                 noWrap
                 className={classes.title}>
-                Welcome, User!
+                Welcome, {userData.email}!
               </Typography>
               <IconButton color='inherit'>
                 <NotificationsIcon />
@@ -182,12 +232,13 @@ export default function Dashboard() {
                 <Grid item xs={12}>
                   <Paper className={classes.paper}>
                     <Cards />
+                    
                   </Paper>
                 </Grid>
                 <Grid container spacing={3}>
-                <Grid item xs={10}>
+                <Grid item xs={12}>
                   <Paper className={classes.paper}>
-                    <Map />
+                    <Map trips={tripsData} />
                   </Paper>
                 </Grid>
                 <Grid item xs={2}></Grid>

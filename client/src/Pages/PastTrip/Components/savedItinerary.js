@@ -38,28 +38,8 @@ export default function AddressForm() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography color='textSecondary' className={classes.depositContext}>
-            Add to your schedule
+            Check out what you did in City!
           </Typography>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id='activity'
-            name='activity'
-            label='Activity'
-            fullWidth
-            // autoComplete="shipping address-level2"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id='datetime-local'
-            type='datetime-local'
-            name='fav2'
-            label='Date / Time'
-            defaultValue='2017-05-24T10:30'
-            fullWidth
-          />
         </Grid>
         <Grid item xs={12} sm={12}>
           <List className={classes.root}>

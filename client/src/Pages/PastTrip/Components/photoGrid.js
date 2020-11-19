@@ -14,30 +14,36 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 500,
-    height: 450,
+    width: 600,
+    height: 475,
   },
 }));
 const tileData = [
   {
     img: image,
+    cols: 1
     
   },
   {
       img: image,
+      cols: 2
      
   },
   {
       img: image,
+      cols: 3
   },
   {
       img: image,
+      cols: 1
   },
   {
       img: image,
+      cols: 1
   },
   {
       img: image,
+      cols: 1
   },
 ];
 export default function ImageGridList() {

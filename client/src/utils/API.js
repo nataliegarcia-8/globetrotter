@@ -20,11 +20,22 @@ export default {
   saveTrip: function(id, tripData) {
     console.log(tripData, id);
     return axios.post("/api/users/" + id, tripData);
+  },
+  saveActivity: function(id, activityData) {
+    console.log(activityData, id);
+    return axios.post("/api/trips/" + id, activityData);
+    
+  },
+  saveExpense: function(id, expensesData) {
+    console.log(expensesData, id);
+    return axios.post("/api/expenses/" + id, expensesData);
     
   },
   getTrips: function() {
     return axios.get("/api/trips");
   },
+
+
 };
 
 
