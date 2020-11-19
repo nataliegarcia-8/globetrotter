@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   makeStyles,
   createMuiTheme,
@@ -116,43 +116,50 @@ export default function CurrentTrip() {
       type: "dark",
     },
   });
+
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  const [userId, setUserId] = useState("");
-  const [dbId, setDbId] = useState("");
+  const initialActivityState = {
+    activity: "",
+    date: "",
+  };
 
-
-// ---------- Use Effect hooks -------------
-   useEffect(() => {
-    checkUser();
-  }, []);
+  const [globalUserData, setGlobalUserData] = useContext(GlobalUserState);
+  const [trips, setTrips] = useState([]);
+  const [currentTrip, setCurrentTrip] = useState({});
+  const [activity, setActivity] = useState(initialActivityState);
 
   useEffect(() => {
-    dbUserSelect();
-  }, [userId]);
+    console.log("global state: ", globalUserData);
+    setTrips(globalUserData.trips);
+  }, [globalUserData]);
 
-// ---------- Check cognito user and then get db user from cognito ID -------------
-const checkUser = async () => {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      setUserId(user.username);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const dbUserSelect = () => {
-    API.getUsers().then((data) =>
-      data.data.forEach((user) => {
-        if (user.cognitoId === userId) setDbId(user._id);
+  useEffect(() => {
+    console.log("trips: ", trips);
+    findCurrentTrip();
+  }, [trips]);
+  useEffect(() => {
+    console.log("current: ", currentTrip);
+  }, [currentTrip]);
 
-        console.log(dbId);
-        API.getUser(dbId).then((data) => console.log(data));
-      })
-    );
+  const findCurrentTrip = () => {
+    trips.forEach((trip) => {
+      if (trip.current === "current") {
+        setCurrentTrip(trip);
+      }
+      console.log(trip);
+    });
   };
 
+  
 
 
+  const handleActivitySubmit = () => {
+    API.saveActivity(currentTrip._id, activity)
+  };
+  const handleActivityInputChange = ({ target: { name, value } }) =>
+    setActivity({ ...activity, [name]: value });
+    console.log(activity);
 
   return (
     <ThemeProvider theme={theme}>
@@ -169,7 +176,7 @@ const checkUser = async () => {
               color="textPrimary"
               gutterBottom
             >
-              City
+              {currentTrip.city}
             </Typography>
             <Typography
               className={classes.dates}
@@ -177,7 +184,7 @@ const checkUser = async () => {
               color="inherit"
               noWrap
             >
-              December 01, 2020
+              {currentTrip.departure}
             </Typography>
           </Container>
         </div>
@@ -198,7 +205,13 @@ const checkUser = async () => {
                     <Typography component="h1" variant="h4" align="left">
                       Trip Itinerary
                     </Typography>
-                    <ActivitiesForm />
+
+                    <ActivitiesForm
+                      handleSubmit={handleActivitySubmit}
+                      handleOnChange={handleActivityInputChange}
+                      
+                    />
+                    
                   </Paper>
                 </Grid>
                 <Grid item xs={12} md={4} lg={3}>

@@ -39,6 +39,7 @@ const UserState = ({ children }) => {
     API.getUsers().then((data) =>
       data.data.forEach((user) => {
         if (user.cognitoId === userId) setDbId(user._id);
+        
         console.log(dbId);
       })
     );

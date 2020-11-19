@@ -92,6 +92,7 @@ export default function PlanTrip() {
 
   // ---------- Use Effect hooks -------------
  
+  console.log(globalUserData);
   useEffect(() => {
     getLatLong(tripState);
   }, [tripState]);

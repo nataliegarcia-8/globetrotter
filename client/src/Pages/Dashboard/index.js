@@ -141,7 +141,7 @@ export default function Dashboard() {
     
     console.log("global state: ",  globalUserData);
     
-  }, []);
+  }, [globalUserData]);
 
   
 
