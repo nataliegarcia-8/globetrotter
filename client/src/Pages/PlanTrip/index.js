@@ -178,6 +178,9 @@ export default function PlanTrip() {
     console.log(tripState);
   };
   
+  const reRoute = () => {
+    
+  }
   console.log(tripState, dbId);
 
   return (
