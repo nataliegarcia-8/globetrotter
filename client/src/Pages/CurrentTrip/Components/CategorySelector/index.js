@@ -64,7 +64,7 @@ export default function CategorySelector() {
 
   return (
     <div className={classes.root}>
-       <Grid item xs={12} md={4} lg={6}>
+       <Grid item xs={12} md={4} lg={4}>
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-controlled-open-select-label">Category</InputLabel>
         <Select
@@ -88,7 +88,7 @@ export default function CategorySelector() {
         </Select>
       </FormControl>
     </Grid>
-     <Grid item xs={12} md={4} lg={6} className={classes.margin}>
+     <Grid item xs={12} md={4} lg={4} className={classes.margin}>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel>
           <Input

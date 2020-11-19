@@ -14,9 +14,7 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import AddressForm from './Components/AddressForm';
-import PaymentForm from './Components/PaymentForm';
-import Review from './Components/Review';
+import ItineraryForm from './Components/ItineraryForm';
 import Grid from '@material-ui/core/Grid';
 import Budget from './Components/Budget';
 import Steps from './Components/Steps';
@@ -153,15 +151,15 @@ return (
                 <main className={classes.layout}>
                     <div className={classes.root}>
                         <Grid container spacing={3}>
-                            <Grid item xs={12} md={8} lg={9}>
+                            <Grid item xs={12} md={8} lg={8}>
                                 <Paper className={fixedHeightPaper}>
                                     <Typography component="h1" variant="h4" align="left">
                                         Trip Itinerary
     </Typography>
-    <AddressForm />
+    <ItineraryForm />
                                 </Paper>
                             </Grid>
-                            <Grid item xs={12} md={4} lg={3}>
+                            <Grid item xs={12} md={4} lg={4}>
                                 <Paper className={fixedHeightPaper}>
 
                                     <div> <Budget /> </div>
