@@ -92,6 +92,7 @@ const countStatesBeenTo = (placesArray) =>{
       count++
     }
   })
+  console.log(count /50 * 100);
   return count;
 }
 
@@ -102,7 +103,7 @@ const countStatesBeenTo = (placesArray) =>{
          <Grid container spacing={5}>
       {CardInfo.map((p, i) => <TripCard key={i + '-trip'} {...p} />)}
          </Grid>
-    <Typography >{statesBeenTo}</Typography>
+    <Typography >{statesBeenTo / 50 * 100}%</Typography>
       </Container>
     </React.Fragment>
  )};
