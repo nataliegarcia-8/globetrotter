@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -34,21 +34,37 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ActivitiesForm(props) {
   const classes = useStyles();
-
+  
+  const renderActivities = () => {
+    if (props.activities) {
+      return props.activities.map((activity, i) => (
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar className={classes.icon}>
+              <ScheduleIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary={activity.activity} secondary={activity.date} />
+        </ListItem>
+      ));
+    } else {
+      return;
+    }
+  };
   return (
     <React.Fragment>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Typography color='textSecondary' className={classes.depositContext}>
+          <Typography color="textSecondary" className={classes.depositContext}>
             Add to your schedule
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id='activity'
-            name='activity'
-            label='Activity'
+            id="activity"
+            name="activity"
+            label="Activity"
             fullWidth
             onChange={props.handleOnChange}
             // autoComplete="shipping address-level2"
@@ -56,85 +72,24 @@ export default function ActivitiesForm(props) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id='datetime-local'
-            type='datetime-local'
-            name='date'
-            label='Date / Time'
-            defaultValue='2017-05-24T10:30'
+            id="datetime-local"
+            type="datetime-local"
+            name="date"
+            label="Date / Time"
+            defaultValue="2017-05-24T10:30"
             fullWidth
             onChange={props.handleOnChange}
           />
         </Grid>
-        <Grid container justify='center'>
-      <Fab variant='extended' aria-label='add' onClick={props.handleSubmit}>
-        <AddIcon />
-        Add Trip
-      </Fab>
-    </Grid>
+        <Grid container justify="center">
+          <Fab variant="extended" aria-label="add" onClick={props.handleSubmit}>
+            <AddIcon />
+            Add activity
+          </Fab>
+        </Grid>
         <Grid item xs={12} sm={12}>
           <List className={classes.root}>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <ScheduleIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary='Tour the Smithsonian'
-                secondary='Jan 9, 2014'
-              />
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <ScheduleIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary='Happy hour at brewery'
-                secondary='Jan 7, 2014'
-              />
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <ScheduleIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary='Hiking sesh' secondary='July 20, 2014' />
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <ScheduleIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary='Hiking sesh' secondary='July 20, 2014' />
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <ScheduleIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary='Hiking sesh' secondary='July 20, 2014' />
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <ScheduleIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary='Hiking sesh' secondary='July 20, 2014' />
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <ScheduleIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary='Hiking sesh' secondary='July 20, 2014' />
-            </ListItem>
+            {renderActivities()}
           </List>
         </Grid>
       </Grid>

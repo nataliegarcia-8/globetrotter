@@ -123,28 +123,29 @@ export default function CurrentTrip() {
     console.log("trips: ", trips);
     findCurrentTrip();
   }, [trips]);
+
   useEffect(() => {
     console.log("current: ", currentTrip);
+    
   }, [currentTrip]);
 
   const findCurrentTrip = () => {
     trips.forEach((trip) => {
       if (trip.current === "current") {
-        setCurrentTrip(trip);
+        API.getTrip(trip._id).then((data) => {
+          setCurrentTrip(data.data);
+        });
       }
       console.log(trip);
     });
   };
 
-  
-
-
   const handleActivitySubmit = () => {
-    API.saveActivity(currentTrip._id, activity)
+    API.saveActivity(currentTrip._id, activity);
   };
   const handleActivityInputChange = ({ target: { name, value } }) =>
     setActivity({ ...activity, [name]: value });
-    console.log(activity);
+  console.log(activity, currentTrip._id);
 
   return (
     <ThemeProvider theme={theme}>
@@ -184,12 +185,11 @@ export default function CurrentTrip() {
                       Trip Itinerary
                     </Typography>
 
-                    <ActivitiesForm
+                    <ItineraryForm
                       handleSubmit={handleActivitySubmit}
                       handleOnChange={handleActivityInputChange}
-                      
+                      activities={currentTrip.activities}
                     />
-                    
                   </Paper>
                 </Grid>
                 <Grid item xs={12} md={4} lg={3}>

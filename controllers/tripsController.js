@@ -12,7 +12,8 @@ module.exports = {
   findById: function(req, res) {
     db.Trips
       .findById(req.params.id)
-      .populate("activities", "expenses")
+      .populate("activities")
+      .populate("expenses")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -33,6 +34,7 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));n
   },
+  
   remove: function(req, res) {
     db.Trips
       .findById({ _id: req.params.id })
