@@ -11,7 +11,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import LayersIcon from "@material-ui/icons/Layers";
 import { Auth } from "aws-amplify";
 import { Route, Redirect, Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 export const mainListItems = (
