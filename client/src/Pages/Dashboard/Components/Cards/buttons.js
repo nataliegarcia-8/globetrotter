@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
 import CardTravelIcon from "@material-ui/icons/CardTravel";
 import EventIcon from "@material-ui/icons/Event";
+import { Route, Redirect, Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -30,30 +31,53 @@ export default function IconLabelButtons() {
 
   return (
     <div className={classes.center}>
-      <Button
-        variant='contained'
-        color='primary'
-        size='large'
-        className={classes.button}
-        startIcon={<EventIcon />}>
-        Previous Trips
-      </Button>
-      <Button
-        variant='contained'
-        color='primary'
-        size='large'
-        className={classes.button}
-        startIcon={<CardTravelIcon />}>
-        Current Trip
-      </Button>
-      <Button
-        variant='contained'
-        color='primary'
-        size='large'
-        className={classes.button}
-        startIcon={<SpeakerNotesIcon />}>
-        Plan Trip
-      </Button>
+      <Route
+        render={({ history }) => (
+          <Button
+            variant='contained'
+            color='primary'
+            size='large'
+            onClick={() => {
+              history.push("/pasttrip");
+            }}
+            className={classes.button}
+            startIcon={<EventIcon />}>
+            Previous Trips
+          </Button>
+        )}
+      />
+
+      <Route
+        render={({ history }) => (
+          <Button
+            variant='contained'
+            color='primary'
+            size='large'
+            onClick={() => {
+              history.push("/currenttrip");
+            }}
+            className={classes.button}
+            startIcon={<CardTravelIcon />}>
+            Current Trip
+          </Button>
+        )}
+      />
+
+      <Route
+        render={({ history }) => (
+          <Button
+            variant='contained'
+            color='primary'
+            size='large'
+            onClick={() => {
+              history.push("/plantrip");
+            }}
+            className={classes.button}
+            startIcon={<SpeakerNotesIcon />}>
+            Plan Trip
+          </Button>
+        )}
+      />
     </div>
   );
 }

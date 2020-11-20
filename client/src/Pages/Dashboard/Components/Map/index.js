@@ -10,7 +10,7 @@ const CustomSkinMap = withScriptjs(
   withGoogleMap((props) => {
     const [position, setPosition] = useState({ lat: 38.0902, lng: -95.7129 });
     const [markerState, setMarkerState] = useState([]);
-    const [zoom, setZoom] = useState(4.6);
+    const [zoom, setZoom] = useState(3.8);
     const zoomIntoMarkerHandler = (coordinates) => {
       console.log("clicked");
       setZoom(zoom + 1);

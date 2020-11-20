@@ -24,6 +24,7 @@ import { mainListItems, secondaryListItems } from "../../Components/ListItems";
 import Cards from "./Components/Cards";
 import Button from "./Components/Cards/buttons";
 import Copyright from "../../Components/Copyright";
+import Charts from "./Components/Cards/";
 import Map from "./Components/Map";
 import Footer from "../../Components/Footer";
 
@@ -42,6 +43,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
     padding: "0 8px",
     ...theme.mixins.toolbar,
+  },
+  center: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -88,6 +95,9 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(9),
     },
   },
+  fixedHeight: {
+    height: "70px",
+  },
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
@@ -103,9 +113,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     overflow: "auto",
     flexDirection: "column",
-  },
-  fixedHeight: {
-    height: 240,
   },
 }));
 
@@ -185,7 +192,7 @@ export default function Dashboard() {
                 </Grid>
                 <Grid item xs={4}>
                   <Paper className={classes.paper}>
-                    <Map />
+                    <Charts />
                   </Paper>
                 </Grid>
               </Grid>
@@ -204,7 +211,7 @@ export default function Dashboard() {
                   </Paper>
                 </Grid>
               </Grid> */}
-              <Box pt={4}>
+              <Box pt={4} pb={4}>
                 <Footer />
               </Box>
             </Container>
