@@ -31,14 +31,24 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     maxHeight: 285,
-    overflow: "auto",
+    // overflow: "auto",
     position: "relative",
+  },
+  button: {
+    backgroundColor: "transparent",
+    border: "2px solid #BB86FC",
+    color: "white",
+    margin: theme.spacing(3),
+    "&:hover": {
+      backgroundColor: "#BB90FF",
+      color: "#121212",
+    },
   },
 }));
 
 export default function ActivitiesForm(props) {
   const classes = useStyles();
-  
+
   const renderActivities = () => {
     if (props.activities) {
       return props.activities.map((activity, i) => (
@@ -59,16 +69,16 @@ export default function ActivitiesForm(props) {
     <React.Fragment>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Typography color="textSecondary" className={classes.depositContext}>
+          <Typography color='textSecondary' className={classes.depositContext}>
             Add to your schedule
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="activity"
-            name="activity"
-            label="Activity"
+            id='activity'
+            name='activity'
+            label='Activity'
             fullWidth
             onChange={props.handleOnChange}
             // autoComplete="shipping address-level2"
@@ -77,25 +87,28 @@ export default function ActivitiesForm(props) {
 
         <Grid item xs={12} sm={6}>
           <TextField
-            id="datetime-local"
-            type="datetime-local"
-            name="date"
-            label="Date / Time"
-            defaultValue="2017-05-24T10:30"
+            id='datetime-local'
+            type='datetime-local'
+            name='date'
+            label='Date / Time'
+            defaultValue='2017-05-24T10:30'
             fullWidth
             onChange={props.handleOnChange}
           />
         </Grid>
-        <Grid container justify="center">
-          <Fab variant="extended" aria-label="add" onClick={props.handleSubmit}>
+        <Grid container justify='center'>
+          <Fab
+            variant='extended'
+            aria-label='add'
+            size='small'
+            onClick={props.handleSubmit}
+            className={classes.button}>
             <AddIcon />
             Add activity
           </Fab>
         </Grid>
         <Grid item xs={12} sm={12}>
-          <List className={classes.root}>
-            {renderActivities()}
-          </List>
+          <List className={classes.root}>{renderActivities()}</List>
         </Grid>
       </Grid>
     </React.Fragment>
