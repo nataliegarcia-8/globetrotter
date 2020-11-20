@@ -168,8 +168,8 @@ export default function CategorySelector(props) {
           variant='extended'
           aria-label='add'
           size='small'
-          className={classes.button}>
-            onClick={handlebudgetSubmit}
+          className={classes.button}
+            onClick={handlebudgetSubmit}>
           <AddIcon />
           Add Expense
         </Fab>

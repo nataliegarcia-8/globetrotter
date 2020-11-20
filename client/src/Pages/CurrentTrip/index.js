@@ -134,12 +134,9 @@ export default function CurrentTrip() {
 
   useEffect(() => {
     console.log("current: ", currentTrip);
-<<<<<<< HEAD
     subtractExpensesFromBudget(currentTrip.expenses);
     setActivities(currentTrip.activities);
  
-=======
->>>>>>> 32a562d5c5d908c34bb9eaf0ab222c0a15f6e7af
   }, [currentTrip]);
 
   useEffect(() => {
