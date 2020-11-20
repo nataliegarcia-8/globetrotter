@@ -5,6 +5,7 @@ import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
 import CardTravelIcon from "@material-ui/icons/CardTravel";
 import EventIcon from "@material-ui/icons/Event";
 import { Route, Redirect, Link } from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -31,6 +32,8 @@ export default function IconLabelButtons() {
 
   return (
     <div className={classes.center}>
+      <Grid container spacing={3}>
+      <Grid item xs={12} md={4} lg={4}>
       <Route
         render={({ history }) => (
           <Button
@@ -46,7 +49,8 @@ export default function IconLabelButtons() {
           </Button>
         )}
       />
-
+      </Grid>
+      <Grid item xs={12} md={4} lg={4}>
       <Route
         render={({ history }) => (
           <Button
@@ -62,7 +66,8 @@ export default function IconLabelButtons() {
           </Button>
         )}
       />
-
+</Grid>
+<Grid item xs={12} md={4} lg={4}>
       <Route
         render={({ history }) => (
           <Button
@@ -78,6 +83,8 @@ export default function IconLabelButtons() {
           </Button>
         )}
       />
+    </Grid>
+    </Grid>
     </div>
   );
 }
