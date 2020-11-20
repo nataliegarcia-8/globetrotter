@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     maxHeight: 285,
-    // overflow: "auto",
+    overflow: "auto",
     position: "relative",
   },
   button: {
