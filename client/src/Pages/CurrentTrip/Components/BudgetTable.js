@@ -8,21 +8,18 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-const useStyles = makeStyles({
-  table: {
-    width: 257,
-  },
-  tableDiv: {
-    width: 257,
-  },
-});
+const useStyles = makeStyles({});
 
 export default function BudgetTable() {
   const classes = useStyles();
 
   return (
     <TableContainer component={Paper} className={classes.tableDiv}>
-      <Table className={classes.table} size='small' aria-label='a dense table'>
+      <Table
+        className={classes.table}
+        size='small'
+        fullWidth
+        aria-label='a dense table'>
         <TableHead>
           <TableRow>
             <TableCell>Categories</TableCell>
