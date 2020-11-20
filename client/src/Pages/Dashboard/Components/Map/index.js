@@ -6,6 +6,7 @@ import {
   Marker,
 } from "react-google-maps";
 import API from "../../../../utils/API";
+
 const CustomSkinMap = withScriptjs(
   withGoogleMap((props) => {
     const [position, setPosition] = useState({ lat: 38.0902, lng: -95.7129 });
@@ -21,19 +22,24 @@ const CustomSkinMap = withScriptjs(
     //   setZooming(false);
     // }, [zooming]);
     let count = 0;
-    useEffect(() => {
-      async function getTrips() {
-        try {
-          const results = await API.getTrips();
-          console.log(results.data);
-          setMarkerState((state) => [...state, ...results.data]);
-        } catch (error) {}
+   
+
+    const renderMarkers = () => {
+      if(props.trips){
+        return(
+        props.trips.map((marker, i) => (
+          <Marker
+            onClick={() => zoomIntoMarkerHandler(marker)}
+            key={i}
+            position={{ lat: marker.lat, lng: marker.long }}
+            zoomOnClick={true}
+          />
+        ))
+      );
+      } else {
+        return;
       }
-      getTrips();
-    }, []);
-    useEffect(() => {
-      console.log(markerState);
-    }, [markerState]);
+    }
     return (
       <GoogleMap
         defaultZoom={zoom}
@@ -116,28 +122,24 @@ const CustomSkinMap = withScriptjs(
               stylers: [{ visibility: "simplified" }],
             },
           ],
-        }}>
-        {markerState.map((marker, i) => (
-          <Marker
-            onClick={() => zoomIntoMarkerHandler(marker)}
-            key={i}
-            position={{ lat: marker.lat, lng: marker.long }}
-            zoomOnClick={true}
-          />
-        ))}
+        }}
+      >
+        {renderMarkers()}
         {/* <Marker position={{ lat: 40.748817, lng: -73.985428 }} />
         <Marker position={{ lat: 37.0902, lng: -95.7129 }} /> */}
       </GoogleMap>
     );
   })
 );
-export default function Maps() {
+export default function Maps(props) {
+  console.log("insidemaps", props.trips)
   return (
     <CustomSkinMap
       googleMapURL='https://maps.googleapis.com/maps/api/js?key=AIzaSyAayUREzm6gydcCBnHzTXcnN4PsneoLays&libraries=places'
       loadingElement={<div style={{ height: `100%` }} />}
       containerElement={<div style={{ height: `65vh` }} />}
       mapElement={<div style={{ height: `100%` }} />}
+      trips={props.trips}
     />
   );
 }

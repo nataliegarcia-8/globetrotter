@@ -9,7 +9,7 @@ const usersSeed = [
   {
     
     email: "santu@gmain.com",
-    id: "asd3asd442as",
+    cognitoId: "asd3asd442as",
     date: new Date(Date.now()),
     firstName: "santu",
     lastName: "solang",

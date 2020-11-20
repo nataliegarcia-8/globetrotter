@@ -25,7 +25,11 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     flexGrow: 1,
-  }, // footer: { //   backgroundColor: theme.palette.background.paper, //   padding: theme.spacing(6), // },
+  },
+  // footer: {
+  //   backgroundColor: theme.palette.background.paper,
+  //   padding: theme.spacing(6),
+  // },
 }));
 function TripCard(props) {
   const classes = useStyles();

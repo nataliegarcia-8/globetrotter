@@ -3,11 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import {
-  makeStyles,
-  createMuiTheme,
-  ThemeProvider,
-} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -34,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ActivitiesForm() {
+export default function AddressForm() {
   const classes = useStyles();
 
   return (
@@ -42,29 +38,8 @@ export default function ActivitiesForm() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography color='textSecondary' className={classes.depositContext}>
-            Add to your schedule
+            Check out what you did in City!
           </Typography>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id='activity'
-            name='activity'
-            label='Activity'
-            fullWidth
-            // autoComplete="shipping address-level2"
-          />
-        </Grid>
-
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id='datetime-local'
-            type='datetime-local'
-            name='fav2'
-            label='Date / Time'
-            defaultValue='2017-05-24T10:30'
-            fullWidth
-          />
         </Grid>
         <Grid item xs={12} sm={12}>
           <List className={classes.root}>

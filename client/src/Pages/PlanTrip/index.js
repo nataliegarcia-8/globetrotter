@@ -77,21 +77,35 @@ export default function PlanTrip() {
     departure: "",
     lat: 0,
     long: 0,
+    current: "future",
   };
+  const coordinates = {
+    lat: 0,
+    long: 0,
+  };
+  // ---------- States -------------
+
   const [tripState, setTripState] = useState(initialTripState);
   const [userId, setUserId] = useState("");
   const [dbId, setDbId] = useState("");
-
+  const [coordinatesState, setCoordinates] = useState(coordinates);
   const [departureDate, setDepartureDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(new Date());
 
+  // ---------- Use Effect hooks -------------
   useEffect(() => {
     checkUser();
   }, []);
+
   useEffect(() => {
     dbUserSelect();
   }, [userId]);
 
+  useEffect(() => {
+    getLatLong(tripState);
+  }, [tripState]);
+
+  // ----------Goecoder function for getting lat and long -------------
   Geocode.setApiKey("AIzaSyAayUREzm6gydcCBnHzTXcnN4PsneoLays");
 
   const getLatLong = (tripState) => {
@@ -99,23 +113,15 @@ export default function PlanTrip() {
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
         console.log(lat, lng);
-        setTripState({ ...tripState, lat: lat, long: lng });
+        setCoordinates({ lat: lat, long: lng });
       },
       (error) => {
         console.error(error);
       }
     );
   };
-  const handleDepartDateChange = (date, value) => {
-    setDepartureDate(date);
-    setTripState({ ...tripState, departure: value });
-  };
 
-  const handleReturnDateChange = (date, value) => {
-    setReturnDate(date);
-    setTripState({ ...tripState, return: value });
-  };
-
+  // ---------- Check cognito user and then get db user from cognito ID -------------
   const checkUser = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
@@ -127,28 +133,49 @@ export default function PlanTrip() {
   const dbUserSelect = () => {
     API.getUsers().then((data) =>
       data.data.forEach((user) => {
-        if (user.id === userId) setDbId(user._id);
+        if (user.cognitoId === userId) setDbId(user._id);
+
+        console.log();
+        API.getUser(dbId).then((data) => console.log(data));
       })
     );
   };
 
+  // ---------- Departure and Return date Input handlers -------------
+  const handleDepartDateChange = (date, value) => {
+    setDepartureDate(date);
+    setTripState({ ...tripState, departure: value });
+  };
+
+  const handleReturnDateChange = (date, value) => {
+    setReturnDate(date);
+    setTripState({ ...tripState, return: value });
+  };
+
+  // ---------- City and State Input handler -------------
   const valueSelected = (val) => {
     if (!val) {
       return;
     } else {
       setTripState({ ...tripState, city: val.city, state: val.state });
+
       console.log(tripState);
-      getLatLong(tripState);
     }
   };
+
+  // ---------- other input handler - mainly for budget  -------------
+  const handleInputChange = ({ target: { name, value } }) =>
+    setTripState({ ...tripState, [name]: value });
+
+  // ---------- Submit button handler -------------
   const handleSubmit = () => {
-    API.saveTrip(dbId, tripState);
+    API.saveTrip(dbId, { ...tripState, ...coordinatesState });
     console.log("submit");
     console.log(dbId);
     console.log(tripState);
   };
-  const handleInputChange = ({ target: { name, value } }) =>
-    setTripState({ ...tripState, [name]: value });
+
+  const reRoute = () => {};
   console.log(tripState, dbId);
 
   return (

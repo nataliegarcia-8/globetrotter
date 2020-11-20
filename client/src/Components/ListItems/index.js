@@ -8,7 +8,6 @@ import EventIcon from "@material-ui/icons/Event";
 import CardTravelIcon from "@material-ui/icons/CardTravel";
 import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
 import PersonIcon from "@material-ui/icons/Person";
-import LayersIcon from "@material-ui/icons/Layers";
 import { Auth } from "aws-amplify";
 import { Route, Redirect, Link } from "react-router-dom";
 

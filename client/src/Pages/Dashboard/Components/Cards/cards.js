@@ -1,25 +1,28 @@
-import Bar from "../ProgressCircle";
-
-
-function Card( t, p, w) {
+import EventIcon from "@material-ui/icons/Event";
+import CardTravelIcon from "@material-ui/icons/CardTravel";
+import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
+function Card(i, t, l, p, b) {
+    this.icon = i;
     this.title = t;
+    this.link = l;
     this.paragraph = p;
-    this.widget = w;
+    this.buttonWords = b;
 }
-
 const CardInfo = [
-    new Card(
-    "You have visited",
-    "of America", 
-    <Bar />),
-    new Card(
-    "You have traveled",
-    "out of the year",
-    <Bar />),
-    new Card(
-    "You have completed",
-    "Activities on your Trips",
-    null),
+    new Card(<EventIcon />,
+    "Past Trips",
+    "#",
+    "View your past trips!", 
+    "REMINISCE"),
+    new Card(<CardTravelIcon />,
+    "Current Trip",
+    "#",
+    "We are on a trip!",
+    "EXPLORE"),
+    new Card(<SpeakerNotesIcon />,
+    "Plan A Trip",
+    "/plantrip",
+    "Plan a trip now!",
+    "DISCOVER"),
 ]
-
 export default CardInfo;
