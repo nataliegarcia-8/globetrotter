@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import {
   createMuiTheme,
@@ -22,8 +22,11 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems, secondaryListItems } from "../../Components/ListItems";
 import Cards from "./Components/Cards";
+import Button from "./Components/Cards/buttons";
 import Copyright from "../../Components/Copyright";
+import Charts from "./Components/Cards/";
 import Map from "./Components/Map";
+import Footer from "../../Components/Footer";
 import { Auth } from "aws-amplify";
 
 import API from "../../utils/API";
@@ -43,6 +46,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
     padding: "0 8px",
     ...theme.mixins.toolbar,
+  },
+  center: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -89,6 +98,9 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(9),
     },
   },
+  fixedHeight: {
+    height: "70px",
+  },
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
@@ -105,13 +117,9 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
   },
-  fixedHeight: {
-    height: 240,
-  },
 }));
 
 export default function Dashboard() {
-
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -127,13 +135,10 @@ export default function Dashboard() {
     },
   });
 
-
-
   const [userId, setUserId] = useState("");
   const [dbId, setDbId] = useState("");
-  const [userData,setUserData] = useState({})
-  const [tripsData,setTripsData] = useState([])
-
+  const [userData, setUserData] = useState({});
+  const [tripsData, setTripsData] = useState([]);
 
   // ---------- Use Effect hooks -------------
   useEffect(() => {
@@ -146,32 +151,30 @@ export default function Dashboard() {
 
   useEffect(() => {
     API.getUser(dbId).then((data) => {
-      setUserData(data.data)
-      setTripsData(data.data.trips)
-      console.log("user: ", data.data.trips)
-    } );
+      setUserData(data.data);
+      setTripsData(data.data.trips);
+      console.log("user: ", data.data.trips);
+    });
   }, [dbId]);
 
- 
   // ---------- Check cognito user and then get db user from cognito ID -------------
-const checkUser = async () => {
-  try {
-    const user = await Auth.currentAuthenticatedUser();
-    setUserId(user.username);
-    console.log("Cognito User Info: ", user);
-  } catch (error) {
-    console.log(error);
-  }
-};
-const dbUserSelect = () => {
-  API.getUsers().then((data) =>
-    data.data.forEach((user) => {
-      if (user.cognitoId === userId) setDbId(user._id);
-      console.log(dbId);
-      
-    })
-  );
-};
+  const checkUser = async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      setUserId(user.username);
+      console.log("Cognito User Info: ", user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const dbUserSelect = () => {
+    API.getUsers().then((data) =>
+      data.data.forEach((user) => {
+        if (user.cognitoId === userId) setDbId(user._id);
+        console.log(dbId);
+      })
+    );
+  };
   //  API.getUser()
   return (
     <ThemeProvider theme={theme}>
@@ -201,9 +204,6 @@ const dbUserSelect = () => {
                 className={classes.title}>
                 Welcome, {userData.email}!
               </Typography>
-              <IconButton color='inherit'>
-                <NotificationsIcon />
-              </IconButton>
             </Toolbar>
           </AppBar>
           <Drawer
@@ -229,23 +229,34 @@ const dbUserSelect = () => {
             <div className={classes.appBarSpacer} />
             <Container maxWidth='lg' className={classes.container}>
               <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <Paper className={classes.paper}>
-                    <Cards />
-                    
-                  </Paper>
-                </Grid>
-                <Grid container spacing={3}>
-                <Grid item xs={12}>
+                <Grid item xs={8}>
                   <Paper className={classes.paper}>
                     <Map trips={tripsData} />
                   </Paper>
                 </Grid>
-                <Grid item xs={2}></Grid>
+                <Grid item xs={4}>
+                  <Paper className={classes.paper}>
+                    <Charts />
+                  </Paper>
+                </Grid>
               </Grid>
+
+              <Grid container spacing={3}>
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}>
+                    <Button />
+                  </Paper>
+                </Grid>
               </Grid>
-              <Box pt={4}>
-                <Copyright />
+              {/* <Grid container spacing={3}>
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}>
+                    <Cards />
+                  </Paper>
+                </Grid>
+              </Grid> */}
+              <Box pt={4} pb={4}>
+                <Footer />
               </Box>
             </Container>
           </main>

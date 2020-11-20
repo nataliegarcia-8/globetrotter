@@ -35,35 +35,49 @@ function TripCard(props) {
   const classes = useStyles();
   return (
     <Grid item xs={12} sm={6} md={4}>
+            
       <Card className={classes.card}>
+                
         <CardMedia className={classes.cardMedia}>
-          {props.icon}
+                    {props.icon}
+                  
         </CardMedia>
+                
         <CardContent className={classes.cardContent}>
+                    
           <Typography gutterBottom variant='h5' component='h2'>
-            {props.title}
+                        {props.title}
+                      
           </Typography>
+                    
           <Typography>
-            {props.paragraph}
+                        {props.paragraph}
+                      
           </Typography>
+                  
         </CardContent>
+                
         <CardActions>
+                    
           <Route
             render={({ history }) => (
               <Button
-              className={classes.link}
-              size='small'
-                primary="Previous Trips"
+                className={classes.link}
+                size='small'
+                primary='Previous Trips'
                 onClick={() => {
                   history.push(props.link);
-                }}
-              >
-              {props.buttonWords}
+                }}>
+                              {props.buttonWords}
+                              
               </Button>
             )}
           />
+                  
         </CardActions>
+              
       </Card>
+          
     </Grid>
   );
 }

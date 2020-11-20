@@ -19,6 +19,9 @@ import clsx from "clsx";
 import ImgGrid from "./Components/ImgGrid";
 import UploadBtn from "./Components/ImgGrid/UploadButton";
 import Title from "../../Components/Title";
+import Footer from "../../Components/Footer";
+import Box from "@material-ui/core/Box";
+import Navigation from "../../Components/Navigation";
 import ItineraryForm from "./Components/ItineraryForm";
 import API from "../../utils/API";
 import { Auth } from "aws-amplify";
@@ -36,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: theme.spacing(6),
+    marginBottom: theme.spacing(2),
   },
   headline: {
     color: "white",
@@ -198,6 +201,10 @@ const checkUser = async () => {
               </Grid>
             </div>
           </main>
+          <Box pt={4} pb={4}>
+            <Navigation />
+            <Footer />
+          </Box>
         </Container>
       </React.Fragment>
     </ThemeProvider>
