@@ -1,16 +1,21 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
 // import tileData from './tileData';
-import image from "../../CurrentTrip/Components/ImgGrid/test2.jpg"
+import image1 from "../../CurrentTrip/Components/ImgGrid/test2.jpg";
+import image2 from "../../CurrentTrip/Components/ImgGrid/test.jpg";
+import image3 from "../../CurrentTrip/Components/ImgGrid/test3.jpg";
+import image4 from "../../CurrentTrip/Components/ImgGrid/test4.jpg";
+import image5 from "../../CurrentTrip/Components/ImgGrid/test5.jpg";
+import image6 from "../../CurrentTrip/Components/ImgGrid/test6.jpg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    overflow: "hidden",
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
@@ -20,30 +25,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 const tileData = [
   {
-    img: image,
-    cols: 1
-    
+    img: image1,
+    cols: 1,
   },
   {
-      img: image,
-      cols: 2
-     
+    img: image2,
+    cols: 2,
   },
   {
-      img: image,
-      cols: 3
+    img: image3,
+    cols: 3,
   },
   {
-      img: image,
-      cols: 1
+    img: image4,
+    cols: 1,
   },
   {
-      img: image,
-      cols: 1
+    img: image5,
+    cols: 1,
   },
   {
-      img: image,
-      cols: 1
+    img: image6,
+    cols: 1,
   },
 ];
 export default function ImageGridList() {

@@ -13,22 +13,22 @@ export default class Dropzone extends Component {
     this.setState({
       open: false,
     });
-  }
+  };
 
   handleSave = (files) => {
     //Saving files to state for further use and closing Modal.
-    console.log(files)
+    console.log(files);
     this.setState({
       files: files,
       open: false,
     });
-  }
+  };
 
   handleOpen = () => {
     this.setState({
       open: true,
     });
-  }
+  };
 
   render() {
     return (
@@ -38,8 +38,10 @@ export default class Dropzone extends Component {
           variant='contained'
           style={{
             color: "white",
-            backgroundColor: "#BB86FC",
-            width: 225,
+            border: "2px solid #BB86FC",
+            backgroundColor: "transparent",
+            width: 150,
+            marginBottom: "7px",
           }}
           startIcon={<CameraAltIcon />}>
           Upload

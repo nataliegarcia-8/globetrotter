@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(3),
   },
   margin: {
-    margin: theme.spacing(5),
+    margin: theme.spacing(0, 5),
   },
   withoutLabel: {
     marginTop: theme.spacing(3),
