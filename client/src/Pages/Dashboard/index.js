@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState, useContext} from "react";
 import clsx from "clsx";
 import {
   createMuiTheme,
@@ -28,6 +28,7 @@ import Charts from "./Components/Cards/";
 import Map from "./Components/Map";
 import Footer from "../../Components/Footer";
 import { Auth } from "aws-amplify";
+import { GlobalUserState } from "../../Components/globalUserState";
 
 import API from "../../utils/API";
 
@@ -135,46 +136,23 @@ export default function Dashboard() {
     },
   });
 
-  const [userId, setUserId] = useState("");
-  const [dbId, setDbId] = useState("");
-  const [userData, setUserData] = useState({});
-  const [tripsData, setTripsData] = useState([]);
+
+
+  
+  const [tripsData,setTripsData] = useState([])
+  const [globalUserData, setGlobalUserData] = useContext(GlobalUserState)
+
 
   // ---------- Use Effect hooks -------------
   useEffect(() => {
-    checkUser();
-  }, []);
+    
+    console.log("global state: ",  globalUserData);
+    
+  }, [globalUserData]);
 
-  useEffect(() => {
-    dbUserSelect();
-  }, [userId]);
-
-  useEffect(() => {
-    API.getUser(dbId).then((data) => {
-      setUserData(data.data);
-      setTripsData(data.data.trips);
-      console.log("user: ", data.data.trips);
-    });
-  }, [dbId]);
+  
 
   // ---------- Check cognito user and then get db user from cognito ID -------------
-  const checkUser = async () => {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      setUserId(user.username);
-      console.log("Cognito User Info: ", user);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const dbUserSelect = () => {
-    API.getUsers().then((data) =>
-      data.data.forEach((user) => {
-        if (user.cognitoId === userId) setDbId(user._id);
-        console.log(dbId);
-      })
-    );
-  };
   //  API.getUser()
   return (
     <ThemeProvider theme={theme}>
@@ -202,7 +180,7 @@ export default function Dashboard() {
                 color='inherit'
                 noWrap
                 className={classes.title}>
-                Welcome, {userData.email}!
+                Welcome, {globalUserData.email}!
               </Typography>
             </Toolbar>
           </AppBar>
@@ -230,14 +208,12 @@ export default function Dashboard() {
             <Container maxWidth='lg' className={classes.container}>
               <Grid container spacing={3}>
                 <Grid item xs={8}>
-                  <Paper className={classes.paper}>
-                    <Map trips={tripsData} />
+                <Paper className={classes.paper}>
+                    <Map trips={globalUserData.trips} />
                   </Paper>
                 </Grid>
                 <Grid item xs={4}>
-                  <Paper className={classes.paper}>
                     <Charts />
-                  </Paper>
                 </Grid>
               </Grid>
 

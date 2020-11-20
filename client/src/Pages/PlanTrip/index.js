@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -18,13 +18,15 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 
 import API from "../../utils/API";
-import { Auth } from "aws-amplify";
+
 import Geocode from "react-geocode";
 import Copyright from "../../Components/Copyright";
 import Booking from "./Components/Booking";
 import SubmitButton from "./Components/SubmitButton";
 import Location from "./Components/Location";
 import Dropdown from "./Components/Dropdown";
+import { GlobalUserState } from "../../Components/globalUserState";
+
 import Footer from "../../Components/Footer";
 import Navigation from "../../Components/Navigation";
 
@@ -86,21 +88,14 @@ export default function PlanTrip() {
   // ---------- States -------------
 
   const [tripState, setTripState] = useState(initialTripState);
-  const [userId, setUserId] = useState("");
-  const [dbId, setDbId] = useState("");
   const [coordinatesState, setCoordinates] = useState(coordinates);
   const [departureDate, setDepartureDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(new Date());
+  const [globalUserData, setGlobalUserData] = useContext(GlobalUserState)
 
   // ---------- Use Effect hooks -------------
-  useEffect(() => {
-    checkUser();
-  }, []);
-
-  useEffect(() => {
-    dbUserSelect();
-  }, [userId]);
-
+ 
+  console.log(globalUserData);
   useEffect(() => {
     getLatLong(tripState);
   }, [tripState]);
@@ -118,26 +113,6 @@ export default function PlanTrip() {
       (error) => {
         console.error(error);
       }
-    );
-  };
-
-  // ---------- Check cognito user and then get db user from cognito ID -------------
-  const checkUser = async () => {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      setUserId(user.username);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const dbUserSelect = () => {
-    API.getUsers().then((data) =>
-      data.data.forEach((user) => {
-        if (user.cognitoId === userId) setDbId(user._id);
-
-        console.log();
-        API.getUser(dbId).then((data) => console.log(data));
-      })
     );
   };
 
@@ -169,14 +144,13 @@ export default function PlanTrip() {
 
   // ---------- Submit button handler -------------
   const handleSubmit = () => {
-    API.saveTrip(dbId, { ...tripState, ...coordinatesState });
+    API.saveTrip(globalUserData._id, { ...tripState, ...coordinatesState });
     console.log("submit");
-    console.log(dbId);
-    console.log(tripState);
+   
   };
-
-  const reRoute = () => {};
-  console.log(tripState, dbId);
+  
+  
+  console.log(tripState, globalUserData._id);
 
   return (
     <ThemeProvider theme={theme}>

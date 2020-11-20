@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Auth, Hub } from "aws-amplify";
 import PastTrip from "./Pages/PastTrip";
 import CurrentTrip from "./Pages/CurrentTrip";
+import UserState from "./Components/globalUserState";
 
 function App() {
   const [loginState, setLoginState] = useState("signedOut");
@@ -17,19 +18,24 @@ function App() {
   useEffect(() => {
     checkUser();
     setAuthListener();
-  }, [loginState]);
+  }, []);
 
   const checkUser = async () => {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      setUser(user);
-      console.log("user: ", user);
-      console.log("signedIn");
-      setLoginState("signedIn");
-    } catch (error) {
-      console.log(error);
-      console.log("signedOut");
-      setLoginState("signedOut");
+    if (user === null){
+
+      try {
+        const user = await Auth.currentAuthenticatedUser();
+        setUser(user);
+        console.log("user: ", user);
+        console.log("signedIn");
+        setLoginState("signedIn");
+      } catch (error) {
+        console.log(error);
+        
+      }
+    } else {
+      
+      return;
     }
   };
 
@@ -66,10 +72,26 @@ function App() {
         <Router>
           <div>
             <Switch>
-              <Route exact path='/' component={Dashboard} />
-              <Route exact path='/plantrip' component={PlanTrip} />
-              <Route exact path='/pasttrip' component={PastTrip} />
-              <Route exact path='/currenttrip' component={CurrentTrip} />
+              <Route exact path="/">
+                <UserState>
+                  <Dashboard />
+                </UserState>
+              </Route>
+              <Route exact path="/plantrip">
+                <UserState>
+                  <PlanTrip />
+                </UserState>
+              </Route>
+              <Route exact path="/pasttrip">
+                <UserState>
+                  <PastTrip />
+                </UserState>
+              </Route>
+              <Route exact path="/currenttrip">
+                <UserState>
+                  <CurrentTrip />
+                </UserState>
+              </Route>
               <Route component={NoMatch} />
             </Switch>
           </div>
