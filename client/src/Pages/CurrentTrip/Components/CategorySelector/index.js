@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -15,6 +15,10 @@ import TextField from "@material-ui/core/TextField";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Grid from "@material-ui/core/Grid";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
+import API from "../../../../utils/API";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,12 +41,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CategorySelector() {
+export default function CategorySelector(props) {
   const classes = useStyles();
-  const [category, setcategory] = React.useState("");
-  const [categoryName, setcategoryName] = React.useState("");
+  const [category, setcategory] = useState("");
+  const [categoryName, setcategoryName] = useState("");
+  const [currentBudget, setCurrentBudget] = useState(props.currentTrip.budget);
 
-  const [open, setOpen] = React.useState(false);
+
+  const [open, setOpen] = useState(false);
 
   const handleChange = (event) => {
     setcategory(event.target.value);
@@ -75,14 +81,23 @@ export default function CategorySelector() {
     setOpen(true);
   };
 
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     amount: "",
   });
 
   const handleInput = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
-  console.log(categoryName, values.amount);
+  const handlebudgetSubmit = async () => {
+    await API.saveExpense(props.currentTrip._id, {expense: parseInt(values.amount), category: categoryName})
+    setValues({amount: ""})
+    setcategory("")
+    setCurrentBudget(props.currentTrip.budget);
+
+  };
+  console.log("current: ", props.currentTrip.budget);
+  console.log(props.currentTrip._id, {expense: parseInt(values.amount), category: categoryName});
+
   return (
     <div className={classes.root}>
       <Grid item xs={12} md={4} lg={4}>
@@ -123,31 +138,7 @@ export default function CategorySelector() {
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={12} md={4} lg={4} className={classes.margin}>
-        <FormControl className={classes.formControl}>
-          <InputLabel id='demo-controlled-open-select-label'>
-            Category
-          </InputLabel>
-          <Select
-            labelId='demo-controlled-open-select-label'
-            id='demo-controlled-open-select'
-            open={open}
-            onClose={handleClose}
-            onOpen={handleOpen}
-            value={category}
-            onChange={handleChange}>
-            <MenuItem value=''>
-              <em>Select one</em>
-            </MenuItem>
-            <MenuItem value={10}>Food</MenuItem>
-            <MenuItem value={20}>Activities</MenuItem>
-            <MenuItem value={30}>Flight</MenuItem>
-            <MenuItem value={40}>Hotel</MenuItem>
-            <MenuItem value={50}>Transportation</MenuItem>
-            <MenuItem value={60}>Misc</MenuItem>
-          </Select>
-        </FormControl>
-      </Grid>
+      
       <Grid item xs={12} md={4} lg={4} className={classes.margin}>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor='standard-adornment-amount'>Amount</InputLabel>
@@ -159,6 +150,12 @@ export default function CategorySelector() {
           />
         </FormControl>
       </Grid>
+      <Grid container justify="center">
+          <Fab variant="extended" aria-label="add" onClick={handlebudgetSubmit}>
+            <AddIcon />
+            Add expense
+          </Fab>
+        </Grid>
     </div>
   );
 }

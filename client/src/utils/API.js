@@ -21,6 +21,10 @@ export default {
     console.log(tripData, id);
     return axios.post("/api/users/" + id, tripData);
   },
+  updateTrip: function(id, tripData) {
+    console.log(tripData, id);
+    return axios.put("/api/trips/" + id, tripData);
+  },
   getTrip: function(id) {
     return axios.get("/api/trips/" + id);
   },

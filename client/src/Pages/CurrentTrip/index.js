@@ -26,6 +26,7 @@ import ItineraryForm from "./Components/ItineraryForm";
 import API from "../../utils/API";
 import { Auth } from "aws-amplify";
 import { GlobalUserState } from "../../Components/globalUserState";
+import { set } from "date-fns";
 
 const useStyles = makeStyles((theme) => ({
   jumbotron: {
@@ -116,6 +117,10 @@ export default function CurrentTrip() {
   const [trips, setTrips] = useState([]);
   const [currentTrip, setCurrentTrip] = useState({});
   const [activity, setActivity] = useState(initialActivityState);
+  const [expensesTotal, setExpensesTotal] = useState(0);
+  const [activities, setActivities] = useState([]);
+  const [curretnBudget, setCurrentBudget] = useState(0);
+
 
   useEffect(() => {
     console.log("global state: ", globalUserData);
@@ -129,8 +134,17 @@ export default function CurrentTrip() {
 
   useEffect(() => {
     console.log("current: ", currentTrip);
-    
+    subtractExpensesFromBudget(currentTrip.expenses);
+    setActivities(currentTrip.activities);
+ 
   }, [currentTrip]);
+
+  useEffect(() => {
+    console.log("expenses: ", expensesTotal);
+    console.log("budget: ", currentTrip.budget);
+    setCurrentBudget(currentTrip.budget - expensesTotal)
+    
+  }, [expensesTotal]);
 
   const findCurrentTrip = () => {
     trips.forEach((trip) => {
@@ -145,10 +159,24 @@ export default function CurrentTrip() {
 
   const handleActivitySubmit = () => {
     API.saveActivity(currentTrip._id, activity);
+    setActivities((state) => [...state, activity]);
   };
+
   const handleActivityInputChange = ({ target: { name, value } }) =>
     setActivity({ ...activity, [name]: value });
   console.log(activity, currentTrip._id);
+
+  const subtractExpensesFromBudget = async (expenses) => {
+    if (expenses) {
+      let count = 0;
+      await expenses.forEach((expense) => {
+        count = count + expense.expense;
+        console.log("total:", count, "expense: ", expense.expense);
+      });
+      setExpensesTotal(count);
+      console.log("total expense: ", count);
+    }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -167,6 +195,7 @@ export default function CurrentTrip() {
             >
               {currentTrip.city}
             </Typography>
+
             <Typography
               className={classes.dates}
               variant="h4"
@@ -191,7 +220,7 @@ export default function CurrentTrip() {
                     <ItineraryForm
                       handleSubmit={handleActivitySubmit}
                       handleOnChange={handleActivityInputChange}
-                      activities={currentTrip.activities}
+                      activities={activities}
                     />
                   </Paper>
                 </Grid>
@@ -199,10 +228,13 @@ export default function CurrentTrip() {
                   <Paper className={fixedHeightPaper}>
                     <div>
                       {" "}
-                      <Budget />{" "}
+                      <Budget
+                        
+                        budget={curretnBudget}
+                      />{" "}
                     </div>
-                    <CategorySelector />
-                    <BudgetTable />
+                    <CategorySelector currentTrip={currentTrip} />
+                    <BudgetTable expenses={currentTrip.expenses} />
                   </Paper>
                 </Grid>
                 <Grid item xs={12}>

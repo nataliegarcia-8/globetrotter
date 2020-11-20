@@ -13,6 +13,7 @@ router
   .route("/:id")
   .get(tripsController.findById)
   .post(activitiesController.create)
+  
   .put(tripsController.update)
   .delete(tripsController.remove);
 

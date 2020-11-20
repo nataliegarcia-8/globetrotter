@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import clsx from "clsx";
 import {
   createMuiTheme,
@@ -26,6 +26,7 @@ import Copyright from "../../Components/Copyright";
 import PhotoGrid from './Components/photoGrid';
 import { Auth } from "aws-amplify";
 import API from "../../utils/API";
+import { GlobalUserState } from "../../Components/globalUserState";
 
 
 const drawerWidth = 240;
@@ -176,49 +177,22 @@ export default function Dashboard() {
 
 
 
-  const [userId, setUserId] = useState("");
-  const [dbId, setDbId] = useState("");
-  const [userData, setUserData] = useState({})
-  const [tripsData, setTripsData] = useState([])
-
+  const [globalUserData, setGlobalUserData] = useContext(GlobalUserState);
+  const [trips, setTrips] = useState([]);
 
   // ---------- Use Effect hooks -------------
   useEffect(() => {
-    checkUser();
-  }, []);
-
+    console.log("global state: ", globalUserData);
+    setTrips(globalUserData.trips);
+  }, [globalUserData]);
+  
   useEffect(() => {
-    dbUserSelect();
-  }, [userId]);
-
-  useEffect(() => {
-    API.getUser(dbId).then((data) => {
-      setUserData(data.data)
-      setTripsData(data.data.trips)
-      console.log("user: ", data.data.trips)
-    });
-  }, [dbId]);
+    console.log("trips: ", trips);
+    
+  }, [trips]);
 
 
-  // ---------- Check cognito user and then get db user from cognito ID -------------
-  const checkUser = async () => {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      setUserId(user.username);
-      console.log("Cognito User Info: ", user);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const dbUserSelect = () => {
-    API.getUsers().then((data) =>
-      data.data.forEach((user) => {
-        if (user.cognitoId === userId) setDbId(user._id);
-        console.log(dbId);
-
-      })
-    );
-  };
+  
   //  API.getUser()
   return (
     <ThemeProvider theme={theme}>
