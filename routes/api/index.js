@@ -10,6 +10,7 @@ const activitiesRoutes = require("./activities");
 // Book routes
 router.use("/users", usersRoutes);
 router.use("/trips", tripsRoutes);
+router.use("/img", require("./photos"))
 router.use("/expenses", expensesRoutes);
 router.use("/activities", activitiesRoutes);
 

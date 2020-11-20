@@ -4,29 +4,27 @@ import Button from "@material-ui/core/Button";
 import CameraAltIcon from "@material-ui/icons/CameraAlt";
 
 export default class Dropzone extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-      files: [],
-    };
-  }
+  state = {
+    open: false,
+    files: [],
+  };
 
-  handleClose() {
+  handleClose = () => {
     this.setState({
       open: false,
     });
   }
 
-  handleSave(files) {
+  handleSave = (files) => {
     //Saving files to state for further use and closing Modal.
+    console.log(files)
     this.setState({
       files: files,
       open: false,
     });
   }
 
-  handleOpen() {
+  handleOpen = () => {
     this.setState({
       open: true,
     });
@@ -36,7 +34,7 @@ export default class Dropzone extends Component {
     return (
       <div>
         <Button
-          onClick={this.handleOpen.bind(this)}
+          onClick={this.handleOpen}
           variant='contained'
           style={{
             color: "white",
@@ -48,11 +46,11 @@ export default class Dropzone extends Component {
         </Button>
         <DropzoneDialog
           open={this.state.open}
-          onSave={this.handleSave.bind(this)}
+          onSave={this.handleSave}
           acceptedFiles={["image/jpeg", "image/png", "image/bmp"]}
           showPreviews={true}
           maxFileSize={5000000}
-          onClose={this.handleClose.bind(this)}
+          onClose={this.handleClose}
         />
       </div>
     );
