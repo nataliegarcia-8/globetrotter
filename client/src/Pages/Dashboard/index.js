@@ -208,15 +208,12 @@ export default function Dashboard() {
             <Container maxWidth='lg' className={classes.container}>
               <Grid container spacing={3}>
                 <Grid item xs={8}>
-                  <Paper className={classes.paper}>
-                    <Map trips={tripsData} />
+                <Paper className={classes.paper}>
+                    <Map trips={globalUserData.trips} />
                   </Paper>
                 </Grid>
                 <Grid item xs={4}>
-                  <Paper className={classes.paper}>
-                    <Map trips={globalUserData.trips} />
                     <Charts />
-                  </Paper>
                 </Grid>
               </Grid>
 
