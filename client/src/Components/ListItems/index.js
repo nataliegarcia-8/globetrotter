@@ -10,7 +10,7 @@ import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
 import PersonIcon from "@material-ui/icons/Person";
 import { Auth } from "aws-amplify";
 import { Route, Redirect, Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 export const mainListItems = (
@@ -19,7 +19,7 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText primary='Dashboard' />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
@@ -28,7 +28,7 @@ export const mainListItems = (
       <Route
         render={({ history }) => (
           <ListItemText
-            primary="Previous Trips"
+            primary='Previous Trips'
             onClick={() => {
               history.push("/pasttrip");
             }}
@@ -43,7 +43,7 @@ export const mainListItems = (
       <Route
         render={({ history }) => (
           <ListItemText
-            primary="Current Trip"
+            primary='Current Trip'
             onClick={() => {
               history.push("/currenttrip");
             }}
@@ -58,7 +58,7 @@ export const mainListItems = (
       <Route
         render={({ history }) => (
           <ListItemText
-            primary="Plan Trip"
+            primary='Plan Trip'
             onClick={() => {
               history.push("/plantrip");
             }}
@@ -76,18 +76,17 @@ export const secondaryListItems = (
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
-      <ListItemText primary="Account Info" />
+      <ListItemText primary='Account Info' />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <ExitToAppIcon />
       </ListItemIcon>
       <ListItemText
-        primary="Logout"
+        primary='Logout'
         onClick={() => {
           Auth.signOut();
-        }}
-      ></ListItemText>
+        }}></ListItemText>
     </ListItem>
   </div>
 );

@@ -8,6 +8,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 import {
   makeStyles,
   createMuiTheme,
@@ -26,6 +27,8 @@ import Location from "./Components/Location";
 import Dropdown from "./Components/Dropdown";
 import { GlobalUserState } from "../../Components/globalUserState";
 
+import Footer from "../../Components/Footer";
+import Navigation from "../../Components/Navigation";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -97,7 +100,6 @@ export default function PlanTrip() {
     getLatLong(tripState);
   }, [tripState]);
 
-
   // ----------Goecoder function for getting lat and long -------------
   Geocode.setApiKey("AIzaSyAayUREzm6gydcCBnHzTXcnN4PsneoLays");
 
@@ -125,7 +127,6 @@ export default function PlanTrip() {
     setTripState({ ...tripState, return: value });
   };
 
-
   // ---------- City and State Input handler -------------
   const valueSelected = (val) => {
     if (!val) {
@@ -137,11 +138,9 @@ export default function PlanTrip() {
     }
   };
 
-
   // ---------- other input handler - mainly for budget  -------------
   const handleInputChange = ({ target: { name, value } }) =>
     setTripState({ ...tripState, [name]: value });
-
 
   // ---------- Submit button handler -------------
   const handleSubmit = () => {
@@ -162,17 +161,16 @@ export default function PlanTrip() {
           <div className={classes.image}>
             <Typography
               className={classes.headline}
-              component="h1"
-              variant="h2"
-              align="center"
-              color="textPrimary"
-              gutterBottom
-            >
+              component='h1'
+              variant='h2'
+              align='center'
+              color='textPrimary'
+              gutterBottom>
               Where to Next?
             </Typography>
           </div>
-          <Container maxWidth="sm"></Container>
-          <Container className={classes.booking} maxWidth="md">
+          <Container maxWidth='sm'></Container>
+          <Container className={classes.booking} maxWidth='md'>
             {/* End hero unit */}
             <Booking
               handleDepartDateChange={handleDepartDateChange}
@@ -180,8 +178,7 @@ export default function PlanTrip() {
               handleInputChange={handleInputChange}
               budget={tripState.budget}
               return={returnDate}
-              departure={departureDate}
-            >
+              departure={departureDate}>
               <Dropdown
                 valueChange={valueSelected}
                 handleInputChange={handleInputChange}
@@ -190,14 +187,10 @@ export default function PlanTrip() {
             <SubmitButton handleSubmit={handleSubmit} />
           </Container>
         </main>
-        {/* Footer */}
-        <footer className={classes.footer}>
-          <Typography variant="h6" align="center" component="p">
-            Your Next Adventure Awaits
-          </Typography>
-          <Copyright />
-        </footer>
-        {/* End footer */}
+        <Box pt={4} pb={4}>
+          <Navigation />
+          <Footer />
+        </Box>
       </React.Fragment>
     </ThemeProvider>
   );

@@ -14,6 +14,6 @@ router
   .post(tripsController.create)
   .get(usersController.findById)
   .put(usersController.update)
-  .delete(usersController.remove);
+  .delete(usersController.remove); 
 
 module.exports = router;

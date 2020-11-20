@@ -5,8 +5,6 @@ const tripsRoutes = require("./trips");
 const expensesRoutes = require("./expenses");
 const activitiesRoutes = require("./activities");
 
-
-
 // Book routes
 router.use("/users", usersRoutes);
 router.use("/trips", tripsRoutes);

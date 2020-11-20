@@ -125,9 +125,34 @@ export default function CategorySelector() {
       </Grid>
       <Grid item xs={12} md={4} lg={4} className={classes.margin}>
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel>
+          <InputLabel id='demo-controlled-open-select-label'>
+            Category
+          </InputLabel>
+          <Select
+            labelId='demo-controlled-open-select-label'
+            id='demo-controlled-open-select'
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            value={category}
+            onChange={handleChange}>
+            <MenuItem value=''>
+              <em>Select one</em>
+            </MenuItem>
+            <MenuItem value={10}>Food</MenuItem>
+            <MenuItem value={20}>Activities</MenuItem>
+            <MenuItem value={30}>Flight</MenuItem>
+            <MenuItem value={40}>Hotel</MenuItem>
+            <MenuItem value={50}>Transportation</MenuItem>
+            <MenuItem value={60}>Misc</MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item xs={12} md={4} lg={4} className={classes.margin}>
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor='standard-adornment-amount'>Amount</InputLabel>
           <Input
-            id="standard-adornment-amount"
+            id='standard-adornment-amount'
             value={values.amount}
             onChange={handleInput("amount")}
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
