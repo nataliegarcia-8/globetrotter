@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(3),
   },
   margin: {
-    marginLeft: theme.spacing(5),
+    margin: theme.spacing(0, 5),
   },
   withoutLabel: {
     marginTop: theme.spacing(3),
@@ -38,6 +38,16 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
+  },
+  button: {
+    backgroundColor: "transparent",
+    border: "2px solid #BB86FC",
+    color: "white",
+    margin: theme.spacing(3),
+    "&:hover": {
+      backgroundColor: "#BB90FF",
+      color: "#121212",
+    },
   },
 }));
 
@@ -102,60 +112,68 @@ export default function CategorySelector(props) {
     <div className={classes.root}>
       <Grid item xs={12} md={4} lg={4}>
         <FormControl className={classes.formControl}>
-          <InputLabel id="demo-controlled-open-select-label">
+          <InputLabel id='demo-controlled-open-select-label'>
             Category
           </InputLabel>
           <Select
-            labelId="demo-controlled-open-select-label"
-            id="demo-controlled-open-select"
+            labelId='demo-controlled-open-select-label'
+            id='demo-controlled-open-select'
             open={open}
             onClose={handleClose}
             onOpen={handleOpen}
             value={category}
-            onChange={handleChange}
-          >
-            <MenuItem value="">
+            fullWidth
+            onChange={handleChange}>
+            <MenuItem value=''>
               <em>Select one</em>
             </MenuItem>
-            <MenuItem name="food" value={10}>
+            <MenuItem name='food' value={10}>
               Food
             </MenuItem>
-            <MenuItem name="activities" value={20}>
+            <MenuItem name='activities' value={20}>
               Activities
             </MenuItem>
-            <MenuItem name="flight" value={30}>
+            <MenuItem name='flight' value={30}>
               Flight
             </MenuItem>
-            <MenuItem name="hotel" value={40}>
+            <MenuItem name='hotel' value={40}>
               Hotel
             </MenuItem>
-            <MenuItem name="transport" value={50}>
+            <MenuItem name='transport' value={50}>
               Transportation
             </MenuItem>
-            <MenuItem name="misc" value={60}>
+            <MenuItem name='misc' value={60}>
               Misc
             </MenuItem>
           </Select>
         </FormControl>
       </Grid>
       
+
       <Grid item xs={12} md={4} lg={4} className={classes.margin}>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor='standard-adornment-amount'>Amount</InputLabel>
           <Input
             id='standard-adornment-amount'
             value={values.amount}
+            fullWidth
             onChange={handleInput("amount")}
-            startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            startAdornment={<InputAdornment position='start'>$</InputAdornment>}
           />
         </FormControl>
       </Grid>
-      <Grid container justify="center">
-          <Fab variant="extended" aria-label="add" onClick={handlebudgetSubmit}>
-            <AddIcon />
-            Add expense
-          </Fab>
-        </Grid>
+      
+      <Grid container justify='center'>
+        <Fab
+          variant='extended'
+          aria-label='add'
+          size='small'
+          className={classes.button}>
+            onClick={handlebudgetSubmit}
+          <AddIcon />
+          Add Expense
+        </Fab>
+      </Grid>
     </div>
   );
 }

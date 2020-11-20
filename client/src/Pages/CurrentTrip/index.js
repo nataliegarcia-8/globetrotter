@@ -134,9 +134,12 @@ export default function CurrentTrip() {
 
   useEffect(() => {
     console.log("current: ", currentTrip);
+<<<<<<< HEAD
     subtractExpensesFromBudget(currentTrip.expenses);
     setActivities(currentTrip.activities);
  
+=======
+>>>>>>> 32a562d5c5d908c34bb9eaf0ab222c0a15f6e7af
   }, [currentTrip]);
 
   useEffect(() => {
@@ -184,36 +187,34 @@ export default function CurrentTrip() {
         <CssBaseline />
         {/* Hero unit */}
         <div className={classes.jumbotron}>
-          <Container maxWidth="sm">
+          <Container maxWidth='sm'>
             <Typography
               className={classes.headline}
-              component="h1"
-              variant="h2"
-              align="center"
-              color="textPrimary"
-              gutterBottom
-            >
+              component='h1'
+              variant='h2'
+              align='center'
+              color='textPrimary'
+              gutterBottom>
               {currentTrip.city}
             </Typography>
 
             <Typography
               className={classes.dates}
-              variant="h4"
-              color="inherit"
-              noWrap
-            >
+              variant='h4'
+              color='inherit'
+              noWrap>
               {currentTrip.departure}
             </Typography>
           </Container>
         </div>
-        <Container maxWidth="lg">
+        <Container maxWidth='lg'>
           <Steps />
           <main className={classes.layout}>
             <div className={classes.root}>
               <Grid container spacing={3}>
                 <Grid item xs={12} md={8} lg={9}>
                   <Paper className={fixedHeightPaper}>
-                    <Typography component="h1" variant="h4" align="left">
+                    <Typography component='h1' variant='h4' align='left'>
                       Trip Itinerary
                     </Typography>
 

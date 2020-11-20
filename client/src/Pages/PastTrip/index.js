@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
-import SavedItinerary from './Components/savedItinerary';
+import SavedItinerary from "./Components/savedItinerary";
 import Box from "@material-ui/core/Box";
 // import AppBar from "@material-ui/core/AppBar";
 // import Toolbar from "@material-ui/core/Toolbar";
@@ -22,12 +22,12 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems } from "./Components/sidebar/listItem";
-import Copyright from "../../Components/Copyright";
-import PhotoGrid from './Components/photoGrid';
+import Footer from "../../Components/Footer";
+import Navigation from "../../Components/Navigation";
+import PhotoGrid from "./Components/photoGrid";
 import { Auth } from "aws-amplify";
 import API from "../../utils/API";
 import { GlobalUserState } from "../../Components/globalUserState";
-
 
 const drawerWidth = 240;
 
@@ -128,29 +128,28 @@ const useStyles = makeStyles((theme) => ({
     height: 500,
   },
   buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
+    display: "flex",
+    justifyContent: "flex-end",
   },
   button: {
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
   },
   dates: {
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
   },
   // root: {
   //     flexGrow: 1,
   // },
   budget: {
     marginTop: theme.spacing(5),
-    display: 'flex',
-    justifyContent: 'center',
-
+    display: "flex",
+    justifyContent: "center",
   },
   center: {
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
   },
   // side: {
   //   marginRight: theme.spacing(8),
@@ -159,7 +158,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
-
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -226,10 +224,8 @@ export default function Dashboard() {
               </IconButton>
             </div>
             <div className={classes.toolbarIcon}>
-              <IconButton 
-               onClick={handleDrawerClose}>
-                <ChevronLeftIcon 
-                 color='#BB86FC'/>
+              <IconButton onClick={handleDrawerClose}>
+                <ChevronLeftIcon color='#BB86FC' />
               </IconButton>
             </div>
             <Divider />
@@ -247,23 +243,23 @@ export default function Dashboard() {
                   color='textPrimary'
                   gutterBottom>
                   City
-            </Typography>
+                </Typography>
                 <Typography
                   className={classes.dates}
                   variant='h4'
                   color='inherit'
                   noWrap>
                   MM/DD/YY - MM/DD/YY
-            </Typography>
+                </Typography>
               </Container>
             </div>
             <Container maxWidth='lg' className={classes.container}>
               <Grid container spacing={3}>
                 <Grid item xs={12} md={6} lg={6}>
                   <Paper className={fixedHeightPaper}>
-                    <Typography component="h1" variant="h4" align="left">
+                    <Typography component='h1' variant='h4' align='left'>
                       Trip Itinerary
-    </Typography>
+                    </Typography>
                     <SavedItinerary />
                   </Paper>
                 </Grid>
@@ -274,7 +270,8 @@ export default function Dashboard() {
                 </Grid>
               </Grid>
               <Box pt={4}>
-                <Copyright />
+                <Navigation />
+                <Footer />
               </Box>
             </Container>
           </main>
