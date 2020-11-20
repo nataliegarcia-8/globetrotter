@@ -207,12 +207,12 @@ export default function Dashboard() {
             <div className={classes.appBarSpacer} />
             <Container maxWidth='lg' className={classes.container}>
               <Grid container spacing={3}>
-                <Grid item xs={8}>
+                <Grid item xs={12} md={8} lg={8}>
                 <Paper className={classes.paper}>
                     <Map trips={globalUserData.trips} />
                   </Paper>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} md={4} lg={4}>
                     <Charts />
                 </Grid>
               </Grid>

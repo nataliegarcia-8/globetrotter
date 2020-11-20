@@ -12,12 +12,13 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     color: "white",
     backgroundColor: "#BB86FC",
+    padding: theme.spacing(3),
     "&:hover": {
       backgroundColor: "#BB90FF",
     },
-    width: "325px",
-    height: "75px",
-    fontSize: "18px",
+    // maxWidth: "325px",
+    // height: "75px",
+    // fontSize: "18px",
   },
   center: {
     display: "flex",
@@ -33,10 +34,11 @@ export default function IconLabelButtons() {
   return (
     <div className={classes.center}>
       <Grid container spacing={3}>
-      <Grid item xs={12} md={4} lg={4}>
+      <Grid item xs={12} md={3} lg={4}>
       <Route
         render={({ history }) => (
           <Button
+          fullWidth
             variant='contained'
             color='primary'
             size='large'
@@ -50,10 +52,11 @@ export default function IconLabelButtons() {
         )}
       />
       </Grid>
-      <Grid item xs={12} md={4} lg={4}>
+      <Grid item xs={12} md={3} lg={4}>
       <Route
         render={({ history }) => (
           <Button
+          fullWidth
             variant='contained'
             color='primary'
             size='large'
@@ -67,10 +70,11 @@ export default function IconLabelButtons() {
         )}
       />
 </Grid>
-<Grid item xs={12} md={4} lg={4}>
+<Grid item xs={12} md={3} lg={4}>
       <Route
         render={({ history }) => (
           <Button
+          fullWidth
             variant='contained'
             color='primary'
             size='large'
@@ -79,7 +83,7 @@ export default function IconLabelButtons() {
             }}
             className={classes.button}
             startIcon={<SpeakerNotesIcon />}>
-            Plan Trip
+            Plan A Trip
           </Button>
         )}
       />
