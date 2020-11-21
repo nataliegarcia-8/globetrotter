@@ -23,6 +23,7 @@ export default function MainListItems(props) {
             <RoomIcon />
           </ListItemIcon>
 
+
           <ListItemText
             primary={trip.city + ", " + trip.state}
             value={trip._id}
