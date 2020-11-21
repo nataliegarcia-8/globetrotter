@@ -39,5 +39,38 @@ export default function MainListItems(props) {
       return;
     }
   };
-  return <div>{renderPastTripList()}</div>;
+  return <div>
+    <ListItem button>
+          <ListItemIcon
+            style={{
+              color: "#BB86FC",
+            }}
+          >
+            <RoomIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="City, State"
+          />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon
+            
+          >
+            <RoomIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="City, State"
+          />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon
+            
+          >
+            <RoomIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="City, State"
+          />
+        </ListItem>
+  </div>;
 }

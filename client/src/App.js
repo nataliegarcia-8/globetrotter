@@ -16,7 +16,10 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    checkUser();
+    if (loginState === "signedOut"){
+
+      checkUser();
+    }
     setAuthListener();
   }, []);
 
