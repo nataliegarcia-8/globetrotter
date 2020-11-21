@@ -4,16 +4,9 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import clsx from "clsx";
-import IconButton from "@material-ui/core/IconButton";
 import Input from "@material-ui/core/Input";
-import FilledInput from "@material-ui/core/FilledInput";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import TextField from "@material-ui/core/TextField";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
+
 import Grid from "@material-ui/core/Grid";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
@@ -22,20 +15,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
-    marginBottom: theme.spacing(3),
-  },
-  margin: {
-    margin: theme.spacing(0, 5),
+    marginBottom: theme.spacing(1),
   },
   withoutLabel: {
     marginTop: theme.spacing(3),
   },
-  // textField: {
-  //   width: '25ch',
-  // },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    width: 125,
   },
   button: {
     backgroundColor: "transparent",
@@ -97,7 +84,8 @@ export default function CategorySelector() {
   console.log(categoryName, values.amount);
   return (
     <div className={classes.root}>
-      <Grid item xs={12} md={4} lg={4}>
+      <Grid container spacing={3}>
+      <Grid item xs={6} md={6} lg={6}>
         <FormControl className={classes.formControl}>
           <InputLabel id='demo-controlled-open-select-label'>
             Category
@@ -135,9 +123,9 @@ export default function CategorySelector() {
           </Select>
         </FormControl>
       </Grid>
-
-      <Grid item xs={12} md={4} lg={4} className={classes.margin}>
-        <FormControl className={classes.formControl}>
+      <Grid item xs={6} md={6} lg={6} className={classes.margin}>
+        <FormControl 
+        className={classes.formControl}>
           <InputLabel htmlFor='standard-adornment-amount'>Amount</InputLabel>
           <Input
             id='standard-adornment-amount'
@@ -155,8 +143,9 @@ export default function CategorySelector() {
           size='small'
           className={classes.button}>
           <AddIcon />
-          Add Expense
+          add Expense
         </Fab>
+      </Grid>
       </Grid>
     </div>
   );

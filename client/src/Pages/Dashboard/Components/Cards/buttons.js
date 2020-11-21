@@ -5,16 +5,18 @@ import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
 import CardTravelIcon from "@material-ui/icons/CardTravel";
 import EventIcon from "@material-ui/icons/Event";
 import { Route, Redirect, Link } from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
     color: "white",
     backgroundColor: "#BB86FC",
+    padding: theme.spacing(3),
     "&:hover": {
       backgroundColor: "#BB90FF",
     },
-    width: "325px",
+    // maxWidth: "325px",
     height: "75px",
     fontSize: "18px",
   },
@@ -31,9 +33,12 @@ export default function IconLabelButtons() {
 
   return (
     <div className={classes.center}>
+      <Grid container spacing={3}>
+      <Grid item xs={12} md={4} lg={4}>
       <Route
         render={({ history }) => (
           <Button
+          fullWidth
             variant='contained'
             color='primary'
             size='large'
@@ -46,10 +51,12 @@ export default function IconLabelButtons() {
           </Button>
         )}
       />
-
+      </Grid>
+      <Grid item xs={12} md={4} lg={4}>
       <Route
         render={({ history }) => (
           <Button
+          fullWidth
             variant='contained'
             color='primary'
             size='large'
@@ -62,10 +69,12 @@ export default function IconLabelButtons() {
           </Button>
         )}
       />
-
+</Grid>
+<Grid item xs={12} md={4} lg={4}>
       <Route
         render={({ history }) => (
           <Button
+          fullWidth
             variant='contained'
             color='primary'
             size='large'
@@ -74,10 +83,12 @@ export default function IconLabelButtons() {
             }}
             className={classes.button}
             startIcon={<SpeakerNotesIcon />}>
-            Plan Trip
+            Plan A Trip
           </Button>
         )}
       />
+    </Grid>
+    </Grid>
     </div>
   );
 }
