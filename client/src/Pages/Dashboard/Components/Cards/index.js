@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState, useContext } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 
@@ -21,6 +21,7 @@ import CardInfo from "./cards";
 import { Typography } from "@material-ui/core";
 import API from "../../../../utils/API.js";
 import ProgressCircle from "../../Components/ProgressCircle";
+import { GlobalUserState } from "../../../../Components/globalUserState.js";
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -122,13 +123,26 @@ export default function PlanTrip(props) {
 
   const [statesBeenTo, setStatesBeenTo] = useState(0);
 
+  const [globalUserData, setGlobalUserData] = useContext(GlobalUserState);
+  const [trips, setTrips] = useState([]);
+
+
+  useEffect(() => {
+    console.log("global state: ", globalUserData);
+    setTrips(globalUserData.trips);
+  }, [globalUserData]);
+  useEffect(() => {
+    console.log("trips: ", trips);
+    setStatesBeenTo(countStatesBeenTo(trips));
+  }, [trips]);
+
   useEffect(() => {
     async function getTrips() {
       try {
-        const results = await API.getTrips();
-        console.log(results.data);
-        setStatesBeenTo(countStatesBeenTo(results.data));
-      } catch (error) {}
+        // const results = await API.getTrips();
+        // console.log(results.data);
+        
+      } catch (error) { }
     }
     getTrips();
   }, []);
@@ -145,12 +159,12 @@ export default function PlanTrip(props) {
   };
 
   function moneySpent() {
-    
+
   }
 
   return (
     <React.Fragment>
-            
+
       <CssBaseline />
       <Card className={classes.card}>
         <CardMedia className={classes.cardMedia}>
@@ -164,10 +178,10 @@ export default function PlanTrip(props) {
         </CardMedia>
 
         <CardContent className={classes.cardContent}>
-          <ProgressCircle />   
+          <ProgressCircle statesBeenTo={statesBeenTo} />
         </CardContent>
       </Card>
-             
+
       <Card className={classes.card}>
         <CardMedia className={classes.cardMedia}>
           <Typography
@@ -184,10 +198,10 @@ export default function PlanTrip(props) {
             $
             <CountUp start={0} end={100} duration={3} />
           </Typography>
-            
+
         </CardContent>
       </Card>
-                            
+
     </React.Fragment>
   );
 }
