@@ -4,36 +4,35 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import clsx from "clsx";
-import IconButton from "@material-ui/core/IconButton";
 import Input from "@material-ui/core/Input";
-import FilledInput from "@material-ui/core/FilledInput";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import TextField from "@material-ui/core/TextField";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
+
 import Grid from "@material-ui/core/Grid";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
-    marginBottom: theme.spacing(3),
-  },
-  margin: {
-    marginLeft: theme.spacing(5),
+    marginBottom: theme.spacing(1),
   },
   withoutLabel: {
     marginTop: theme.spacing(3),
   },
-  // textField: {
-  //   width: '25ch',
-  // },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    width: 125,
+  },
+  button: {
+    backgroundColor: "transparent",
+    border: "2px solid #BB86FC",
+    color: "white",
+    margin: theme.spacing(3),
+    "&:hover": {
+      backgroundColor: "#BB90FF",
+      color: "#121212",
+    },
   },
 }));
 
@@ -85,45 +84,8 @@ export default function CategorySelector() {
   console.log(categoryName, values.amount);
   return (
     <div className={classes.root}>
-      <Grid item xs={12} md={4} lg={4}>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-controlled-open-select-label">
-            Category
-          </InputLabel>
-          <Select
-            labelId="demo-controlled-open-select-label"
-            id="demo-controlled-open-select"
-            open={open}
-            onClose={handleClose}
-            onOpen={handleOpen}
-            value={category}
-            onChange={handleChange}
-          >
-            <MenuItem value="">
-              <em>Select one</em>
-            </MenuItem>
-            <MenuItem name="food" value={10}>
-              Food
-            </MenuItem>
-            <MenuItem name="activities" value={20}>
-              Activities
-            </MenuItem>
-            <MenuItem name="flight" value={30}>
-              Flight
-            </MenuItem>
-            <MenuItem name="hotel" value={40}>
-              Hotel
-            </MenuItem>
-            <MenuItem name="transport" value={50}>
-              Transportation
-            </MenuItem>
-            <MenuItem name="misc" value={60}>
-              Misc
-            </MenuItem>
-          </Select>
-        </FormControl>
-      </Grid>
-      <Grid item xs={12} md={4} lg={4} className={classes.margin}>
+      <Grid container spacing={3}>
+      <Grid item xs={6} md={6} lg={6}>
         <FormControl className={classes.formControl}>
           <InputLabel id='demo-controlled-open-select-label'>
             Category
@@ -135,29 +97,55 @@ export default function CategorySelector() {
             onClose={handleClose}
             onOpen={handleOpen}
             value={category}
+            fullWidth
             onChange={handleChange}>
             <MenuItem value=''>
               <em>Select one</em>
             </MenuItem>
-            <MenuItem value={10}>Food</MenuItem>
-            <MenuItem value={20}>Activities</MenuItem>
-            <MenuItem value={30}>Flight</MenuItem>
-            <MenuItem value={40}>Hotel</MenuItem>
-            <MenuItem value={50}>Transportation</MenuItem>
-            <MenuItem value={60}>Misc</MenuItem>
+            <MenuItem name='food' value={10}>
+              Food
+            </MenuItem>
+            <MenuItem name='activities' value={20}>
+              Activities
+            </MenuItem>
+            <MenuItem name='flight' value={30}>
+              Flight
+            </MenuItem>
+            <MenuItem name='hotel' value={40}>
+              Hotel
+            </MenuItem>
+            <MenuItem name='transport' value={50}>
+              Transportation
+            </MenuItem>
+            <MenuItem name='misc' value={60}>
+              Misc
+            </MenuItem>
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={12} md={4} lg={4} className={classes.margin}>
-        <FormControl className={classes.formControl}>
+      <Grid item xs={6} md={6} lg={6} className={classes.margin}>
+        <FormControl 
+        className={classes.formControl}>
           <InputLabel htmlFor='standard-adornment-amount'>Amount</InputLabel>
           <Input
             id='standard-adornment-amount'
             value={values.amount}
+            fullWidth
             onChange={handleInput("amount")}
-            startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            startAdornment={<InputAdornment position='start'>$</InputAdornment>}
           />
         </FormControl>
+      </Grid>
+      <Grid container justify='center'>
+        <Fab
+          variant='extended'
+          aria-label='add'
+          size='small'
+          className={classes.button}>
+          <AddIcon />
+          add Expense
+        </Fab>
+      </Grid>
       </Grid>
     </div>
   );

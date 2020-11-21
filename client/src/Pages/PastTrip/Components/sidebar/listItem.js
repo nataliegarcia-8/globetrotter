@@ -9,7 +9,10 @@ import RoomIcon from '@material-ui/icons/Room';
 export const mainListItems = (
   <div>
     <ListItem button>
-      <ListItemIcon>
+      <ListItemIcon 
+      style={{
+        color:"#BB86FC",
+      }}>
         <RoomIcon />
       </ListItemIcon>
       <Route
@@ -70,26 +73,3 @@ export const mainListItems = (
     </ListItem>
   </div>
 );
-
-// export const secondaryListItems = (
-//   <div>
-//     <ListSubheader inset>User Settings</ListSubheader>
-//     <ListItem button>
-//       <ListItemIcon>
-//         <PersonIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Account Info" />
-//     </ListItem>
-//     <ListItem button>
-//       <ListItemIcon>
-//         <ExitToAppIcon />
-//       </ListItemIcon>
-//       <ListItemText
-//         primary="Logout"
-//         onClick={() => {
-//           Auth.signOut();
-//         }}
-//       ></ListItemText>
-//     </ListItem>
-//   </div>
-// );

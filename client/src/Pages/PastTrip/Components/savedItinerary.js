@@ -13,7 +13,7 @@ import Avatar from "@material-ui/core/Avatar";
 import ImageIcon from "@material-ui/icons/Image";
 import WorkIcon from "@material-ui/icons/Work";
 import BeachAccessIcon from "@material-ui/icons/BeachAccess";
-import ScheduleIcon from "@material-ui/icons/Schedule";
+import CheckIcon from "@material-ui/icons/Check";
 
 const useStyles = makeStyles((theme) => ({
   depositContext: {
@@ -46,7 +46,7 @@ export default function AddressForm() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar className={classes.icon}>
-                  <ScheduleIcon />
+                  <CheckIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
@@ -57,7 +57,7 @@ export default function AddressForm() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar className={classes.icon}>
-                  <ScheduleIcon />
+                  <CheckIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
@@ -68,7 +68,7 @@ export default function AddressForm() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar className={classes.icon}>
-                  <ScheduleIcon />
+                  <CheckIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary='Hiking sesh' secondary='July 20, 2014' />
@@ -76,7 +76,7 @@ export default function AddressForm() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar className={classes.icon}>
-                  <ScheduleIcon />
+                  <CheckIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary='Hiking sesh' secondary='July 20, 2014' />
@@ -84,7 +84,7 @@ export default function AddressForm() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar className={classes.icon}>
-                  <ScheduleIcon />
+                  <CheckIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary='Hiking sesh' secondary='July 20, 2014' />
@@ -92,7 +92,7 @@ export default function AddressForm() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar className={classes.icon}>
-                  <ScheduleIcon />
+                  <CheckIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary='Hiking sesh' secondary='July 20, 2014' />
@@ -100,7 +100,7 @@ export default function AddressForm() {
             <ListItem>
               <ListItemAvatar>
                 <Avatar className={classes.icon}>
-                  <ScheduleIcon />
+                  <CheckIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary='Hiking sesh' secondary='July 20, 2014' />

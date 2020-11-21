@@ -22,7 +22,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems, secondaryListItems } from "../../Components/ListItems";
 import Cards from "./Components/Cards";
-import Button from "./Components/Cards/buttons";
+import ButtonCards from "./Components/Cards/buttons";
 import Copyright from "../../Components/Copyright";
 import Charts from "./Components/Cards/";
 import Map from "./Components/Map";
@@ -207,12 +207,12 @@ export default function Dashboard() {
             <div className={classes.appBarSpacer} />
             <Container maxWidth='lg' className={classes.container}>
               <Grid container spacing={3}>
-                <Grid item xs={8}>
+                <Grid item xs={12} md={8} lg={8}>
                 <Paper className={classes.paper}>
                     <Map trips={globalUserData.trips} />
                   </Paper>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} md={4} lg={4}>
                     <Charts />
                 </Grid>
               </Grid>
@@ -220,7 +220,7 @@ export default function Dashboard() {
               <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <Paper className={classes.paper}>
-                    <Button />
+                    <ButtonCards />
                   </Paper>
                 </Grid>
               </Grid>

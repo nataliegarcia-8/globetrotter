@@ -7,8 +7,6 @@ import {
 import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Budget from "./Components/Budget";
@@ -26,6 +24,7 @@ import ItineraryForm from "./Components/ItineraryForm";
 import API from "../../utils/API";
 import { Auth } from "aws-amplify";
 import { GlobalUserState } from "../../Components/globalUserState";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   jumbotron: {
@@ -129,7 +128,6 @@ export default function CurrentTrip() {
 
   useEffect(() => {
     console.log("current: ", currentTrip);
-    
   }, [currentTrip]);
 
   const findCurrentTrip = () => {
@@ -156,15 +154,14 @@ export default function CurrentTrip() {
         <CssBaseline />
         {/* Hero unit */}
         <div className={classes.jumbotron}>
-          <Container maxWidth="sm">
+          <Container maxWidth='sm'>
             <Typography
               className={classes.headline}
-              component="h1"
-              variant="h2"
-              align="center"
-              color="textPrimary"
-              gutterBottom
-            >
+              component='h1'
+              variant='h2'
+              align='center'
+              color='textPrimary'
+              gutterBottom>
               {currentTrip.city}
             </Typography>
             <Typography
@@ -173,18 +170,18 @@ export default function CurrentTrip() {
               color="inherit"
               noWrap
             >
-              {currentTrip.departure}
+              {moment().format("MMMM Do, YYYY")}
             </Typography>
           </Container>
         </div>
-        <Container maxWidth="lg">
+        <Container maxWidth='lg'>
           <Steps />
           <main className={classes.layout}>
             <div className={classes.root}>
               <Grid container spacing={3}>
-                <Grid item xs={12} md={8} lg={9}>
+                <Grid item xs={12} md={8} lg={8}>
                   <Paper className={fixedHeightPaper}>
-                    <Typography component="h1" variant="h4" align="left">
+                    <Typography component='h1' variant='h4' align='left'>
                       Trip Itinerary
                     </Typography>
 
@@ -195,7 +192,7 @@ export default function CurrentTrip() {
                     />
                   </Paper>
                 </Grid>
-                <Grid item xs={12} md={4} lg={3}>
+                <Grid item xs={12} md={4} lg={4}>
                   <Paper className={fixedHeightPaper}>
                     <div>
                       {" "}
@@ -205,8 +202,9 @@ export default function CurrentTrip() {
                     <BudgetTable />
                   </Paper>
                 </Grid>
-                <Grid item xs={12}>
-                  <Paper className={classes.paper}>
+                <Grid item xs={12} justify='center'>
+                  <Paper
+              className={classes.paper}>
                     <Title>
                       <UploadBtn />
                     </Title>

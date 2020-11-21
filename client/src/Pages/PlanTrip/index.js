@@ -53,10 +53,10 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(4, 0, 1),
   },
   booking: {
-    padding: theme.spacing(6, 20),
+    padding: theme.spacing(0, 20),
   },
   footer: {
-    padding: theme.spacing(6),
+    padding: theme.spacing(4),
   },
 }));
 
@@ -91,10 +91,10 @@ export default function PlanTrip() {
   const [coordinatesState, setCoordinates] = useState(coordinates);
   const [departureDate, setDepartureDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(new Date());
-  const [globalUserData, setGlobalUserData] = useContext(GlobalUserState)
+  const [globalUserData, setGlobalUserData] = useContext(GlobalUserState);
 
   // ---------- Use Effect hooks -------------
- 
+
   console.log(globalUserData);
   useEffect(() => {
     getLatLong(tripState);
@@ -146,10 +146,8 @@ export default function PlanTrip() {
   const handleSubmit = () => {
     API.saveTrip(globalUserData._id, { ...tripState, ...coordinatesState });
     console.log("submit");
-   
   };
-  
-  
+
   console.log(tripState, globalUserData._id);
 
   return (
@@ -184,8 +182,10 @@ export default function PlanTrip() {
                 handleInputChange={handleInputChange}
               />
             </Booking>
-            <SubmitButton handleSubmit={handleSubmit} />
           </Container>
+          <Grid>
+            <SubmitButton handleSubmit={handleSubmit} />
+          </Grid>
         </main>
         <Box pt={4} pb={4}>
           <Navigation />

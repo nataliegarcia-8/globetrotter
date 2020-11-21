@@ -24,7 +24,12 @@ export default function FloatingActionButtonSize(props) {
 
   return (
     <Grid container justify='center'>
-      <Fab variant='extended' aria-label='add' className={classes.styling} onClick={props.handleSubmit}>
+      <Fab
+        variant='extended'
+        aria-label='add'
+        size='medium'
+        className={classes.styling}
+        onClick={props.handleSubmit}>
         <AddIcon className={classes.extendedIcon} />
         Add Trip
       </Fab>
