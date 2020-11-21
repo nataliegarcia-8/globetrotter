@@ -4,15 +4,17 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from "@material-ui/core/styles";
-import { CircularProgressbar } from 'react-circular-progressbar';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
-    percent: {
-        fontSize: '12',
-        color: '#BB86FC',
-    }
-  }));
+  path: {
+    width: "175px",
+    height: "175px",
+    marginBottom: "36px",
+  },
+}));
 
 function CircularProgressWithLabel(props) {
     const classes = useStyles();
@@ -20,11 +22,24 @@ function CircularProgressWithLabel(props) {
     const percentage = ((props.statesBeenTo / 50) * 100);
   return (
  
+<Grid container justify='center'>
 <CircularProgressbar 
-textColor='#BB86FC'
-trailColor='#BB86FC'
+className={classes.path}
+strokeWidth={5}
+styles={buildStyles({
+  pathColor: "white",
+  trailColor: "#BB86FC",
+  strokeLinecap: "butt",
+  textSize: "16px",
+  marginBottom: "37px",
+  textColor: "#BB86FC",
+})}
+
+
 value={percentage} text={`${percentage}%`} />
+  </Grid>
 
   )}
+
 
   export default CircularProgressWithLabel;

@@ -277,7 +277,7 @@ export default function Dashboard() {
                   color="textPrimary"
                   gutterBottom
                 >
-                  city
+                  Chicago, Illinois
                 </Typography>
                 <Typography
                   className={classes.dates}

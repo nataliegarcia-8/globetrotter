@@ -65,7 +65,8 @@ export default function AddressForm() {
                   <CheckIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="something" secondary="time" />
+              <ListItemText primary="Chicago architecture river cruise
+" secondary="11/11/2020 1:30pm" />
             </ListItem>
             <ListItem>
               <ListItemAvatar>
@@ -73,7 +74,7 @@ export default function AddressForm() {
                   <CheckIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="something" secondary="time" />
+              <ListItemText primary="Instagram it up by the bean" secondary="11/12/2020 3:30pm" />
             </ListItem>
             <ListItem>
               <ListItemAvatar>
@@ -81,7 +82,7 @@ export default function AddressForm() {
                   <CheckIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="something" secondary="time" />
+              <ListItemText primary="Cubs game at Wrigley Field" secondary="11/14/2020 5:30pm" />
             </ListItem>
           </List>
         </Grid>
