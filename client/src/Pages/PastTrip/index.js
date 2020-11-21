@@ -171,29 +171,7 @@ export default function Dashboard() {
       type: "dark",
     },
   });
-
-  const [userId, setUserId] = useState("");
-  const [dbId, setDbId] = useState("");
-  const [userData, setUserData] = useState({});
-  const [tripsData, setTripsData] = useState([]);
-
-  // ---------- Use Effect hooks -------------
-  useEffect(() => {
-    checkUser();
-  }, []);
-
-  useEffect(() => {
-    dbUserSelect();
-  }, [userId]);
-
-  useEffect(() => {
-    API.getUser(dbId).then((data) => {
-      setUserData(data.data);
-      setTripsData(data.data.trips);
-      console.log("user: ", data.data.trips);
-    });
-  }, [dbId]);
-
+  
   // ---------- Check cognito user and then get db user from cognito ID -------------
   const checkUser = async () => {
     try {
