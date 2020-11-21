@@ -3,12 +3,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 // import tileData from './tileData';
-import image1 from "../../CurrentTrip/Components/ImgGrid/test2.jpg";
-import image2 from "../../CurrentTrip/Components/ImgGrid/test.jpg";
-import image3 from "../../CurrentTrip/Components/ImgGrid/test3.jpg";
-import image4 from "../../CurrentTrip/Components/ImgGrid/test4.jpg";
-import image5 from "../../CurrentTrip/Components/ImgGrid/test5.jpg";
-import image6 from "../../CurrentTrip/Components/ImgGrid/test6.jpg";
+import image1 from "../../CurrentTrip/Components/ImgGrid/Chicago1.jpg";
+import image2 from "../../CurrentTrip/Components/ImgGrid/Chicago2.jpg";
+import image3 from "../../CurrentTrip/Components/ImgGrid/Chicago3.jpg";
+import image4 from "../../CurrentTrip/Components/ImgGrid/Chicago4.jpg";
+import image5 from "../../CurrentTrip/Components/ImgGrid/Chicago5.jpg";
+import image6 from "../../CurrentTrip/Components/ImgGrid/Chicago6.jpg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
