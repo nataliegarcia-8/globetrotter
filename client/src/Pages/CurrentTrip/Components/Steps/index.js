@@ -190,7 +190,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ["December 1st", "December 2nd", "December 3rd"];
+  return ["November 20th", "November 21st", "November 22nd"];
 }
 
 function getStepContent(step) {
