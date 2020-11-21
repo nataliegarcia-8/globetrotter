@@ -113,6 +113,8 @@ export default function CurrentTrip() {
   };
 
   const [globalUserData, setGlobalUserData] = useContext(GlobalUserState);
+  const [localUserData, setLocalUserData] = useState({});
+
   const [trips, setTrips] = useState([]);
   const [currentTrip, setCurrentTrip] = useState({});
   const [activity, setActivity] = useState(initialActivityState);
@@ -120,11 +122,16 @@ export default function CurrentTrip() {
   const [activities, setActivities] = useState([]);
   const [curretnBudget, setCurrentBudget] = useState(0);
 
-
   useEffect(() => {
-    console.log("global state: ", globalUserData);
-    setTrips(globalUserData.trips);
-  }, [globalUserData]);
+    const localData = JSON.parse(localStorage.getItem('user'))
+    console.log("local: ", localData.globalUserData.trips);
+    setTrips(localData.globalUserData.trips);
+  }, [])
+  // useEffect(() => {
+  //   console.log("global state: ", globalUserData);
+  //   console.log("local: ", localUserData);
+  //   setTrips(localUserData.trips);
+  // }, [localUserData ]);
 
   useEffect(() => {
     console.log("trips: ", trips);

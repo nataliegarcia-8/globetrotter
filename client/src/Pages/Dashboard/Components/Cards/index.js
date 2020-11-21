@@ -136,16 +136,7 @@ export default function PlanTrip(props) {
     setStatesBeenTo(countStatesBeenTo(trips));
   }, [trips]);
 
-  useEffect(() => {
-    async function getTrips() {
-      try {
-        // const results = await API.getTrips();
-        // console.log(results.data);
-        
-      } catch (error) { }
-    }
-    getTrips();
-  }, []);
+ 
 
   const countStatesBeenTo = (placesArray) => {
     let count = 0;

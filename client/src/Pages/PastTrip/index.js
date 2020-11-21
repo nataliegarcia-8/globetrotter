@@ -175,36 +175,34 @@ export default function Dashboard() {
 
   const [globalUserData, setGlobalUserData] = useContext(GlobalUserState);
   const [trips, setTrips] = useState([]);
-  const [pastTrips, setPastTrips] = useState([{city: ""}]);
-  const [selectedTrip, setSelectedTrip] = useState({city: " ", state: " ", activities: []});
+  const [pastTrips, setPastTrips] = useState([]);
+  const [selectedTrip, setSelectedTrip] = useState({});
   
 
   // ---------- Use Effect hooks -------------
   useEffect(() => {
-    console.log("global state: ", globalUserData);
-    
-    setTrips(globalUserData.trips);
-    
-  }, [globalUserData]);
+    const localData = JSON.parse(localStorage.getItem('trips'))
+    console.log("local: ", localData.tripsData);
+    // setTrips(localData.globalUserData.trips)
+    findPastTrip(localData.tripsData);
+  }, [])
 
-  useEffect(() => {
-    console.log("trips: ", trips);
-    findPastTrip();
-  }, [trips]);
+ 
 
 
   useEffect(() => {
     console.log("past trips: ", pastTrips);
-    setSelectedTrip(pastTrips[0])
+    // setSelectedTrip(pastTrips[0])
 
   }, [pastTrips]);
   
   useEffect(() => {
     console.log("selected trip: ", selectedTrip);
   }, [selectedTrip]);
+  
 
 
-  const findPastTrip = () => {
+  const findPastTrip = (trips) => {
     let pastTripsTemp = [];
     console.log(trips);
     trips.forEach((trip) => {

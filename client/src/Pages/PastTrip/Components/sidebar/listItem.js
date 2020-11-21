@@ -14,7 +14,8 @@ export default function MainListItems(props) {
   const renderPastTripList = () => {
     if (props.trips) {
       return props.trips.map((trip, i) => (
-        <ListItem button>
+        <ListItem button
+        key={i}>
           <ListItemIcon
             style={{
               color: "#BB86FC",
@@ -27,7 +28,7 @@ export default function MainListItems(props) {
           <ListItemText
             primary={trip.city + ", " + trip.state}
             value={trip._id}
-            key={i}
+            
             onClick={() => {
               props.handleClick(trip._id);
             }}
