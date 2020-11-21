@@ -104,6 +104,7 @@ export default function ActivitiesForm(props) {
             onClick={props.handleSubmit}
             className={classes.button}>
             <AddIcon />
+            
             Add activity
           </Fab>
         </Grid>
