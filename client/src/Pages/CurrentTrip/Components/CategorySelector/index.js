@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -10,6 +10,8 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Grid from "@material-ui/core/Grid";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
+import API from "../../../../utils/API";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,12 +38,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CategorySelector() {
+export default function CategorySelector(props) {
   const classes = useStyles();
-  const [category, setcategory] = React.useState("");
-  const [categoryName, setcategoryName] = React.useState("");
+  const [category, setcategory] = useState("");
+  const [categoryName, setcategoryName] = useState("");
+  const [currentBudget, setCurrentBudget] = useState(props.currentTrip.budget);
 
-  const [open, setOpen] = React.useState(false);
+
+  const [open, setOpen] = useState(false);
 
   const handleChange = (event) => {
     setcategory(event.target.value);
@@ -74,14 +78,23 @@ export default function CategorySelector() {
     setOpen(true);
   };
 
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     amount: "",
   });
 
   const handleInput = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
-  console.log(categoryName, values.amount);
+  const handlebudgetSubmit = async () => {
+    await API.saveExpense(props.currentTrip._id, {expense: parseInt(values.amount), category: categoryName})
+    setValues({amount: ""})
+    setcategory("")
+    setCurrentBudget(props.currentTrip.budget);
+
+  };
+  console.log("current: ", props.currentTrip.budget);
+  console.log(props.currentTrip._id, {expense: parseInt(values.amount), category: categoryName});
+
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
@@ -136,12 +149,14 @@ export default function CategorySelector() {
           />
         </FormControl>
       </Grid>
+      
       <Grid container justify='center'>
         <Fab
           variant='extended'
           aria-label='add'
           size='small'
-          className={classes.button}>
+          className={classes.button}
+            onClick={handlebudgetSubmit}>
           <AddIcon />
           add Expense
         </Fab>

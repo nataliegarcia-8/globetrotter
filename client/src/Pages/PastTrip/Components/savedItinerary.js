@@ -30,9 +30,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AddressForm() {
+
+export default function AddressForm(props) {
+
   const classes = useStyles();
 
+  const renderActivities = () => {
+    if (props.activities) {
+      return props.activities.map((activity, i) => (
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar className={classes.icon}>
+              <CheckIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary={activity.activity} secondary={activity.date} />
+        </ListItem>
+      ));
+    } else {
+      return;
+    }
+  };
   return (
     <React.Fragment>
       <Grid container spacing={3}>
@@ -43,68 +61,7 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={12} sm={12}>
           <List className={classes.root}>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <CheckIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary='Tour the Smithsonian'
-                secondary='Jan 9, 2014'
-              />
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <CheckIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary='Happy hour at brewery'
-                secondary='Jan 7, 2014'
-              />
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <CheckIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary='Hiking sesh' secondary='July 20, 2014' />
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <CheckIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary='Hiking sesh' secondary='July 20, 2014' />
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <CheckIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary='Hiking sesh' secondary='July 20, 2014' />
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <CheckIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary='Hiking sesh' secondary='July 20, 2014' />
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <CheckIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary='Hiking sesh' secondary='July 20, 2014' />
-            </ListItem>
+          {renderActivities()}
           </List>
         </Grid>
       </Grid>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import clsx from "clsx";
 import {
   createMuiTheme,
@@ -21,12 +21,13 @@ import Paper from "@material-ui/core/Paper";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // import NotificationsIcon from "@material-ui/icons/Notifications";
-import { mainListItems } from "./Components/sidebar/listItem";
+import MainListItems from "./Components/sidebar/listItem";
 import Footer from "../../Components/Footer";
 import Navigation from "../../Components/Navigation";
 import PhotoGrid from "./Components/photoGrid";
 import { Auth } from "aws-amplify";
 import API from "../../utils/API";
+import { GlobalUserState } from "../../Components/globalUserState";
 
 const drawerWidth = 240;
 
@@ -158,7 +159,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -171,24 +172,60 @@ export default function Dashboard() {
       type: "dark",
     },
   });
+
+  const [globalUserData, setGlobalUserData] = useContext(GlobalUserState);
+  const [trips, setTrips] = useState([]);
+  const [pastTrips, setPastTrips] = useState([{city: ""}]);
+  const [selectedTrip, setSelectedTrip] = useState({city: " ", state: " ", activities: []});
   
-  // ---------- Check cognito user and then get db user from cognito ID -------------
-  const checkUser = async () => {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      setUserId(user.username);
-      console.log("Cognito User Info: ", user);
-    } catch (error) {
-      console.log(error);
-    }
+
+  // ---------- Use Effect hooks -------------
+  useEffect(() => {
+    console.log("global state: ", globalUserData);
+    
+    setTrips(globalUserData.trips);
+    
+  }, [globalUserData]);
+
+  useEffect(() => {
+    console.log("trips: ", trips);
+    findPastTrip();
+  }, [trips]);
+
+
+  useEffect(() => {
+    console.log("past trips: ", pastTrips);
+    setSelectedTrip(pastTrips[0])
+
+  }, [pastTrips]);
+  
+  useEffect(() => {
+    console.log("selected trip: ", selectedTrip);
+  }, [selectedTrip]);
+
+
+  const findPastTrip = () => {
+    let pastTripsTemp = [];
+    console.log(trips);
+    trips.forEach((trip) => {
+      if (trip.current === "past") {
+        API.getTrip(trip._id).then((data) => {
+          pastTripsTemp.push(data.data);
+        });
+      }
+    })
+    console.log(pastTripsTemp);
+
+    setPastTrips(pastTripsTemp);
+
   };
-  const dbUserSelect = () => {
-    API.getUsers().then((data) =>
-      data.data.forEach((user) => {
-        if (user.cognitoId === userId) setDbId(user._id);
-        console.log(dbId);
-      })
-    );
+
+
+  const handleOnClickForTrip = (id) => {
+    console.log(id);
+    API.getTrip(id).then(({data})=>{
+      setSelectedTrip(data)
+    })
   };
   //  API.getUser()
   return (
@@ -197,69 +234,74 @@ export default function Dashboard() {
         <div className={classes.root}>
           <CssBaseline />
           <Drawer
-            variant='permanent'
+            variant="permanent"
             classes={{
               paper: clsx(
                 classes.drawerPaper,
                 !open && classes.drawerPaperClose
               ),
             }}
-            open={open}>
+            open={open}
+          >
+
             <div className={classes.toolbarIcon}>
-              {/* <Typography variant='h5'
-                color='inherit'
-                className={classes.side}>
-                Previous<br></br>Trips</Typography> */}
+             
               <IconButton
-                edge='start'
-                color='inherit'
-                aria-label='open drawer'
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
                 onClick={handleDrawerOpen}
                 className={clsx(
                   classes.menuButton,
                   open && classes.menuButtonHidden
-                )}>
+                )}
+              >
                 <MenuIcon />
               </IconButton>
             </div>
             <div className={classes.toolbarIcon}>
               <IconButton onClick={handleDrawerClose}>
-                <ChevronLeftIcon color='#BB86FC' />
+                <ChevronLeftIcon color="#BB86FC" />
               </IconButton>
             </div>
             <Divider />
-            <List>{mainListItems}</List>
+            <List>
+              <MainListItems trips={pastTrips} handleClick={handleOnClickForTrip} />
+
+            </List>
           </Drawer>
           <main className={classes.content}>
             {/* <div className={classes.appBarSpacer} /> */}
             <div className={classes.jumbotron}>
-              <Container maxWidth='sm'>
+              <Container maxWidth="sm">
                 <Typography
                   className={classes.headline}
-                  component='h1'
-                  variant='h2'
-                  align='center'
-                  color='textPrimary'
-                  gutterBottom>
-                  City
+                  component="h1"
+                  variant="h2"
+                  align="center"
+                  color="textPrimary"
+                  gutterBottom
+                >
+                  {/* {selectedTrip.city} */}
                 </Typography>
                 <Typography
                   className={classes.dates}
-                  variant='h4'
-                  color='inherit'
-                  noWrap>
-                  MM/DD/YY - MM/DD/YY
+                  variant="h4"
+                  color="inherit"
+                  noWrap
+                >
+                  {/* {selectedTrip.departure} - {selectedTrip.return} */}
                 </Typography>
               </Container>
             </div>
-            <Container maxWidth='lg' className={classes.container}>
+            <Container maxWidth="lg" className={classes.container}>
               <Grid container spacing={3}>
                 <Grid item xs={12} md={6} lg={6}>
                   <Paper className={fixedHeightPaper}>
-                    <Typography component='h1' variant='h4' align='left'>
+                    <Typography component="h1" variant="h4" align="left">
                       Trip Itinerary
                     </Typography>
-                    <SavedItinerary />
+                    {/* <SavedItinerary activities ={selectedTrip.activities} /> */}
                   </Paper>
                 </Grid>
                 <Grid item xs={12} md={6} lg={6}>

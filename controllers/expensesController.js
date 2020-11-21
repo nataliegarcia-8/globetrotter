@@ -20,7 +20,7 @@ module.exports = {
       .create(req.body)
       .then(dbModel => {
         console.log(dbModel);
-        return db.Trips.findOneAndUpdate({ _id: req.params.id }, { $push : {Expenseses: dbModel._id }}, { new: true });
+        return db.Trips.findOneAndUpdate({ _id: req.params.id }, { $push : {expenses: dbModel._id }}, { new: true });
       })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
