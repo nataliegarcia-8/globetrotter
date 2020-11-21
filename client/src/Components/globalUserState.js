@@ -40,7 +40,7 @@ const UserState = ({ children }) => {
       data.data.forEach((user) => {
         if (user.cognitoId === userId) setDbId(user._id);
         
-        console.log(dbId);
+        // console.log(dbId);
       })
     );
   };

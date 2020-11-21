@@ -135,11 +135,9 @@ export default function Dashboard() {
       type: "dark",
     },
   });
-
-
-
   
   const [tripsData,setTripsData] = useState([])
+
   const [globalUserData, setGlobalUserData] = useContext(GlobalUserState)
 
 
@@ -224,13 +222,6 @@ export default function Dashboard() {
                   </Paper>
                 </Grid>
               </Grid>
-              {/* <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <Paper className={classes.paper}>
-                    <Cards />
-                  </Paper>
-                </Grid>
-              </Grid> */}
               <Box pt={4} pb={4}>
                 <Footer />
               </Box>
