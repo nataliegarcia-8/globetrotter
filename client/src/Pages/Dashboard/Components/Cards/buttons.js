@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#BB90FF",
     },
     // maxWidth: "325px",
-    // height: "75px",
-    // fontSize: "18px",
+    height: "75px",
+    fontSize: "18px",
   },
   center: {
     display: "flex",
