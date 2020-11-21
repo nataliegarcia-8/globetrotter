@@ -193,13 +193,15 @@ export default function Dashboard() {
 
   useEffect(() => {
     console.log("past trips: ", pastTrips);
-    setSelectedTrip(pastTrips[0])
+    // setSelectedTrip(pastTrips[0])
+
   }, [pastTrips]);
   
   useEffect(() => {
     console.log("selected trip: ", selectedTrip);
   }, [selectedTrip]);
 
+  
   const findPastTrip = async () => {
     let pastTripsTemp = [];
     await trips.forEach((trip) => {
@@ -277,7 +279,7 @@ export default function Dashboard() {
                   color="textPrimary"
                   gutterBottom
                 >
-                  {selectedTrip.city}
+                  {/* {selectedTrip.city} */}
                 </Typography>
                 <Typography
                   className={classes.dates}
@@ -285,7 +287,7 @@ export default function Dashboard() {
                   color="inherit"
                   noWrap
                 >
-                  {selectedTrip.departure} - {selectedTrip.return}
+                  {/* {selectedTrip.departure} - {selectedTrip.return} */}
                 </Typography>
               </Container>
             </div>
@@ -296,7 +298,7 @@ export default function Dashboard() {
                     <Typography component="h1" variant="h4" align="left">
                       Trip Itinerary
                     </Typography>
-                    <SavedItinerary activities ={selectedTrip.activities} />
+                    {/* <SavedItinerary activities ={selectedTrip.activities} /> */}
                   </Paper>
                 </Grid>
                 <Grid item xs={12} md={6} lg={6}>

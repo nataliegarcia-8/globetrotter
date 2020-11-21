@@ -8,7 +8,12 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-const useStyles = makeStyles({});
+const useStyles = makeStyles({
+
+  tableDiv: {
+    minHeight: 235,
+  }
+});
 
 export default function BudgetTable() {
   const classes = useStyles();

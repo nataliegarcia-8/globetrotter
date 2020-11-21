@@ -12,14 +12,11 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Divider from "@material-ui/core/Divider";
 import Avatar from "@material-ui/core/Avatar";
-import ImageIcon from "@material-ui/icons/Image";
-import WorkIcon from "@material-ui/icons/Work";
-import BeachAccessIcon from "@material-ui/icons/BeachAccess";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
+import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
   depositContext: {
@@ -30,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#BB86FC",
   },
   root: {
-    maxHeight: 285,
+    maxHeight: 225,
     overflow: "auto",
     position: "relative",
   },
@@ -38,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "transparent",
     border: "2px solid #BB86FC",
     color: "white",
-    margin: theme.spacing(3),
+    margin: theme.spacing(1),
     "&:hover": {
       backgroundColor: "#BB90FF",
       color: "#121212",
@@ -58,7 +55,8 @@ export default function ActivitiesForm(props) {
               <ScheduleIcon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary={activity.activity} secondary={activity.date} />
+          <ListItemText primary={activity.activity} 
+          secondary={moment(activity.date).format('MM-DD-YYYY, hh:mm A')} />
         </ListItem>
       ));
     } else {
@@ -104,8 +102,7 @@ export default function ActivitiesForm(props) {
             onClick={props.handleSubmit}
             className={classes.button}>
             <AddIcon />
-            
-            Add activity
+          add activity
           </Fab>
         </Grid>
         <Grid item xs={12} sm={12}>
