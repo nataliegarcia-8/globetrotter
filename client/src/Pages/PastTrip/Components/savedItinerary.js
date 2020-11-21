@@ -30,38 +30,59 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-export default function AddressForm(props) {
-
+export default function AddressForm() {
   const classes = useStyles();
 
-  const renderActivities = () => {
-    if (props.activities) {
-      return props.activities.map((activity, i) => (
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar className={classes.icon}>
-              <CheckIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary={activity.activity} secondary={activity.date} />
-        </ListItem>
-      ));
-    } else {
-      return;
-    }
-  };
+  // const renderActivities = () => {
+  //   if (props.activities) {
+  //     return props.activities.map((activity, i) => (
+  //       <ListItem>
+  //         <ListItemAvatar>
+  //           <Avatar className={classes.icon}>
+  //             <CheckIcon />
+  //           </Avatar>
+  //         </ListItemAvatar>
+  //         <ListItemText primary={activity.activity} secondary={activity.date} />
+  //       </ListItem>
+  //     ));
+  //   } else {
+  //     return;
+  //   }
+  // };
   return (
     <React.Fragment>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Typography color='textSecondary' className={classes.depositContext}>
+          <Typography color="textSecondary" className={classes.depositContext}>
             Check out what you did in City!
           </Typography>
         </Grid>
         <Grid item xs={12} sm={12}>
           <List className={classes.root}>
-          {renderActivities()}
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar className={classes.icon}>
+                  <CheckIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary="something" secondary="time" />
+            </ListItem>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar className={classes.icon}>
+                  <CheckIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary="something" secondary="time" />
+            </ListItem>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar className={classes.icon}>
+                  <CheckIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary="something" secondary="time" />
+            </ListItem>
           </List>
         </Grid>
       </Grid>

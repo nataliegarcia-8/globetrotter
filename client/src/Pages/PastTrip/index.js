@@ -173,58 +173,55 @@ export default function Dashboard() {
     },
   });
 
-  const [globalUserData, setGlobalUserData] = useContext(GlobalUserState);
-  const [trips, setTrips] = useState([]);
-  const [pastTrips, setPastTrips] = useState([]);
-  const [selectedTrip, setSelectedTrip] = useState({});
+
   
 
   // ---------- Use Effect hooks -------------
-  useEffect(() => {
-    const localData = JSON.parse(localStorage.getItem('trips'))
-    console.log("local: ", localData.tripsData);
-    // setTrips(localData.globalUserData.trips)
-    findPastTrip(localData.tripsData);
-  }, [])
+  // useEffect(() => {
+  //   const localData = JSON.parse(localStorage.getItem('trips'))
+  //   console.log("local: ", localData.tripsData);
+  //   // setTrips(localData.globalUserData.trips)
+  //   findPastTrip(localData.tripsData);
+  // }, [])
 
  
 
 
-  useEffect(() => {
-    console.log("past trips: ", pastTrips);
-    // setSelectedTrip(pastTrips[0])
+  // useEffect(() => {
+  //   console.log("past trips: ", pastTrips);
+  //   setSelectedTrip(pastTrips[0])
 
-  }, [pastTrips]);
+  // }, [pastTrips]);
   
-  useEffect(() => {
-    console.log("selected trip: ", selectedTrip);
-  }, [selectedTrip]);
+  // useEffect(() => {
+  //   console.log("selected trip: ", selectedTrip);
+  // }, [selectedTrip]);
   
 
 
-  const findPastTrip = (trips) => {
-    let pastTripsTemp = [];
-    console.log(trips);
-    trips.forEach((trip) => {
-      if (trip.current === "past") {
-        API.getTrip(trip._id).then((data) => {
-          pastTripsTemp.push(data.data);
-        });
-      }
-    })
-    console.log(pastTripsTemp);
+  // const findPastTrip = (trips) => {
+  //   let pastTripsTemp = [];
+  //   console.log(trips);
+  //   trips.forEach((trip) => {
+  //     if (trip.current === "past") {
+  //       API.getTrip(trip._id).then((data) => {
+  //         pastTripsTemp.push(data.data);
+  //       });
+  //     }
+  //   })
+  //   console.log(pastTripsTemp);
 
-    setPastTrips(pastTripsTemp);
+  //   setPastTrips(pastTripsTemp);
 
-  };
+  // };
 
 
-  const handleOnClickForTrip = (id) => {
-    console.log(id);
-    API.getTrip(id).then(({data})=>{
-      setSelectedTrip(data)
-    })
-  };
+  // const handleOnClickForTrip = (id) => {
+  //   console.log(id);
+  //   API.getTrip(id).then(({data})=>{
+  //     setSelectedTrip(data)
+  //   })
+  // };
   //  API.getUser()
   return (
     <ThemeProvider theme={theme}>
@@ -264,7 +261,7 @@ export default function Dashboard() {
             </div>
             <Divider />
             <List>
-              <MainListItems trips={pastTrips} handleClick={handleOnClickForTrip} />
+              <MainListItems  />
 
             </List>
           </Drawer>
@@ -280,7 +277,7 @@ export default function Dashboard() {
                   color="textPrimary"
                   gutterBottom
                 >
-                  {/* {selectedTrip.city} */}
+                  city
                 </Typography>
                 <Typography
                   className={classes.dates}
@@ -288,7 +285,7 @@ export default function Dashboard() {
                   color="inherit"
                   noWrap
                 >
-                  {/* {selectedTrip.departure} - {selectedTrip.return} */}
+                  11/10/20 - 11/19/20
                 </Typography>
               </Container>
             </div>
@@ -299,7 +296,7 @@ export default function Dashboard() {
                     <Typography component="h1" variant="h4" align="left">
                       Trip Itinerary
                     </Typography>
-                    {/* <SavedItinerary activities ={selectedTrip.activities} /> */}
+                    <SavedItinerary  />
                   </Paper>
                 </Grid>
                 <Grid item xs={12} md={6} lg={6}>
