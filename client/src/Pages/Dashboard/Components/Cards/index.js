@@ -149,13 +149,16 @@ export default function PlanTrip(props) {
 
   const countStatesBeenTo = (placesArray) => {
     let count = 0;
-    placesArray.forEach((place) => {
-      if (statesArray.find((state) => state.label === place.state)) {
-        count++;
-      }
-    });
-    console.log((count / 50) * 100);
-    return count;
+    if(placesArray){
+
+      placesArray.forEach((place) => {
+        if (statesArray.find((state) => state.label === place.state)) {
+          count++;
+        }
+      });
+      console.log((count / 50) * 100);
+      return count;
+    }
   };
 
   function moneySpent() {
