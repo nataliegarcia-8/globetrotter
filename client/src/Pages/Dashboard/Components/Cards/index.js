@@ -144,6 +144,10 @@ export default function PlanTrip(props) {
     return count;
   };
 
+  function moneySpent() {
+    
+  }
+
   return (
     <React.Fragment>
             

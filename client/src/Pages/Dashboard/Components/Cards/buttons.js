@@ -34,7 +34,7 @@ export default function IconLabelButtons() {
   return (
     <div className={classes.center}>
       <Grid container spacing={3}>
-      <Grid item xs={12} md={3} lg={4}>
+      <Grid item xs={12} md={4} lg={4}>
       <Route
         render={({ history }) => (
           <Button
@@ -52,7 +52,7 @@ export default function IconLabelButtons() {
         )}
       />
       </Grid>
-      <Grid item xs={12} md={3} lg={4}>
+      <Grid item xs={12} md={4} lg={4}>
       <Route
         render={({ history }) => (
           <Button
@@ -70,7 +70,7 @@ export default function IconLabelButtons() {
         )}
       />
 </Grid>
-<Grid item xs={12} md={3} lg={4}>
+<Grid item xs={12} md={4} lg={4}>
       <Route
         render={({ history }) => (
           <Button

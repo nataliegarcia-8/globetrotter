@@ -9,12 +9,10 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
 const useStyles = makeStyles({
-  table: {
-    width: 200,
-  },
+
   tableDiv: {
-    width: 225,
-  },
+    minHeight: 235,
+  }
 });
 
 export default function BudgetTable() {
@@ -22,7 +20,11 @@ export default function BudgetTable() {
 
   return (
     <TableContainer component={Paper} className={classes.tableDiv}>
-      <Table className={classes.table} size='small' aria-label='a dense table'>
+      <Table
+        className={classes.table}
+        size='small'
+        fullWidth
+        aria-label='a dense table'>
         <TableHead>
           <TableRow>
             <TableCell>Categories</TableCell>
