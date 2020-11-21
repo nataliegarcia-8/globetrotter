@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 function CircularProgressWithLabel(props) {
     const classes = useStyles();
 
-    const percentage = props.statesBeenTo;
+    const percentage = ((props.statesBeenTo / 50) * 100);
   return (
  
 <CircularProgressbar 

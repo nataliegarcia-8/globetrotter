@@ -136,17 +136,24 @@ export default function Dashboard() {
     },
   });
   
+  
   const [tripsData,setTripsData] = useState([])
-
   const [globalUserData, setGlobalUserData] = useContext(GlobalUserState)
 
-
+  const localData = localStorage.getItem('user')
   // ---------- Use Effect hooks -------------
   useEffect(() => {
     
     console.log("global state: ",  globalUserData);
+   
+
+      localStorage.setItem('user', JSON.stringify({globalUserData}))
+      
+      setTripsData(globalUserData.trips)
+    
     
   }, [globalUserData]);
+  
 
   
 
