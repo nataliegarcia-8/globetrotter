@@ -28,8 +28,8 @@ function CircularProgressWithLabel(props) {
         alignItems="center"
         justifyContent="center"
       >
-        <Typography className={classes.percent} variant="caption" component="div" color="textSecondary">{`${Math.round(
-          props.value,
+        <Typography className={classes.percent} component="h2" variant="caption" component="div" color="textSecondary">{`${Math.round(
+          props.statesBeenTo * 2,
         )}%`}</Typography>
       </Box>
     </Box>
@@ -44,19 +44,20 @@ CircularProgressWithLabel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-export default function CircularStatic() {
-  const [progress, setProgress] = React.useState(10);
+export default function CircularStatic(props) {
+  // const [progress, setProgress] = React.useState(0);
 
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prevProgress) => (prevProgress >= 50 ? 10 : prevProgress + 10));
-    }, 800);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+  // React.useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setProgress((prevProgress) => (prevProgress >= 50 ? 10 : prevProgress + 1));
+  //   }, 80);
+  //   return () => {
+  //     //if (progress === props.statesBeenTo)
+  //     clearInterval(timer);
+  //   };
+  // }, []);
 
-  return <CircularProgressWithLabel value={progress} />;
+  return <CircularProgressWithLabel statesBeenTo={props.statesBeenTo}  />;
 }
 
 
