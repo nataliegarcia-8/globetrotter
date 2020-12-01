@@ -12,7 +12,7 @@ export default function MainListItems(props) {
   }, [props.trips]);
 
   const renderPastTripList = () => {
-    if (props.trips) {
+    if (props.trips.length > 1) {
       return props.trips.map((trip, i) => (
         <ListItem button
         key={i}>
@@ -40,7 +40,8 @@ export default function MainListItems(props) {
     }
   };
   return <div>
-    <ListItem button>
+    {renderPastTripList()}
+    {/* <ListItem button>
           <ListItemIcon
             style={{
               color: "#BB86FC",
@@ -71,6 +72,6 @@ export default function MainListItems(props) {
           <ListItemText
             primary="City, State"
           />
-        </ListItem>
+        </ListItem> */}
   </div>;
 }

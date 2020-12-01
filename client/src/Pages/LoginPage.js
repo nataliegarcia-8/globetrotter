@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Avatar from "@material-ui/core/Avatar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
@@ -63,14 +63,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignInSide() {
+export default function SignInSide(props) {
+  const [validAuthState, setValidAuthState] = useState(["signIn", "signedOut", "signedUp"])
   const classes = useStyles();
   const theme = createMuiTheme({
     palette: {
       type: "dark",
     },
   });
-
+  if (validAuthState.includes(props.authState)) {
   return (
     <ThemeProvider theme={theme}>
       <Paper>
@@ -102,4 +103,7 @@ export default function SignInSide() {
       </Paper>
     </ThemeProvider>
   );
+  } else {
+    return null;
+  }
 }
