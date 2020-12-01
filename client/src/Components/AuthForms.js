@@ -104,6 +104,7 @@ function AuthForms() {
   };
 
   const classes = useStyles();
+  
   return (
     <div>
       {formType === "signUp" && (
@@ -129,7 +130,7 @@ function AuthForms() {
           toSignUp={backToSignUp}
         />
       )}
-      {formType === "signedIn" && <Redirect to='/' />}
+     
     </div>
   );
 }

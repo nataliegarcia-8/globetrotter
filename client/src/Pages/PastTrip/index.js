@@ -27,7 +27,7 @@ import Navigation from "../../Components/Navigation";
 import PhotoGrid from "./Components/photoGrid";
 import { Auth } from "aws-amplify";
 import API from "../../utils/API";
-import { GlobalUserState } from "../../Components/globalUserState";
+// import { GlobalUserState } from "../../Components/globalUserState";
 
 const drawerWidth = 240;
 
@@ -173,146 +173,155 @@ export default function Dashboard() {
     },
   });
 
+  // const [globalUserData, setGlobalUserData] = useContext(GlobalUserState);
+  const [trips, setTrips] = useState([]);
+  const [pastTrips, setPastTrips] = useState({});
+  const [selectedTrip, setSelectedTrip] = useState({});
+  // const [saveSelected, setSaveSelected] = useState({});
 
-  
+  const [localData, setLocalData] = useState(
+    JSON.parse(localStorage.getItem("trips"))
+  );
 
   // ---------- Use Effect hooks -------------
-  // useEffect(() => {
-  //   const localData = JSON.parse(localStorage.getItem('trips'))
-  //   console.log("local: ", localData.tripsData);
-  //   // setTrips(localData.globalUserData.trips)
-  //   findPastTrip(localData.tripsData);
-  // }, [])
-
  
 
+  useEffect(() => {
+    console.log("local: ", localData.tripsData);
+    // setTrips(localData.globalUserData.trips)
+    setTrips(localData.tripsData);
+  }, []);
 
-  // useEffect(() => {
-  //   console.log("past trips: ", pastTrips);
-  //   setSelectedTrip(pastTrips[0])
+  useEffect(() => {
+    console.log("trips: ", trips);
+    setPastTrips(
+      trips.filter((trip) => {
+        return trip.current.includes("past");
+      })
+    );
+  }, [trips]);
 
-  // }, [pastTrips]);
-  
-  // useEffect(() => {
-  //   console.log("selected trip: ", selectedTrip);
-  // }, [selectedTrip]);
-  
+  useEffect(() => {
+    console.log("past trips: ", pastTrips);
+    setSelectedTrip(pastTrips[0]);
+  }, [pastTrips]);
 
+  useEffect(() => {
+    console.log("selected trip: ", selectedTrip);
+  }, [selectedTrip]);
 
-  // const findPastTrip = (trips) => {
-  //   let pastTripsTemp = [];
-  //   console.log(trips);
+  // const findPastTrip = () => {
+  //   const pastTripsTemp = [];
   //   trips.forEach((trip) => {
   //     if (trip.current === "past") {
   //       API.getTrip(trip._id).then((data) => {
+  //         // console.log(data.data);
   //         pastTripsTemp.push(data.data);
   //       });
   //     }
-  //   })
-  //   console.log(pastTripsTemp);
+  //   });
+  //   console.log(pastTripsTemp.data);
 
   //   setPastTrips(pastTripsTemp);
-
   // };
-
-
-  // const handleOnClickForTrip = (id) => {
-  //   console.log(id);
-  //   API.getTrip(id).then(({data})=>{
-  //     setSelectedTrip(data)
-  //   })
-  // };
+  const handleOnClickForTrip = (id) => {
+    console.log(id);
+    API.getTrip(id).then(({ data }) => {
+      setSelectedTrip(data);
+    });
+  };
   //  API.getUser()
-  return (
-    <ThemeProvider theme={theme}>
-      <Paper>
-        <div className={classes.root}>
-          <CssBaseline />
-          <Drawer
-            variant="permanent"
-            classes={{
-              paper: clsx(
-                classes.drawerPaper,
-                !open && classes.drawerPaperClose
-              ),
-            }}
-            open={open}
-          >
-
-            <div className={classes.toolbarIcon}>
-             
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                className={clsx(
-                  classes.menuButton,
-                  open && classes.menuButtonHidden
-                )}
-              >
-                <MenuIcon />
-              </IconButton>
-            </div>
-            <div className={classes.toolbarIcon}>
-              <IconButton onClick={handleDrawerClose}>
-                <ChevronLeftIcon color="#BB86FC" />
-              </IconButton>
-            </div>
-            <Divider />
-            <List>
-              <MainListItems  />
-
-            </List>
-          </Drawer>
-          <main className={classes.content}>
-            {/* <div className={classes.appBarSpacer} /> */}
-            <div className={classes.jumbotron}>
-              <Container maxWidth="sm">
-                <Typography
-                  className={classes.headline}
-                  component="h1"
-                  variant="h2"
-                  align="center"
-                  color="textPrimary"
-                  gutterBottom
-                >
-                  Chicago, Illinois
-                </Typography>
-                <Typography
-                  className={classes.dates}
-                  variant="h4"
+  if (selectedTrip) {
+    return (
+      <ThemeProvider theme={theme}>
+        <Paper>
+          <div className={classes.root}>
+            <CssBaseline />
+            <Drawer
+              variant="permanent"
+              classes={{
+                paper: clsx(
+                  classes.drawerPaper,
+                  !open && classes.drawerPaperClose
+                ),
+              }}
+              open={open}
+            >
+              <div className={classes.toolbarIcon}>
+                <IconButton
+                  edge="start"
                   color="inherit"
-                  noWrap
+                  aria-label="open drawer"
+                  onClick={handleDrawerOpen}
+                  className={clsx(
+                    classes.menuButton,
+                    open && classes.menuButtonHidden
+                  )}
                 >
-                  11/10/20 - 11/19/20
-                </Typography>
+                  <MenuIcon />
+                </IconButton>
+              </div>
+              <div className={classes.toolbarIcon}>
+                <IconButton onClick={handleDrawerClose}>
+                  <ChevronLeftIcon color="#BB86FC" />
+                </IconButton>
+              </div>
+              <Divider />
+              <List>
+                <MainListItems trips={pastTrips} handleClick={handleOnClickForTrip} />
+              </List>
+            </Drawer>
+            <main className={classes.content}>
+              {/* <div className={classes.appBarSpacer} /> */}
+              <div className={classes.jumbotron}>
+                <Container maxWidth="sm">
+                  <Typography
+                    className={classes.headline}
+                    component="h1"
+                    variant="h2"
+                    align="center"
+                    color="textPrimary"
+                    gutterBottom
+                  >
+                    {selectedTrip.city}
+                  </Typography>
+                  <Typography
+                    className={classes.dates}
+                    variant="h4"
+                    color="inherit"
+                    noWrap
+                  >
+                    {selectedTrip.departure} - {selectedTrip.return}
+                  </Typography>
+                </Container>
+              </div>
+              <Container maxWidth="lg" className={classes.container}>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} md={6} lg={6}>
+                    <Paper className={fixedHeightPaper}>
+                      <Typography component="h1" variant="h4" align="left">
+                        Trip Itinerary
+                      </Typography>
+                      <SavedItinerary />
+                    </Paper>
+                  </Grid>
+                  <Grid item xs={12} md={6} lg={6}>
+                    <Paper className={fixedHeightPaper}>
+                      <PhotoGrid />
+                    </Paper>
+                  </Grid>
+                </Grid>
+                <Box pt={4}>
+                  <Navigation />
+                  <Footer />
+                </Box>
               </Container>
-            </div>
-            <Container maxWidth="lg" className={classes.container}>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6} lg={6}>
-                  <Paper className={fixedHeightPaper}>
-                    <Typography component="h1" variant="h4" align="left">
-                      Trip Itinerary
-                    </Typography>
-                    <SavedItinerary  />
-                  </Paper>
-                </Grid>
-                <Grid item xs={12} md={6} lg={6}>
-                  <Paper className={fixedHeightPaper}>
-                    <PhotoGrid />
-                  </Paper>
-                </Grid>
-              </Grid>
-              <Box pt={4}>
-                <Navigation />
-                <Footer />
-              </Box>
-            </Container>
-          </main>
-        </div>
-      </Paper>
-    </ThemeProvider>
-  );
+            </main>
+          </div>
+        </Paper>
+      </ThemeProvider>
+    );
+  } else {
+    return null
+  }
 }
