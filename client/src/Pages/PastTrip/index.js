@@ -231,7 +231,6 @@ export default function Dashboard() {
     });
   };
   //  API.getUser()
-<<<<<<< HEAD
   if (selectedTrip) {
     return (
       <ThemeProvider theme={theme}>
@@ -251,67 +250,6 @@ export default function Dashboard() {
               <div className={classes.toolbarIcon}>
                 <IconButton
                   edge="start"
-=======
-  return (
-    <ThemeProvider theme={theme}>
-      <Paper>
-        <div className={classes.root}>
-          <CssBaseline />
-          <Drawer
-            variant="permanent"
-            classes={{
-              paper: clsx(
-                classes.drawerPaper,
-                !open && classes.drawerPaperClose
-              ),
-            }}
-            open={open}
-          >
-
-            <div className={classes.toolbarIcon}>
-             
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                className={clsx(
-                  classes.menuButton,
-                  open && classes.menuButtonHidden
-                )}
-              >
-                <MenuIcon />
-              </IconButton>
-            </div>
-            <div className={classes.toolbarIcon}>
-              <IconButton onClick={handleDrawerClose}>
-                <ChevronLeftIcon color="#BB86FC" />
-              </IconButton>
-            </div>
-            <Divider />
-            <List>
-              <MainListItems  />
-
-            </List>
-          </Drawer>
-          <main className={classes.content}>
-            {/* <div className={classes.appBarSpacer} /> */}
-            <div className={classes.jumbotron}>
-              <Container maxWidth="sm">
-                <Typography
-                  className={classes.headline}
-                  component="h1"
-                  variant="h2"
-                  align="center"
-                  color="textPrimary"
-                  gutterBottom
-                >
-                  Chicago, Illinois
-                </Typography>
-                <Typography
-                  className={classes.dates}
-                  variant="h4"
->>>>>>> 103db9341c682b9027a53b3fb8056d85d2f69b96
                   color="inherit"
                   aria-label="open drawer"
                   onClick={handleDrawerOpen}
