@@ -64,14 +64,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignInSide(props) {
-  const [validAuthState, setValidAuthState] = useState(["signIn", "signedOut", "signedUp"])
+  const [_validAuthState, setValidAuthState] = useState(["signIn", "signedOut", "signedUp"])
   const classes = useStyles();
   const theme = createMuiTheme({
     palette: {
       type: "dark",
     },
   });
-  if (validAuthState.includes(props.authState)) {
+  if (_validAuthState.includes(props.authState)) {
   return (
     <ThemeProvider theme={theme}>
       <Paper>
@@ -96,7 +96,7 @@ export default function SignInSide(props) {
                 <LockOutlinedIcon />
               </Avatar>
 
-              <AuthForms />
+              <AuthForms authState={props.authState} onStateChange={props.onStateChange}/>
             </div>
           </Grid>
         </Grid>

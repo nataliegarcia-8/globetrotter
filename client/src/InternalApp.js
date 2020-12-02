@@ -11,7 +11,7 @@ import CurrentTrip from "./Pages/CurrentTrip";
 import UserState from "./Components/globalUserState";
 import API from "./utils/API";
 
-import { Auth, Hub } from "aws-amplify";
+import { Auth } from "aws-amplify";
 
 function InternalApp(props) {
   const [user, setUser] = useState(null);
