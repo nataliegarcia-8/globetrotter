@@ -180,16 +180,16 @@ export default function Dashboard() {
   // const [saveSelected, setSaveSelected] = useState({});
 
   const [localData, setLocalData] = useState(
-    JSON.parse(localStorage.getItem("trips"))
+    JSON.parse(localStorage.getItem("user"))
   );
 
   // ---------- Use Effect hooks -------------
  
 
   useEffect(() => {
-    console.log("local: ", localData.tripsData);
+    console.log("local: ", localData);
     // setTrips(localData.globalUserData.trips)
-    setTrips(localData.tripsData);
+    setTrips(localData.globalUserData.trips);
   }, []);
 
   useEffect(() => {
