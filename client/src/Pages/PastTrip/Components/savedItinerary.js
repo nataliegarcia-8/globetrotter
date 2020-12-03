@@ -30,25 +30,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AddressForm() {
+export default function AddressForm(props) {
   const classes = useStyles();
 
-  // const renderActivities = () => {
-  //   if (props.activities) {
-  //     return props.activities.map((activity, i) => (
-  //       <ListItem>
-  //         <ListItemAvatar>
-  //           <Avatar className={classes.icon}>
-  //             <CheckIcon />
-  //           </Avatar>
-  //         </ListItemAvatar>
-  //         <ListItemText primary={activity.activity} secondary={activity.date} />
-  //       </ListItem>
-  //     ));
-  //   } else {
-  //     return;
-  //   }
-  // };
+  const renderActivities = () => {
+    if (props.activities) {
+      return props.activities.map((activity, i) => (
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar className={classes.icon}>
+              <CheckIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary={activity.activity} secondary={activity.date} />
+        </ListItem>
+      ));
+    } else {
+      return (
+     
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar className={classes.icon}>
+                <CheckIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary="Nothing Saved to Itineary"
+              secondary="N/A"
+            />
+          </ListItem>
+          
+        
+      );
+    }
+  };
   return (
     <React.Fragment>
       <Grid container spacing={3}>
@@ -59,31 +74,7 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={12} sm={12}>
           <List className={classes.root}>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <CheckIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Chicago architecture river cruise
-" secondary="11/11/2020 1:30pm" />
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <CheckIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Instagram it up by the bean" secondary="11/12/2020 3:30pm" />
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar className={classes.icon}>
-                  <CheckIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Cubs game at Wrigley Field" secondary="11/14/2020 5:30pm" />
-            </ListItem>
+            {renderActivities()}
           </List>
         </Grid>
       </Grid>

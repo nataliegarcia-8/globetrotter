@@ -7,8 +7,8 @@ function AuthWrapper(props) {
     console.log("Auth State: ", props.authState)
       return (
         <div>
-            <Login authState={props.authState}/>
-            <InternalApp authState={props.authState} />
+            <Login authState={props.authState} onStateChange={props.onStateChange}/>
+            <InternalApp authState={props.authState} onStateChange={props.onStateChange}/>
         </div>
       );
 

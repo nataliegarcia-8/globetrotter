@@ -24,6 +24,7 @@ function SignOutButton() {
       variant='contained'
       onClick={() => {
         Auth.signOut();
+        localStorage.clear();
         <Redirect to='/' />;
       }}>
       Sign out

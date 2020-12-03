@@ -7,6 +7,12 @@ import awsconfig from "./aws-exports";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-Amplify.configure(awsconfig);
-
+Amplify.configure({
+    Auth: {
+      region: "us-east-1",
+      userPoolId: "us-east-1_O9fYnQkA9",
+      userPoolWebClientId: "o0q470hl95an7murb10fabvfv",
+    },
+  });
+  window.LOG_LEVEL = 'DEBUG';
 ReactDOM.render(<App />, document.getElementById("root"));

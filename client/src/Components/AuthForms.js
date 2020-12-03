@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AuthForms() {
+function AuthForms(props) {
   const initialFormState = {
     email: "",
     password: "",
@@ -83,6 +83,7 @@ function AuthForms() {
     e.preventDefault();
     const { email, code } = formState;
     await Auth.confirmSignUp(email, code);
+
     setFormState({ ...formState, formType: "signIn" });
   };
 
@@ -90,7 +91,11 @@ function AuthForms() {
     e.preventDefault();
     const { email, password } = formState;
     await Auth.signIn(email, password);
+    // await Auth.verifyCurrentUserAttribute({email: email});
+
+    // Auth.verifyCurrentUserAttribute(email);
     // saveNewUser(user, formState.firstName, formState.lastName )
+    // props.onStateChange("signedIn", {})
     setFormState({ ...formState, formType: "signedIn" });
 
   };

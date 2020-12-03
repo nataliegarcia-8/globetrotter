@@ -86,6 +86,8 @@ export const secondaryListItems = (
         primary='Logout'
         onClick={() => {
           Auth.signOut();
+          localStorage.clear();
+
         }}></ListItemText>
     </ListItem>
   </div>
