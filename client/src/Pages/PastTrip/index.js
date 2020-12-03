@@ -302,7 +302,7 @@ export default function Dashboard() {
                       <Typography component="h1" variant="h4" align="left">
                         Trip Itinerary
                       </Typography>
-                      <SavedItinerary />
+                      <SavedItinerary activities={selectedTrip.activities} />
                     </Paper>
                   </Grid>
                   <Grid item xs={12} md={6} lg={6}>
