@@ -27,6 +27,8 @@ import Navigation from "../../Components/Navigation";
 import PhotoGrid from "./Components/photoGrid";
 import { Auth } from "aws-amplify";
 import API from "../../utils/API";
+import moment from "moment";
+
 // import { GlobalUserState } from "../../Components/globalUserState";
 
 const drawerWidth = 240;
@@ -177,7 +179,7 @@ export default function Dashboard() {
   const [trips, setTrips] = useState([]);
   const [pastTrips, setPastTrips] = useState({});
   const [selectedTrip, setSelectedTrip] = useState({});
-  // const [saveSelected, setSaveSelected] = useState({});
+  const [firstSelected, setFirstSelected] = useState({});
 
   const [localData, setLocalData] = useState(
     JSON.parse(localStorage.getItem("user"))
@@ -203,32 +205,23 @@ export default function Dashboard() {
 
   useEffect(() => {
     console.log("past trips: ", pastTrips);
+    
     setSelectedTrip(pastTrips[0]);
+    
   }, [pastTrips]);
 
   useEffect(() => {
     console.log("selected trip: ", selectedTrip);
   }, [selectedTrip]);
 
-  // const findPastTrip = () => {
-  //   const pastTripsTemp = [];
-  //   trips.forEach((trip) => {
-  //     if (trip.current === "past") {
-  //       API.getTrip(trip._id).then((data) => {
-  //         // console.log(data.data);
-  //         pastTripsTemp.push(data.data);
-  //       });
-  //     }
-  //   });
-  //   console.log(pastTripsTemp.data);
-
-  //   setPastTrips(pastTripsTemp);
-  // };
-  const handleOnClickForTrip = (id) => {
-    console.log(id);
+  const getSelectedTrip = (id) =>{
     API.getTrip(id).then(({ data }) => {
       setSelectedTrip(data);
     });
+  }
+  const handleOnClickForTrip = (id) => {
+    console.log(id);
+    getSelectedTrip(id)
   };
   //  API.getUser()
   if (selectedTrip) {
@@ -291,7 +284,7 @@ export default function Dashboard() {
                     color="inherit"
                     noWrap
                   >
-                    {selectedTrip.departure} - {selectedTrip.return}
+                    {moment(selectedTrip.departure).format('MMM Do YYYY')} - {moment(selectedTrip.return).format('MMM Do YYYY')}
                   </Typography>
                 </Container>
               </div>

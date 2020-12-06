@@ -14,6 +14,7 @@ import ImageIcon from "@material-ui/icons/Image";
 import WorkIcon from "@material-ui/icons/Work";
 import BeachAccessIcon from "@material-ui/icons/BeachAccess";
 import CheckIcon from "@material-ui/icons/Check";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   depositContext: {
@@ -34,7 +35,8 @@ export default function AddressForm(props) {
   const classes = useStyles();
 
   const renderActivities = () => {
-    if (props.activities) {
+    if (props.activities ) {
+      console.log(props.activities);
       return props.activities.map((activity, i) => (
         <ListItem>
           <ListItemAvatar>
@@ -42,7 +44,7 @@ export default function AddressForm(props) {
               <CheckIcon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary={activity.activity} secondary={activity.date} />
+          <ListItemText primary={activity.activity} secondary={moment(activity.date).format('MM/DD/YY LT')} />
         </ListItem>
       ));
     } else {
@@ -55,7 +57,7 @@ export default function AddressForm(props) {
               </Avatar>
             </ListItemAvatar>
             <ListItemText
-              primary="Nothing Saved to Itineary"
+              primary="Nothing Saved to itinerary"
               secondary="N/A"
             />
           </ListItem>
