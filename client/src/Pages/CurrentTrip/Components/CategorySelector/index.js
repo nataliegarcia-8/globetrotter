@@ -63,7 +63,7 @@ export default function CategorySelector(props) {
       case 40:
         return "hotel";
       case 50:
-        return "transport";
+        return "transportion";
       case 60:
         return "misc";
       default:
@@ -79,7 +79,7 @@ export default function CategorySelector(props) {
   };
 
   const [values, setValues] = useState({
-    amount: "",
+    amount: "0",
   });
 
   const handleInput = (prop) => (event) => {
@@ -92,8 +92,8 @@ export default function CategorySelector(props) {
     setCurrentBudget(props.currentTrip.budget);
 
   };
-  console.log("current: ", props.currentTrip.budget);
-  console.log(props.currentTrip._id, {expense: parseInt(values.amount), category: categoryName});
+  // console.log("current: ", props.currentTrip.budget);
+  // console.log(props.currentTrip._id, {expense: parseInt(values.amount), category: categoryName});
 
   return (
     <div className={classes.root}>
