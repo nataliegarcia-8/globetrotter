@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 function CircularProgressWithLabel(props) {
     const classes = useStyles();
 
-    const percentage = ((props.statesBeenTo / 50) * 100);
+    const percentage = (Math.round((props.statesBeenTo / 50) * 100));
   return (
  
 <Grid container justify='center'>

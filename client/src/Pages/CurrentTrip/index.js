@@ -212,7 +212,7 @@ export default function CurrentTrip() {
           </Container>
         </div>
         <Container maxWidth='lg'>
-          <Steps />
+          <Steps startDate={currentTrip.departure} endDate={currentTrip.return}/>
           <main className={classes.layout}>
             <div className={classes.root}>
               <Grid container spacing={3}>
