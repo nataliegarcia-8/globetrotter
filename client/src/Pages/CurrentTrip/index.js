@@ -132,7 +132,7 @@ export default function CurrentTrip() {
     city: "",
     state: "",
   });
-  const [activity, setActivity] = useState(initialActivityState);
+  const [activity, setActivity] = useState(initialActivityState); 
   const [expensesTotal, setExpensesTotal] = useState(0);
   const [activities, setActivities] = useState([]);
   const [currentBudget, setCurrentBudget] = useState(0);
@@ -309,7 +309,7 @@ export default function CurrentTrip() {
                   </Paper>
                 </Grid>
 
-                {/* Activity search */}
+                {/* Activity searching */}
                 <Grid item xs={12} justify="center">
                   <Paper className={classes.paper}>
                     <Title>
