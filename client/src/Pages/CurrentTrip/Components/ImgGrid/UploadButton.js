@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { DropzoneDialog } from "material-ui-dropzone";
 import Button from "@material-ui/core/Button";
 import CameraAltIcon from "@material-ui/icons/CameraAlt";
-import Amplify, { Storage } from 'aws-amplify'
-export default function Dropzone() {
+import S3FileUpload from 'react-s3';
+import { uploadFile } from 'react-s3';
+import API from '../../../../utils/API'
+
+export default function Dropzone(props) {
   const [name, setName] = useState('')
   const [file, setFile] = useState([])
   const [open, setOpen] = useState(false)
@@ -13,6 +16,13 @@ export default function Dropzone() {
   //   open: false,
   //   files: [],
   // };
+  const config = {
+    bucketName: 'stateside-img-bucket',
+    region: 'us-east-1',
+    dirName: 'photos',
+    accessKeyId: 'AKIAQYPLSONUTHZTYAXN',
+    secretAccessKey: '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',
+}
 
   const handleClose = () => {
     setOpen(false)
@@ -20,21 +30,18 @@ export default function Dropzone() {
 
   const handleSave = (files) => {
     //Saving files to state for further use and closing Modal.
-    console.log(files);
+    console.log(files[0]);
     setFile(files)
     setOpen(false)
-    Storage.put(files[0].name, files, {
-      /* level: 'protected', */
-      contentType: file.type,
-    })
-      .then((result) => {
-        console.log(result)
-        setResponse(`Success uploading file: ${name}!`)
-      })
-      .catch((err) => {
-        console.log(err)
-        setResponse(`Can't upload file: ${err}`)
-      })
+    uploadFile(files[0], config)
+    .then(data => {
+
+      console.log(data.location)
+      API.savePhoto(props.id, {photo: data.location})
+    }
+      
+      )
+    .catch(err => console.error(err))
 
     
   };

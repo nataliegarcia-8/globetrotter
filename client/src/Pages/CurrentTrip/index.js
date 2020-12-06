@@ -116,17 +116,32 @@ export default function CurrentTrip() {
   const [localUserData, setLocalUserData] = useState({});
 
   const [trips, setTrips] = useState([]);
-  const [currentTrip, setCurrentTrip] = useState({});
-  const [activity, setActivity] = useState(initialActivityState);
+  const [currentTrip, setCurrentTrip] = useState({
+    expenses: 0,
+    budgetTableData: {
+      food: 0,
+      activities: 0,
+      flight: 0,
+      hotel: 0,
+      transportation: 0,
+      misc: 0,
+    },
+    activities: [],
+    budget: 0,
+    _id: "",
+    city: "",
+    state: "",
+  });
+  const [activity, setActivity] = useState(initialActivityState); 
   const [expensesTotal, setExpensesTotal] = useState(0);
   const [activities, setActivities] = useState([]);
-  const [curretnBudget, setCurrentBudget] = useState(0);
+  const [currentBudget, setCurrentBudget] = useState(0);
 
   useEffect(() => {
-    const localData = JSON.parse(localStorage.getItem('user'))
+    const localData = JSON.parse(localStorage.getItem("user"));
     console.log("local: ", localData.globalUserData.trips);
     setTrips(localData.globalUserData.trips);
-  }, [])
+  }, []);
   // useEffect(() => {
   //   console.log("global state: ", globalUserData);
   //   console.log("local: ", localUserData);
@@ -142,21 +157,67 @@ export default function CurrentTrip() {
     console.log("current: ", currentTrip);
     subtractExpensesFromBudget(currentTrip.expenses);
     setActivities(currentTrip.activities);
- 
+    setCurrentBudget(currentTrip.budget - expensesTotal)
   }, [currentTrip]);
 
   useEffect(() => {
     console.log("expenses: ", expensesTotal);
+    console.log(typeof expensesTotal);
     console.log("budget: ", currentTrip.budget);
-    setCurrentBudget(currentTrip.budget - expensesTotal)
-    
+    console.log(typeof currentTrip.budget);
+    setCurrentBudget(currentTrip.budget - expensesTotal);
   }, [expensesTotal]);
 
   const findCurrentTrip = () => {
     trips.forEach((trip) => {
       if (trip.current === "current") {
-        API.getTrip(trip._id).then((data) => {
-          setCurrentTrip(data.data);
+        API.getTrip(trip._id).then((response) => {
+          const {
+            activities,
+            budget,
+            city,
+            current,
+            departure,
+            expenses,
+            lat,
+            long,
+            state,
+            _v,
+            _id,
+          } = response.data;
+          console.log(response.data);
+          function crunchNumbers(array) {
+            const object = {
+              food: 0,
+              activities: 0,
+              flight: 0,
+              hotel: 0,
+              transportation: 0,
+              misc: 0,
+            };
+            array.forEach((item) => {
+              const { category, expense } = item;
+              object[category] += expense;
+            });
+            return object;
+          }
+          console.log({budget})
+          setCurrentTrip({
+            ...currentTrip,
+            activities,
+            budget,
+            budgetTableData: crunchNumbers(expenses),
+            city,
+            current,
+            departure,
+            expenses,
+            lat,
+            long,
+            return: response.data.return,
+            state,
+            _v,
+            _id,
+          });
         });
       }
       console.log(trip);
@@ -181,7 +242,11 @@ export default function CurrentTrip() {
       });
       setExpensesTotal(count);
       console.log("total expense: ", count);
+      return;
     }
+    setExpensesTotal(0);
+    return
+
   };
 
   return (
@@ -190,14 +255,15 @@ export default function CurrentTrip() {
         <CssBaseline />
         {/* Hero unit */}
         <div className={classes.jumbotron}>
-          <Container maxWidth='sm'>
+          <Container maxWidth="sm">
             <Typography
               className={classes.headline}
-              component='h1'
-              variant='h2'
-              align='center'
-              color='textPrimary'
-              gutterBottom>
+              component="h1"
+              variant="h2"
+              align="center"
+              color="textPrimary"
+              gutterBottom
+            >
               {currentTrip.city}
             </Typography>
 
@@ -211,14 +277,14 @@ export default function CurrentTrip() {
             </Typography>
           </Container>
         </div>
-        <Container maxWidth='lg'>
-          <Steps startDate={currentTrip.departure} endDate={currentTrip.return}/>
+        <Container maxWidth="lg">
+          <Steps />
           <main className={classes.layout}>
             <div className={classes.root}>
               <Grid container spacing={3}>
                 <Grid item xs={12} md={8} lg={8}>
                   <Paper className={fixedHeightPaper}>
-                    <Typography component='h1' variant='h4' align='left'>
+                    <Typography component="h1" variant="h4" align="left">
                       Trip Itinerary
                     </Typography>
 
@@ -233,20 +299,29 @@ export default function CurrentTrip() {
                   <Paper className={fixedHeightPaper}>
                     <div>
                       {" "}
-                      <Budget
-                        
-                        budget={curretnBudget}
-                      />{" "}
+                      <Budget budget={currentBudget} />{" "}
                     </div>
-                    <CategorySelector currentTrip={currentTrip} />
-                    <BudgetTable expenses={currentTrip.expenses} />
+                    <CategorySelector reset={findCurrentTrip} currentTrip={currentTrip} />
+                    <BudgetTable
+                      data={currentTrip.budgetTableData}
+                      expenses={currentTrip.expenses}
+                    />
                   </Paper>
                 </Grid>
-                <Grid item xs={12} justify='center'>
-                  <Paper
-              className={classes.paper}>
+                 {/* Activity search */}
+             {/* <Grid item xs={12} justify="center">
+                  <Paper className={classes.paper}>
                     <Title>
                       <UploadBtn />
+                    </Title>
+                    <ImgGrid />
+                  </Paper>
+                </Grid> */}
+                
+                <Grid item xs={12} justify="center">
+                  <Paper className={classes.paper}>
+                    <Title>
+                      <UploadBtn id={currentTrip._id} />
                     </Title>
                     <ImgGrid />
                   </Paper>

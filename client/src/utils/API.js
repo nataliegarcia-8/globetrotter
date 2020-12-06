@@ -38,6 +38,11 @@ export default {
     return axios.post("/api/expenses/" + id, expensesData);
     
   },
+  savePhoto: function(id, photoData) {
+    console.log(photoData, id);
+    return axios.post("/api/photos/" + id, photoData);
+    
+  },
   getTrips: function() {
     return axios.get("/api/trips");
   },
