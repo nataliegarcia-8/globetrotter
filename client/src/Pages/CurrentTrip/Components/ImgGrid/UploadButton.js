@@ -1,40 +1,54 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { DropzoneDialog } from "material-ui-dropzone";
 import Button from "@material-ui/core/Button";
 import CameraAltIcon from "@material-ui/icons/CameraAlt";
+import Amplify, { Storage } from 'aws-amplify'
+export default function Dropzone() {
+  const [name, setName] = useState('')
+  const [file, setFile] = useState([])
+  const [open, setOpen] = useState(false)
 
-export default class Dropzone extends Component {
-  state = {
-    open: false,
-    files: [],
+  const [response, setResponse] = useState('')
+  // state = {
+  //   open: false,
+  //   files: [],
+  // };
+
+  const handleClose = () => {
+    setOpen(false)
   };
 
-  handleClose = () => {
-    this.setState({
-      open: false,
-    });
-  };
-
-  handleSave = (files) => {
+  const handleSave = (files) => {
     //Saving files to state for further use and closing Modal.
     console.log(files);
-    this.setState({
-      files: files,
-      open: false,
-    });
+    setFile(files)
+    setOpen(false)
+    Storage.put(files[0].name, files, {
+      /* level: 'protected', */
+      contentType: file.type,
+    })
+      .then((result) => {
+        console.log(result)
+        setResponse(`Success uploading file: ${name}!`)
+      })
+      .catch((err) => {
+        console.log(err)
+        setResponse(`Can't upload file: ${err}`)
+      })
+
+    
   };
 
-  handleOpen = () => {
-    this.setState({
-      open: true,
-    });
+ const handleOpen = () => {
+    setOpen(true)
+
   };
 
-  render() {
+  
     return (
       <div>
         <Button
-          onClick={this.handleOpen}
+          onClick={handleOpen}
           variant='contained'
           style={{
             color: "white",
@@ -47,14 +61,14 @@ export default class Dropzone extends Component {
           Upload
         </Button>
         <DropzoneDialog
-          open={this.state.open}
-          onSave={this.handleSave}
+          open={open}
+          onSave={handleSave}
           acceptedFiles={["image/jpeg", "image/png", "image/bmp"]}
           showPreviews={true}
           maxFileSize={5000000}
-          onClose={this.handleClose}
+          onClose={handleClose}
         />
       </div>
     );
-  }
+  
 }

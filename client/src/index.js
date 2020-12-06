@@ -13,6 +13,10 @@ Amplify.configure({
       userPoolId: "us-east-1_O9fYnQkA9",
       userPoolWebClientId: "o0q470hl95an7murb10fabvfv",
     },
+    Storage: {
+      bucket: 'amplify-stateside-dev-123619-deployment', //REQUIRED -  Amazon S3 bucket
+      region: 'us-east-1', //OPTIONAL -  Amazon service region
+  }
   });
   window.LOG_LEVEL = 'DEBUG';
 ReactDOM.render(<App />, document.getElementById("root"));
