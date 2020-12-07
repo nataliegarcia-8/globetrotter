@@ -14,7 +14,7 @@ module.exports = {
       .findById(req.params.id)
       .populate("activities")
       .populate("expenses")
-      
+      .populate("photos")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

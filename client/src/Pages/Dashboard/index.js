@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from "react";
+import React, { useEffect, useState, useContext } from "react";
 import clsx from "clsx";
 import {
   createMuiTheme,
@@ -135,27 +135,19 @@ export default function Dashboard() {
       type: "dark",
     },
   });
-  
-  
-  const [tripsData,setTripsData] = useState([])
-  const [globalUserData, setGlobalUserData] = useContext(GlobalUserState)
 
-  const localData = localStorage.getItem('user')
+  const [tripsData, setTripsData] = useState([]);
+  const [globalUserData, setGlobalUserData] = useContext(GlobalUserState);
+
+  const localData = localStorage.getItem("user");
   // ---------- Use Effect hooks -------------
   useEffect(() => {
-    
-    console.log("global state: ",  globalUserData);
-   
+    console.log("global state: ", globalUserData);
 
-      localStorage.setItem('user', JSON.stringify({globalUserData}))
-      
-      setTripsData(globalUserData.trips)
-    
-    
+    localStorage.setItem("user", JSON.stringify({ globalUserData }));
+
+    setTripsData(globalUserData.trips);
   }, [globalUserData]);
-  
-
-  
 
   // ---------- Check cognito user and then get db user from cognito ID -------------
   //  API.getUser()
@@ -165,39 +157,43 @@ export default function Dashboard() {
         <div className={classes.root}>
           <CssBaseline />
           <AppBar
-            position='absolute'
-            className={clsx(classes.appBar, open && classes.appBarShift)}>
+            position="absolute"
+            className={clsx(classes.appBar, open && classes.appBarShift)}
+          >
             <Toolbar className={classes.toolbar}>
               <IconButton
-                edge='start'
-                color='inherit'
-                aria-label='open drawer'
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
                 onClick={handleDrawerOpen}
                 className={clsx(
                   classes.menuButton,
                   open && classes.menuButtonHidden
-                )}>
+                )}
+              >
                 <MenuIcon />
               </IconButton>
               <Typography
-                component='h1'
-                variant='h6'
-                color='inherit'
+                component="h1"
+                variant="h6"
+                color="inherit"
                 noWrap
-                className={classes.title}>
+                className={classes.title}
+              >
                 Welcome, {globalUserData.email}!
               </Typography>
             </Toolbar>
           </AppBar>
           <Drawer
-            variant='permanent'
+            variant="permanent"
             classes={{
               paper: clsx(
                 classes.drawerPaper,
                 !open && classes.drawerPaperClose
               ),
             }}
-            open={open}>
+            open={open}
+          >
             <div className={classes.toolbarIcon}>
               <IconButton onClick={handleDrawerClose}>
                 <ChevronLeftIcon />
@@ -210,15 +206,15 @@ export default function Dashboard() {
           </Drawer>
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
-            <Container maxWidth='lg' className={classes.container}>
+            <Container maxWidth="lg" className={classes.container}>
               <Grid container spacing={3}>
                 <Grid item xs={12} md={8} lg={8}>
-                <Paper className={classes.paper}>
+                  <Paper className={classes.paper}>
                     <Map trips={globalUserData.trips} />
                   </Paper>
                 </Grid>
                 <Grid item xs={12} md={4} lg={4}>
-                    <Charts />
+                  <Charts />
                 </Grid>
               </Grid>
 

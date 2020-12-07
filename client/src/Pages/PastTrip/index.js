@@ -9,6 +9,11 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
 import SavedItinerary from "./Components/savedItinerary";
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import { Route, Redirect, Link } from "react-router-dom";
+import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
+import CardTravelIcon from "@material-ui/icons/CardTravel";
+import EventIcon from "@material-ui/icons/Event";
 // import AppBar from "@material-ui/core/AppBar";
 // import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
@@ -133,9 +138,27 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "flex-end",
   },
+  // button: {
+  //   marginTop: theme.spacing(3),
+  //   marginLeft: theme.spacing(1),
+  // },
   button: {
-    marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1),
+    margin: theme.spacing(1),
+    color: "white",
+    backgroundColor: "#BB86FC",
+    padding: theme.spacing(3),
+    "&:hover": {
+      backgroundColor: "#BB90FF",
+    },
+    // maxWidth: "325px",
+    height: "75px",
+    fontSize: "18px",
+  },
+  center: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   dates: {
     display: "flex",
@@ -186,7 +209,6 @@ export default function Dashboard() {
   );
 
   // ---------- Use Effect hooks -------------
- 
 
   useEffect(() => {
     console.log("local: ", localData);
@@ -205,23 +227,22 @@ export default function Dashboard() {
 
   useEffect(() => {
     console.log("past trips: ", pastTrips);
-    
+
     setSelectedTrip(pastTrips[0]);
-    
   }, [pastTrips]);
 
   useEffect(() => {
     console.log("selected trip: ", selectedTrip);
   }, [selectedTrip]);
 
-  const getSelectedTrip = (id) =>{
+  const getSelectedTrip = (id) => {
     API.getTrip(id).then(({ data }) => {
       setSelectedTrip(data);
     });
-  }
+  };
   const handleOnClickForTrip = (id) => {
     console.log(id);
-    getSelectedTrip(id)
+    getSelectedTrip(id);
   };
   //  API.getUser()
   if (selectedTrip) {
@@ -261,7 +282,10 @@ export default function Dashboard() {
               </div>
               <Divider />
               <List>
-                <MainListItems trips={pastTrips} handleClick={handleOnClickForTrip} />
+                <MainListItems
+                  trips={pastTrips}
+                  handleClick={handleOnClickForTrip}
+                />
               </List>
             </Drawer>
             <main className={classes.content}>
@@ -284,7 +308,8 @@ export default function Dashboard() {
                     color="inherit"
                     noWrap
                   >
-                    {moment(selectedTrip.departure).format('MMM Do YYYY')} - {moment(selectedTrip.return).format('MMM Do YYYY')}
+                    {moment(selectedTrip.departure).format("MMM Do YYYY")} -{" "}
+                    {moment(selectedTrip.return).format("MMM Do YYYY")}
                   </Typography>
                 </Container>
               </div>
@@ -300,7 +325,7 @@ export default function Dashboard() {
                   </Grid>
                   <Grid item xs={12} md={6} lg={6}>
                     <Paper className={fixedHeightPaper}>
-                      <PhotoGrid />
+                      <PhotoGrid photos={selectedTrip.photos} />
                     </Paper>
                   </Grid>
                 </Grid>
@@ -315,6 +340,82 @@ export default function Dashboard() {
       </ThemeProvider>
     );
   } else {
-    return null
+    
+   
+    return (
+      <ThemeProvider theme={theme}>
+        <Paper>
+          <div className={classes.root}>
+            <CssBaseline />
+
+            <main className={classes.content}>
+              {/* <div className={classes.appBarSpacer} /> */}
+              <div className={classes.jumbotron}>
+                <Container maxWidth="sm">
+                  <Typography
+                    className={classes.dates}
+                    variant="h2"
+                    color="inherit"
+                    noWrap
+                  >
+                    {"No Past Trips Found"}
+                  </Typography>
+                </Container>
+              </div>
+              <Container maxWidth="lg" className={classes.container}>
+                
+                  <div className={classes.center}>
+                    <Grid container spacing={4}>
+                      <Grid item xs={12} md={4} lg={6}>
+                        <Route
+                          render={({ history }) => (
+                            <Button
+                              fullWidth
+                              variant="contained"
+                              color="primary"
+                              size="large"
+                              onClick={() => {
+                                history.push("/currenttrip");
+                              }}
+                              className={classes.button}
+                              startIcon={<CardTravelIcon />}
+                            >
+                              Current Trip
+                            </Button>
+                          )}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={4} lg={6}>
+                        <Route
+                          render={({ history }) => (
+                            <Button
+                              fullWidth
+                              variant="contained"
+                              color="primary"
+                              size="large"
+                              onClick={() => {
+                                history.push("/plantrip");
+                              }}
+                              className={classes.button}
+                              startIcon={<SpeakerNotesIcon />}
+                            >
+                              Plan A Trip
+                            </Button>
+                          )}
+                        />
+                      </Grid>
+                    </Grid>
+                  </div>
+                
+                <Box pt={4}>
+                  <Navigation />
+                  <Footer />
+                </Box>
+              </Container>
+            </main>
+          </div>
+        </Paper>
+      </ThemeProvider>
+    );
   }
 }

@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const tileData = [
+const tileData = [] || [
   {
     img: image1,
   },
@@ -56,17 +56,17 @@ const tileData = [
   },
 ];
 
-export default function ImgGrid() {
+export default function ImgGrid(props) {
   const classes = useStyles();
-
+  // console.log(props.photos);
   return (
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={2.5}>
-        {tileData.map((tile) => (
-          <GridListTile key={tile.img}>
-            <img src={tile.img} alt={tile.title} />
+        {props.photos.map((photo) => (
+          <GridListTile key={photo.photo}>
+            <img src={photo.photo} alt="photo" />
             <GridListTileBar
-              title={tile.title}
+              title="photo"
               classes={{
                 root: classes.titleBar,
                 // title: classes.title,

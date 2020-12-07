@@ -49,15 +49,15 @@ const tileData = [
     cols: 1,
   },
 ];
-export default function ImageGridList() {
+export default function ImageGridList(props) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <GridList cellHeight={160} className={classes.gridList} cols={3}>
-        {tileData.map((tile) => (
-          <GridListTile key={tile.img} cols={tile.cols || 1}>
-            <img src={tile.img} alt={tile.title} />
+        {props.photos.map((photo) => (
+          <GridListTile key={photo.photo} cols={ 1}>
+            <img src={photo.photo} alt={"photo"} />
           </GridListTile>
         ))}
       </GridList>

@@ -127,6 +127,7 @@ export default function CurrentTrip() {
       misc: 0,
     },
     activities: [],
+    photos: [],
     budget: 0,
     _id: "",
     city: "",
@@ -179,6 +180,7 @@ export default function CurrentTrip() {
             current,
             departure,
             expenses,
+            photos,
             lat,
             long,
             state,
@@ -211,6 +213,7 @@ export default function CurrentTrip() {
             current,
             departure,
             expenses,
+            photos,
             lat,
             long,
             return: response.data.return,
@@ -220,7 +223,7 @@ export default function CurrentTrip() {
           });
         });
       }
-      console.log(trip);
+      console.log("current trip: ", trip);
     });
   };
 
@@ -321,9 +324,9 @@ export default function CurrentTrip() {
                 <Grid item xs={12} justify="center">
                   <Paper className={classes.paper}>
                     <Title>
-                      <UploadBtn id={currentTrip._id} />
+                      <UploadBtn id={currentTrip._id} reset={findCurrentTrip}/>
                     </Title>
-                    <ImgGrid />
+                    <ImgGrid photos={currentTrip.photos} />
                   </Paper>
                 </Grid>
               </Grid>
