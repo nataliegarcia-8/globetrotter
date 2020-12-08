@@ -364,9 +364,9 @@ export default function Dashboard() {
               </div>
               <Container maxWidth="lg" className={classes.container}>
                 
-                  <div className={classes.center}>
-                    <Grid container spacing={4}>
-                      <Grid item xs={12} md={4} lg={6}>
+              <div className={classes.center}>
+                    <Grid container spacing={3}>
+                      <Grid item xs={12} md={4} lg={4}>
                         <Route
                           render={({ history }) => (
                             <Button
@@ -385,7 +385,26 @@ export default function Dashboard() {
                           )}
                         />
                       </Grid>
-                      <Grid item xs={12} md={4} lg={6}>
+                      <Grid item xs={12} md={4} lg={4}>
+                        <Route
+                          render={({ history }) => (
+                            <Button
+                              fullWidth
+                              variant="contained"
+                              color="primary"
+                              size="large"
+                              onClick={() => {
+                                history.push("/");
+                              }}
+                              className={classes.button}
+                              startIcon={<EventIcon />}
+                            >
+                              Dashboard
+                            </Button>
+                          )}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={4} lg={4}>
                         <Route
                           render={({ history }) => (
                             <Button
