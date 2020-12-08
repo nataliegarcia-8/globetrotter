@@ -4,13 +4,16 @@ const usersRoutes = require("./users");
 const tripsRoutes = require("./trips");
 const expensesRoutes = require("./expenses");
 const activitiesRoutes = require("./activities");
+const photosRoutes = require("./photos");
+
 
 // Book routes
 router.use("/users", usersRoutes);
 router.use("/trips", tripsRoutes);
-router.use("/img", require("./photos"))
 router.use("/expenses", expensesRoutes);
 router.use("/activities", activitiesRoutes);
+router.use("/photos", photosRoutes);
+
 
 
 

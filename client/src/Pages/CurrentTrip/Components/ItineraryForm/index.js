@@ -56,7 +56,7 @@ export default function ActivitiesForm(props) {
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary={activity.activity} 
-          secondary={moment(activity.date).format('MM-DD-YYYY, hh:mm A')} />
+          secondary={moment(activity.date).format('MM/DD/YY LT')} />
         </ListItem>
       ));
     } else {

@@ -9,6 +9,7 @@ import image3 from "../../CurrentTrip/Components/ImgGrid/Chicago3.jpg";
 import image4 from "../../CurrentTrip/Components/ImgGrid/Chicago4.jpg";
 import image5 from "../../CurrentTrip/Components/ImgGrid/Chicago5.jpg";
 import image6 from "../../CurrentTrip/Components/ImgGrid/Chicago6.jpg";
+import { el } from "date-fns/locale";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,18 +50,22 @@ const tileData = [
     cols: 1,
   },
 ];
-export default function ImageGridList() {
+export default function ImageGridList(props) {
   const classes = useStyles();
+if(props.photos){
 
   return (
     <div className={classes.root}>
       <GridList cellHeight={160} className={classes.gridList} cols={3}>
-        {tileData.map((tile) => (
-          <GridListTile key={tile.img} cols={tile.cols || 1}>
-            <img src={tile.img} alt={tile.title} />
+        {props.photos.map((photo) => (
+          <GridListTile key={photo.photo} cols={ 1}>
+            <img src={photo.photo} alt={"photo"} />
           </GridListTile>
         ))}
       </GridList>
     </div>
   );
+} else {
+  return null
+}
 }

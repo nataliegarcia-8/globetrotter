@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from "react";
-
 import Dashboard from "./Pages/Dashboard";
 import NoMatch from "./Pages/NoMatch";
 import PlanTrip from "./Pages/PlanTrip";
-
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
 import PastTrip from "./Pages/PastTrip";
 import CurrentTrip from "./Pages/CurrentTrip";
 import UserState from "./Components/globalUserState";
 import API from "./utils/API";
-
-import { Auth, Hub } from "aws-amplify";
+import { Auth } from "aws-amplify";
 
 function InternalApp(props) {
   const [user, setUser] = useState(null);
   useEffect(() => {
     checkUser();
   }, []);
-  
+
   const checkUser = async () => {
     if (user === null) {
       try {
@@ -41,8 +37,6 @@ function InternalApp(props) {
     });
   };
   if (props.authState === "signedIn") {
-
-
     return (
       <>
         <Router>

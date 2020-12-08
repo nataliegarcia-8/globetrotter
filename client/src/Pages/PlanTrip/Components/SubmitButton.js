@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Grid from "@material-ui/core/Grid";
-
+import { Route, Redirect, Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   styling: {
     margin: theme.spacing(6),
@@ -24,15 +24,25 @@ export default function FloatingActionButtonSize(props) {
 
   return (
     <Grid container justify='center'>
-      <Fab
+      <Route
+        render={({ history }) => (
+          <Fab
         variant='extended'
         aria-label='add'
         size='medium'
         className={classes.styling}
-        onClick={props.handleSubmit}>
+        onClick={() => {
+          props.handleSubmit()
+          history.push("/")
+        }}>
+          
         <AddIcon className={classes.extendedIcon} />
         Add Trip
       </Fab>
+         
+        )}
+      />
+      
     </Grid>
   );
 }

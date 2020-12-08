@@ -12,6 +12,7 @@ import VideoLabelIcon from "@material-ui/icons/VideoLabel";
 import StepConnector from "@material-ui/core/StepConnector";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import moment from "moment";
 
 const QontoConnector = withStyles({
   alternativeLabel: {
@@ -189,10 +190,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 function getSteps() {
   return ["November 20th", "November 21st", "November 22nd"];
 }
-
+// console.log("date range: ", moment().range(startDate, endDate));
 function getStepContent(step) {
   switch (step) {
     case 0:
@@ -206,10 +208,12 @@ function getStepContent(step) {
   }
 }
 
-export default function CustomizedSteppers() {
+export default function CustomizedSteppers(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(1);
   const steps = getSteps();
+  // const range =  moment().range(props.startDate, props.endDate)
+ 
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);

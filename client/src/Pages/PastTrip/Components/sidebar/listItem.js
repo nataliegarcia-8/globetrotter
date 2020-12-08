@@ -12,7 +12,7 @@ export default function MainListItems(props) {
   }, [props.trips]);
 
   const renderPastTripList = () => {
-    if (props.trips.length > 1) {
+    if (props.trips.length >= 1) {
       return props.trips.map((trip, i) => (
         <ListItem button
         key={i}>

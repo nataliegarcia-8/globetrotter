@@ -36,39 +36,39 @@ export default function BudgetTable(props) {
             <TableCell component="th" scope="row">
               Food
             </TableCell>
-            <TableCell align="right">{props.data.food || `$0`}</TableCell>
+            <TableCell align="right">{"$" + props.data.food || `$0`}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell component="th" scope="row">
               Activities
             </TableCell>
-            <TableCell align="right">{props.data.activies || `$0`}</TableCell>
+            <TableCell align="right">{"$" + props.data.activities || `$0`}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell component="th" scope="row">
               Flight
             </TableCell>
-            <TableCell align="right">{props.data.flight || `$0`}</TableCell>
+            <TableCell align="right">{"$" + props.data.flight || `$0`}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell component="th" scope="row">
               Hotel
             </TableCell>
-            <TableCell align="right">{props.data.hotel || `$0`}</TableCell>
+            <TableCell align="right">{"$" + props.data.hotel || `$0`}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell component="th" scope="row">
               Transportation
             </TableCell>
             <TableCell align="right">
-              {props.data.transportation || `$0`}
+              {"$" + props.data.transportation || `$0`}
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell component="th" scope="row">
               Misc
             </TableCell>
-            <TableCell align="right">{props.data.misc || `$0`}</TableCell>
+            <TableCell align="right">{"$" + props.data.misc || `$0`}</TableCell>
           </TableRow>
         </TableBody>
       </Table>
