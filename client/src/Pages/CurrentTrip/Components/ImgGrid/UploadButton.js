@@ -5,7 +5,11 @@ import CameraAltIcon from "@material-ui/icons/CameraAlt";
 import S3FileUpload from "react-s3";
 import { uploadFile } from "react-s3";
 import API from "../../../../utils/API";
+<<<<<<< HEAD
+// import AWS from "../../../../utils/keys";
+=======
 
+>>>>>>> 27df999887217ee199ca6cec8a4240d229b2dba6
 
 export default function Dropzone(props) {
   const [name, setName] = useState("");
@@ -24,7 +28,7 @@ export default function Dropzone(props) {
     // accessKeyId: AWS.access,
     // secretAccessKey: AWS.secret,
   };
- 
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -37,9 +41,8 @@ export default function Dropzone(props) {
     uploadFile(files[0], config)
       .then((data) => {
         console.log(data.location);
-        API.savePhoto(props.id, { photo: data.location }).then(()=>{
-
-          props.reset()
+        API.savePhoto(props.id, { photo: data.location }).then(() => {
+          props.reset();
         });
       })
       .catch((err) => console.error(err));
@@ -53,7 +56,7 @@ export default function Dropzone(props) {
     <div>
       <Button
         onClick={handleOpen}
-        variant="contained"
+        variant='contained'
         style={{
           color: "white",
           border: "2px solid #BB86FC",
@@ -61,8 +64,7 @@ export default function Dropzone(props) {
           width: 150,
           marginBottom: "7px",
         }}
-        startIcon={<CameraAltIcon />}
-      >
+        startIcon={<CameraAltIcon />}>
         Upload
       </Button>
       <DropzoneDialog
