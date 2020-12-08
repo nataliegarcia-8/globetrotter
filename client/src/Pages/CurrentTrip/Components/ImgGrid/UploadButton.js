@@ -5,11 +5,7 @@ import CameraAltIcon from "@material-ui/icons/CameraAlt";
 import S3FileUpload from "react-s3";
 import { uploadFile } from "react-s3";
 import API from "../../../../utils/API";
-<<<<<<< HEAD
-// import AWS from "../../../../utils/keys";
-=======
-
->>>>>>> 27df999887217ee199ca6cec8a4240d229b2dba6
+import AWS from "../../../../utils/keys";
 
 export default function Dropzone(props) {
   const [name, setName] = useState("");
@@ -25,8 +21,8 @@ export default function Dropzone(props) {
     bucketName: "stateside-img-bucket",
     region: "us-east-1",
     dirName: "photos",
-    // accessKeyId: AWS.access,
-    // secretAccessKey: AWS.secret,
+    accessKeyId: AWS.access,
+    secretAccessKey: AWS.secret,
   };
 
   const handleClose = () => {
