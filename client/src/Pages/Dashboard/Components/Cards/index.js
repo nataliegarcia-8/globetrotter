@@ -40,6 +40,14 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
+  link: {
+    display: "flex",
+    paddingTop: theme.spacing(4),
+    color: "#BB86FC",
+    "&:hover": {
+      color: "#BB90FF",
+    },
+  },
   cardMedia: {
     border: "2px solid #BB86FC",
     height: "66px",
@@ -126,7 +134,6 @@ export default function PlanTrip(props) {
   const [globalUserData, setGlobalUserData] = useContext(GlobalUserState);
   const [trips, setTrips] = useState([]);
 
-
   useEffect(() => {
     console.log("global state: ", globalUserData);
     setTrips(globalUserData.trips);
@@ -136,12 +143,9 @@ export default function PlanTrip(props) {
     setStatesBeenTo(countStatesBeenTo(trips));
   }, [trips]);
 
- 
-
   const countStatesBeenTo = (placesArray) => {
     let count = 0;
-    if(placesArray){
-
+    if (placesArray) {
       placesArray.forEach((place) => {
         if (statesArray.find((state) => state.label === place.state)) {
           count++;
@@ -152,13 +156,10 @@ export default function PlanTrip(props) {
     }
   };
 
-  function moneySpent() {
-
-  }
+  function moneySpent() {}
 
   return (
     <React.Fragment>
-
       <CssBaseline />
       <Card className={classes.card}>
         <CardMedia className={classes.cardMedia}>
@@ -183,19 +184,27 @@ export default function PlanTrip(props) {
             gutterBottom
             variant='h5'
             component='h2'>
-            Money Spent
+            Upcoming Trip
           </Typography>
         </CardMedia>
 
-        <CardContent className={classes.cardContent}>
-          <Typography className={classes.counter}>
-            $
-            <CountUp start={0} end={100} duration={3} />
+        <CardContent className={classes.center}>
+          <Typography component='p' variant='h4'>
+            City, State
           </Typography>
-
+          <Typography color='textSecondary' className={classes.depositContext}>
+            on 15 March, 2019
+          </Typography>
+          <div>
+            <Link
+              className={classes.link}
+              target='_blank'
+              href='https://www.priceline.com/?tab=flights&match=e&kw=airlines%20booking%20online&adp=&refid=PLGOOGLECPC&refclickid=D%3AcFlight_JGCV_16839507390g3182264857601555969115kwd-1993568360%7C1015452&gclid=CjwKCAiAwrf-BRA9EiwAUWwKXi9aNxfxFkskjog_vnUKT7moHBc-bwi8OIPvQuRcQjvGkY0090i-zxoCEisQAvD_BwE&gclsrc=aw.ds&slingshot=1090&vrid=eb91f04d1cec423c5de1998fd8bbee9f'>
+              Book a Flight
+            </Link>
+          </div>
         </CardContent>
       </Card>
-
     </React.Fragment>
   );
 }

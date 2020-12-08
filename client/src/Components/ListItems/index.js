@@ -71,13 +71,6 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>User Settings</ListSubheader>
-    <ListItem button>
-      <ListItemIcon>
-        <PersonIcon />
-      </ListItemIcon>
-      <ListItemText primary='Account Info' />
-    </ListItem>
     <ListItem button>
       <ListItemIcon>
         <ExitToAppIcon />
@@ -87,7 +80,6 @@ export const secondaryListItems = (
         onClick={() => {
           Auth.signOut();
           localStorage.clear();
-
         }}></ListItemText>
     </ListItem>
   </div>
