@@ -45,6 +45,9 @@ Application working under an MIT license
 
 Reach out to me via email regarding any questions or concerns with this project:
 - chandler.lowrance1@gmail.com
+- garcianatalie585@gmail.com
+- barrettpope94@gmail.com
+- santiago.sjs@gmail.com
 
 
 # Contributors
