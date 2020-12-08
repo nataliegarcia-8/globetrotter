@@ -22,24 +22,21 @@ const CustomSkinMap = withScriptjs(
     //   setZooming(false);
     // }, [zooming]);
     let count = 0;
-   
 
     const renderMarkers = () => {
-      if(props.trips){
-        return(
-        props.trips.map((marker, i) => (
+      if (props.trips) {
+        return props.trips.map((marker, i) => (
           <Marker
             onClick={() => zoomIntoMarkerHandler(marker)}
             key={i}
             position={{ lat: marker.lat, lng: marker.long }}
             zoomOnClick={true}
           />
-        ))
-      );
+        ));
       } else {
         return;
       }
-    }
+    };
     return (
       <GoogleMap
         defaultZoom={zoom}
@@ -122,8 +119,7 @@ const CustomSkinMap = withScriptjs(
               stylers: [{ visibility: "simplified" }],
             },
           ],
-        }}
-      >
+        }}>
         {renderMarkers()}
         {/* <Marker position={{ lat: 40.748817, lng: -73.985428 }} />
         <Marker position={{ lat: 37.0902, lng: -95.7129 }} /> */}
@@ -132,12 +128,12 @@ const CustomSkinMap = withScriptjs(
   })
 );
 export default function Maps(props) {
-  console.log("insidemaps", props.trips)
+  console.log("insidemaps", props.trips);
   return (
     <CustomSkinMap
       googleMapURL='https://maps.googleapis.com/maps/api/js?key=AIzaSyAayUREzm6gydcCBnHzTXcnN4PsneoLays&libraries=places'
       loadingElement={<div style={{ height: `100%` }} />}
-      containerElement={<div style={{ height: `65vh` }} />}
+      containerElement={<div style={{ height: `73vh` }} />}
       mapElement={<div style={{ height: `100%` }} />}
       trips={props.trips}
     />
