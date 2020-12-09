@@ -16,12 +16,15 @@ export default function Dropzone(props) {
   //   open: false,
   //   files: [],
   // };
+  
+  const accessKey = process.env.REACT_APP_ACCESS_KEY
+  const secretKey = process.env.REACT_APP_SECRET_KEY
   const config = {
     bucketName: "stateside-img-bucket",
     region: "us-east-1",
     dirName: "photos",
-    // accessKeyId: AWS.access,
-    // secretAccessKey: AWS.secret,
+    accessKey,
+    secretKey,
   };
 
   const handleClose = () => {
