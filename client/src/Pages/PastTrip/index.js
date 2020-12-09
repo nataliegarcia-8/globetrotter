@@ -227,8 +227,13 @@ export default function Dashboard() {
 
   useEffect(() => {
     console.log("past trips: ", pastTrips);
+    if(pastTrips.length >= 1){
 
-    setSelectedTrip(pastTrips[0]);
+      getSelectedTrip(pastTrips[0]._id);
+    } else {
+
+      setSelectedTrip(pastTrips[0]);
+    }
   }, [pastTrips]);
 
   useEffect(() => {

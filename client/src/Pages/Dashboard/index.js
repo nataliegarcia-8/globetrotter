@@ -143,7 +143,7 @@ export default function Dashboard() {
   // ---------- Use Effect hooks -------------
   useEffect(() => {
     API.getUser(globalUserData._id).then((user)=>{
-      console.log("here:", user.data.trips);
+      // console.log("here:", user.data.trips);
       const globalUserData = user.data
       localStorage.setItem("user", JSON.stringify({ globalUserData }));
       setTripsData(user.data.trips)
