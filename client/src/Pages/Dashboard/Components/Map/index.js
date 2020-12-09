@@ -30,6 +30,7 @@ const CustomSkinMap = withScriptjs(
             onClick={() => zoomIntoMarkerHandler(marker)}
             key={i}
             position={{ lat: marker.lat, lng: marker.long }}
+            animation= {2}
             zoomOnClick={true}
           />
         ));
