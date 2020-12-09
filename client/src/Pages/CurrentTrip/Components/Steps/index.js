@@ -113,65 +113,6 @@ const ColorlibConnector = withStyles({
   },
 })(StepConnector);
 
-// const useColorlibStepIconStyles = makeStyles({
-//   root: {
-//     backgroundColor: '#ccc',
-//     zIndex: 1,
-//     color: '#fff',
-//     width: 50,
-//     height: 50,
-//     display: 'flex',
-//     borderRadius: '50%',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   active: {
-//     backgroundImage:
-//       'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
-//     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
-//   },
-//   completed: {
-//     backgroundImage:
-//       'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
-//   },
-// });
-
-// function ColorlibStepIcon(props) {
-//   const classes = useColorlibStepIconStyles();
-//   const { active, completed } = props;
-
-//   const icons = {
-//     1: <SettingsIcon />,
-//     2: <GroupAddIcon />,
-//     3: <VideoLabelIcon />,
-//   };
-
-//   return (
-//     <div
-//       className={clsx(classes.root, {
-//         [classes.active]: active,
-//         [classes.completed]: completed,
-//       })}
-//     >
-//       {icons[String(props.icon)]}
-//     </div>
-//   );
-// }
-
-// ColorlibStepIcon.propTypes = {
-//   /**
-//    * Whether this step is active.
-//    */
-//   active: PropTypes.bool,
-//   /**
-//    * Mark the step as completed. Is passed to child components.
-//    */
-//   completed: PropTypes.bool,
-//   /**
-//    * The label displayed in the step icon.
-//    */
-//   icon: PropTypes.node,
-// };
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -192,7 +133,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function getSteps() {
-  return ["November 20th", "November 21st", "November 22nd"];
+  return ["December 8th", "December 9th", "December 10th"];
 }
 // console.log("date range: ", moment().range(startDate, endDate));
 function getStepContent(step) {
