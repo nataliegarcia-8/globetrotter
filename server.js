@@ -10,9 +10,10 @@ const path = require("path");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(_dirname, "client/build")));
-}
+// if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+// }
+console.log("DIRNAME", __dirname)
 // Add routes, both API and view
 app.use(routes);
 
