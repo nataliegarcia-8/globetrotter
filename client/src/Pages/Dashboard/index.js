@@ -142,6 +142,14 @@ export default function Dashboard() {
   const localData = localStorage.getItem("user");
   // ---------- Use Effect hooks -------------
   useEffect(() => {
+    API.getUser(globalUserData._id).then((user)=>{
+      // console.log("here:", user.data.trips);
+      const globalUserData = user.data
+      localStorage.setItem("user", JSON.stringify({ globalUserData }));
+      setTripsData(user.data.trips)
+    })
+  }, [])
+  useEffect(() => {
     console.log("global state: ", globalUserData);
 
     localStorage.setItem("user", JSON.stringify({ globalUserData }));
@@ -210,11 +218,11 @@ export default function Dashboard() {
               <Grid container spacing={3}>
                 <Grid item xs={12} md={8} lg={8}>
                   <Paper className={classes.paper}>
-                    <Map trips={globalUserData.trips} />
+                    <Map trips={tripsData} />
                   </Paper>
                 </Grid>
                 <Grid item xs={12} md={4} lg={4}>
-                  <Charts />
+                  <Charts trips={tripsData} />
                 </Grid>
               </Grid>
 

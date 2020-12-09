@@ -12,7 +12,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 
 import Toolbar from "@material-ui/core/Toolbar";
 import CountUp from "react-countup";
-
+import moment from "moment"
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
@@ -133,16 +133,30 @@ export default function PlanTrip(props) {
 
   const [globalUserData, setGlobalUserData] = useContext(GlobalUserState);
   const [trips, setTrips] = useState([]);
+  const [futureTrips, setFutureTrips] = useState([]);
 
   useEffect(() => {
     console.log("global state: ", globalUserData);
     setTrips(globalUserData.trips);
   }, [globalUserData]);
+
   useEffect(() => {
     console.log("trips: ", trips);
     setStatesBeenTo(countStatesBeenTo(trips));
+    if(trips){
+      console.log("here");
+      setFutureTrips(
+        trips.filter((trip) => {
+          return trip.current.includes("future");
+        })
+      );
+    }
   }, [trips]);
 
+  useEffect(() => {
+    console.log("future trips: ", futureTrips);
+    
+  }, [futureTrips]);
   const countStatesBeenTo = (placesArray) => {
     let count = 0;
     if (placesArray) {
@@ -155,7 +169,41 @@ export default function PlanTrip(props) {
       return count;
     }
   };
-
+  const displayFutureTrips = () => {
+    if (futureTrips.length >= 1) {
+      return (
+        <>
+          <Typography component="p" variant="h4">
+            {futureTrips[0].city}, {futureTrips[0].state}
+          </Typography>
+          <Typography color="textSecondary" className={classes.depositContext}>
+          {moment(futureTrips[0].departure).format("MMM Do YYYY")}
+          </Typography>
+          <div>
+            <Link
+              className={classes.link}
+              target="_blank"
+              href="https://www.priceline.com/?tab=flights&match=e&kw=airlines%20booking%20online&adp=&refid=PLGOOGLECPC&refclickid=D%3AcFlight_JGCV_16839507390g3182264857601555969115kwd-1993568360%7C1015452&gclid=CjwKCAiAwrf-BRA9EiwAUWwKXi9aNxfxFkskjog_vnUKT7moHBc-bwi8OIPvQuRcQjvGkY0090i-zxoCEisQAvD_BwE&gclsrc=aw.ds&slingshot=1090&vrid=eb91f04d1cec423c5de1998fd8bbee9f"
+            >
+              Book a Flight
+            </Link>
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Typography component="p" variant="h4">
+            No Upcoming Trips
+          </Typography>
+          <Typography color="textSecondary" className={classes.depositContext}>
+            Plan a trip below
+          </Typography>
+          
+        </>
+      );
+    }
+  };
   function moneySpent() {}
 
   return (
@@ -166,8 +214,9 @@ export default function PlanTrip(props) {
           <Typography
             className={classes.headline}
             gutterBottom
-            variant='h5'
-            component='h2'>
+            variant="h5"
+            component="h2"
+          >
             Amount Traveled
           </Typography>
         </CardMedia>
@@ -182,27 +231,15 @@ export default function PlanTrip(props) {
           <Typography
             className={classes.headline}
             gutterBottom
-            variant='h5'
-            component='h2'>
+            variant="h5"
+            component="h2"
+          >
             Upcoming Trip
           </Typography>
         </CardMedia>
 
         <CardContent className={classes.center}>
-          <Typography component='p' variant='h4'>
-            City, State
-          </Typography>
-          <Typography color='textSecondary' className={classes.depositContext}>
-            on 15 March, 2019
-          </Typography>
-          <div>
-            <Link
-              className={classes.link}
-              target='_blank'
-              href='https://www.priceline.com/?tab=flights&match=e&kw=airlines%20booking%20online&adp=&refid=PLGOOGLECPC&refclickid=D%3AcFlight_JGCV_16839507390g3182264857601555969115kwd-1993568360%7C1015452&gclid=CjwKCAiAwrf-BRA9EiwAUWwKXi9aNxfxFkskjog_vnUKT7moHBc-bwi8OIPvQuRcQjvGkY0090i-zxoCEisQAvD_BwE&gclsrc=aw.ds&slingshot=1090&vrid=eb91f04d1cec423c5de1998fd8bbee9f'>
-              Book a Flight
-            </Link>
-          </div>
+         {displayFutureTrips()}
         </CardContent>
       </Card>
     </React.Fragment>

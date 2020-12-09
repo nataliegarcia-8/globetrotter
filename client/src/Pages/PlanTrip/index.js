@@ -1,12 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import {
@@ -15,18 +9,13 @@ import {
   ThemeProvider,
 } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
-
 import API from "../../utils/API";
-
 import Geocode from "react-geocode";
-import Copyright from "../../Components/Copyright";
 import Booking from "./Components/Booking";
 import SubmitButton from "./Components/SubmitButton";
-import Location from "./Components/Location";
 import Dropdown from "./Components/Dropdown";
 import { GlobalUserState } from "../../Components/globalUserState";
-
+import moment from "moment";
 import Footer from "../../Components/Footer";
 import Navigation from "../../Components/Navigation";
 
@@ -79,7 +68,7 @@ export default function PlanTrip() {
     departure: "",
     lat: 0,
     long: 0,
-    current: "future",
+    current: "",
   };
   const coordinates = {
     lat: 0,
@@ -92,7 +81,7 @@ export default function PlanTrip() {
   const [departureDate, setDepartureDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(new Date());
   const [globalUserData, setGlobalUserData] = useContext(GlobalUserState);
-
+  const now = moment()
   // ---------- Use Effect hooks -------------
 
   console.log(globalUserData);
@@ -119,12 +108,20 @@ export default function PlanTrip() {
   // ---------- Departure and Return date Input handlers -------------
   const handleDepartDateChange = (date, value) => {
     setDepartureDate(date);
-    setTripState({ ...tripState, departure: value });
+    setReturnDate(date);
+    if(moment(value).isBefore(now)){
+
+      setTripState({ ...tripState, departure: value, current: "current" });
+    } else if (moment(value).isAfter(now)){
+      setTripState({ ...tripState, departure: value, current: "future" });
+    }
+    
   };
 
   const handleReturnDateChange = (date, value) => {
     setReturnDate(date);
     setTripState({ ...tripState, return: value });
+  
   };
 
   // ---------- City and State Input handler -------------
@@ -144,6 +141,14 @@ export default function PlanTrip() {
 
   // ---------- Submit button handler -------------
   const handleSubmit = () => {
+    if(moment(tripState.departure).isBefore(now) && moment(tripState.return).isAfter(now) ){
+      console.log(tripState.departure, moment(tripState.departure).isBefore(now));
+      setTripState({ ...tripState, current: "current" });
+    } else if(moment(tripState.departure).isAfter(now)){
+      console.log(tripState.departure);
+
+      setTripState({ ...tripState, current: "future" });
+    }
     API.saveTrip(globalUserData._id, { ...tripState, ...coordinatesState });
     console.log("submit");
   };

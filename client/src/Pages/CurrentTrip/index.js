@@ -14,6 +14,8 @@ import Steps from "./Components/Steps";
 import BudgetTable from "./Components/BudgetTable";
 import CategorySelector from "./Components/CategorySelector";
 import clsx from "clsx";
+import Button from "@material-ui/core/Button";
+import { Route, Redirect, Link } from "react-router-dom";
 import ImgGrid from "./Components/ImgGrid";
 import UploadBtn from "./Components/ImgGrid/UploadButton";
 import Title from "../../Components/Title";
@@ -140,7 +142,7 @@ export default function CurrentTrip() {
 
   useEffect(() => {
     const localData = JSON.parse(localStorage.getItem("user"));
-    console.log("local: ", localData.globalUserData.trips);
+    // console.log("local: ", localData.globalUserData.trips);
     setTrips(localData.globalUserData.trips);
   }, []);
   // useEffect(() => {
@@ -251,6 +253,9 @@ export default function CurrentTrip() {
     return
 
   };
+  const handleTripEnd = () =>{
+    API.updateTrip(currentTrip._id, {...currentTrip, current: "past"})
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -329,6 +334,26 @@ export default function CurrentTrip() {
                     <ImgGrid photos={currentTrip.photos} />
                   </Paper>
                 </Grid>
+                <Grid item xs={12} md={12} lg={12}>
+                        <Route
+                          render={({ history }) => (
+                            <Button
+                              fullWidth
+                              variant="contained"
+                              color="primary"
+                              size="large"
+                              onClick={() => {
+                                history.push("/")
+                                handleTripEnd()
+                              }}
+                              className={classes.button}
+                              
+                            >
+                              End Current Trip
+                            </Button>
+                          )}
+                        />
+                      </Grid>
               </Grid>
             </div>
           </main>
