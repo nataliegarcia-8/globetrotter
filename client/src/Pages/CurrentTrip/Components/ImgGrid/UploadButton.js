@@ -5,7 +5,6 @@ import CameraAltIcon from "@material-ui/icons/CameraAlt";
 import S3FileUpload from "react-s3";
 import { uploadFile } from "react-s3";
 import API from "../../../../utils/API";
-// import AWS from "../../../../utils/keys";
 
 export default function Dropzone(props) {
   const [name, setName] = useState("");
