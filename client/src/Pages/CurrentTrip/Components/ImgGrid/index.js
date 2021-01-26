@@ -6,12 +6,7 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 // import IconButton from '@material-ui/core/IconButton';
 // import StarBorderIcon from '@material-ui/icons/StarBorder';
 // import tileData from './tileData';
-import image1 from "./test2.jpg";
-import image2 from "./test.jpg";
-import image3 from "./test3.jpg";
-import image4 from "./test4.jpg";
-import image5 from "./test5.jpg";
-import image6 from "./test6.jpg";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,26 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const tileData = [] || [
-  {
-    img: image1,
-  },
-  {
-    img: image2,
-  },
-  {
-    img: image3,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image5,
-  },
-  {
-    img: image6,
-  },
-];
+
 
 export default function ImgGrid(props) {
   const classes = useStyles();

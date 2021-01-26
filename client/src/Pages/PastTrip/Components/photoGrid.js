@@ -3,12 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 // import tileData from './tileData';
-import image1 from "../../CurrentTrip/Components/ImgGrid/Chicago1.jpg";
-import image2 from "../../CurrentTrip/Components/ImgGrid/Chicago2.jpg";
-import image3 from "../../CurrentTrip/Components/ImgGrid/Chicago3.jpg";
-import image4 from "../../CurrentTrip/Components/ImgGrid/Chicago4.jpg";
-import image5 from "../../CurrentTrip/Components/ImgGrid/Chicago5.jpg";
-import image6 from "../../CurrentTrip/Components/ImgGrid/Chicago6.jpg";
+
 import { el } from "date-fns/locale";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,32 +19,7 @@ const useStyles = makeStyles((theme) => ({
     height: 475,
   },
 }));
-const tileData = [
-  {
-    img: image1,
-    cols: 1,
-  },
-  {
-    img: image2,
-    cols: 2,
-  },
-  {
-    img: image3,
-    cols: 3,
-  },
-  {
-    img: image4,
-    cols: 1,
-  },
-  {
-    img: image5,
-    cols: 1,
-  },
-  {
-    img: image6,
-    cols: 1,
-  },
-];
+
 export default function ImageGridList(props) {
   const classes = useStyles();
 if(props.photos){
