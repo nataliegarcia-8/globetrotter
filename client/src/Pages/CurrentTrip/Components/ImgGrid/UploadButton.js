@@ -19,8 +19,8 @@ export default function Dropzone(props) {
   //   files: [],
   // };
   // console.log(API.accessKey);
-  const accessKey =  Keys.access
-  const secretKey =  Keys.secret
+  const accessKey =  process.env.REACT_APP_ACCESS_KEY || Keys.access
+  const secretKey =  process.env.REACT_APP_SECRET_KEY || Keys.secret
   const config = {
     bucketName: "stateside-img-bucket",
     region: "us-east-1",
