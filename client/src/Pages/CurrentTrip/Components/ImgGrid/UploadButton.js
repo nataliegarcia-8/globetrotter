@@ -5,6 +5,8 @@ import CameraAltIcon from "@material-ui/icons/CameraAlt";
 import S3FileUpload from "react-s3";
 import { uploadFile } from "react-s3";
 import API from "../../../../utils/API";
+import Keys from "../../../../utils/keys";
+
 
 export default function Dropzone(props) {
   const [name, setName] = useState("");
@@ -16,15 +18,15 @@ export default function Dropzone(props) {
   //   open: false,
   //   files: [],
   // };
-  
-  const accessKey = process.env.REACT_APP_ACCESS_KEY
-  const secretKey = process.env.REACT_APP_SECRET_KEY
+  // console.log(API.accessKey);
+  const accessKey =  Keys.access
+  const secretKey =  Keys.secret
   const config = {
     bucketName: "stateside-img-bucket",
     region: "us-east-1",
     dirName: "photos",
-    accessKey,
-    secretKey,
+    accessKeyId: accessKey,
+    secretAccessKey: secretKey,
   };
 
   const handleClose = () => {

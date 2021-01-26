@@ -18,15 +18,13 @@ console.log("DIRNAME", __dirname)
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/globetrotter",
-// { useNewUrlParser: true },
-// { useUnifiedTopology: true }
-// {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useCreateIndex: true,
-//   useFindAndModify: false
-// }
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/globetrotter",{
+
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
+}
 );
 
 
