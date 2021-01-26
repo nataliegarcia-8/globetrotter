@@ -2,25 +2,20 @@ import React, { useState } from "react";
 import { DropzoneDialog } from "material-ui-dropzone";
 import Button from "@material-ui/core/Button";
 import CameraAltIcon from "@material-ui/icons/CameraAlt";
-import S3FileUpload from "react-s3";
+
 import { uploadFile } from "react-s3";
 import API from "../../../../utils/API";
 import Keys from "../../../../utils/keys";
 
 
 export default function Dropzone(props) {
-  const [name, setName] = useState("");
   const [file, setFile] = useState([]);
   const [open, setOpen] = useState(false);
 
-  const [response, setResponse] = useState("");
-  // state = {
-  //   open: false,
-  //   files: [],
-  // };
-  // console.log(API.accessKey);
+  
   const accessKey =  process.env.REACT_APP_ACCESS_KEY || Keys.access
   const secretKey =  process.env.REACT_APP_SECRET_KEY || Keys.secret
+
   const config = {
     bucketName: "stateside-img-bucket",
     region: "us-east-1",
@@ -38,6 +33,7 @@ export default function Dropzone(props) {
     console.log(files[0]);
     setFile(files);
     setOpen(false);
+    // Upload our image to s-3 and store in db
     uploadFile(files[0], config)
       .then((data) => {
         console.log(data.location);
